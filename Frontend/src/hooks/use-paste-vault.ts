@@ -56,5 +56,6 @@ export function usePasteVault() {
     savePaste,
     removePaste,
     getManagementToken,
+    getToken: getManagementToken,
   };
 }
