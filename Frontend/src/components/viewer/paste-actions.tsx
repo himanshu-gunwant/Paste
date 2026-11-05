@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { ShareDialog } from "./share-dialog";
 import { ReportDialog } from "./report-dialog";
 import { DeleteConfirmDialog } from "./delete-confirm-dialog";
+import { EmbedConfiguratorDialog } from "./embed-configurator-dialog";
+import { PasteAnalyticsSheet } from "@/components/analytics/paste-analytics-sheet";
 import { forkPaste, getDownloadPasteUrl, getRawPasteUrl } from "@/lib/api/pastes";
 import { addBookmark, removeBookmark } from "@/lib/api/collections";
 import { useAuth } from "@/hooks/use-auth";
@@ -24,6 +26,8 @@ import {
   Flag,
   History,
   Loader2,
+  Code2,
+  BarChart2,
 } from "lucide-react";
 
 interface PasteActionsProps {
@@ -57,6 +61,8 @@ export function PasteActions({
   const [shareOpen, setShareOpen] = useState(false);
   const [reportOpen, setReportOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const [embedOpen, setEmbedOpen] = useState(false);
+  const [analyticsOpen, setAnalyticsOpen] = useState(false);
 
   const handleCopy = () => {
     if (!content) return;
@@ -195,6 +201,30 @@ export function PasteActions({
           </Button>
         </Link>
 
+        {/* Embed code dialog */}
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setEmbedOpen(true)}
+          className="h-8 text-xs gap-1.5 border-border bg-subtle hover:bg-muted text-muted-foreground hover:text-foreground"
+        >
+          <Code2 className="h-3.5 w-3.5 text-violet-400" />
+          <span>Embed</span>
+        </Button>
+
+        {/* Analytics stats if owner/canManage */}
+        {canManage && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setAnalyticsOpen(true)}
+            className="h-8 text-xs gap-1.5 border-border bg-subtle hover:bg-muted text-muted-foreground hover:text-foreground"
+          >
+            <BarChart2 className="h-3.5 w-3.5 text-cyan-400" />
+            <span>Stats</span>
+          </Button>
+        )}
+
         {/* Manage: Edit & Delete if owner or has managementToken */}
         {canManage && (
           <>
@@ -251,6 +281,18 @@ export function PasteActions({
         open={deleteOpen}
         onOpenChange={setDeleteOpen}
         managementToken={managementToken}
+      />
+
+      <EmbedConfiguratorDialog
+        pasteId={pasteId}
+        open={embedOpen}
+        onOpenChange={setEmbedOpen}
+      />
+
+      <PasteAnalyticsSheet
+        pasteId={pasteId}
+        open={analyticsOpen}
+        onOpenChange={setAnalyticsOpen}
       />
     </>
   );
