@@ -27,6 +27,7 @@ export interface SessionInfo {
   createdAt: string;
   lastUsedAt: string;
   expiresAt: string;
+  isCurrent?: boolean;
 }
 
 export interface ApiErrorResponse {
