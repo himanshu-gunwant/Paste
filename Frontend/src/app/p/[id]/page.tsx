@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useEffect, useState, useCallback } from "react";
+import { use, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { getPaste } from "@/lib/api/pastes";
@@ -30,45 +30,56 @@ export default function PastePage({ params }: PastePageProps) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isPasswordRequired, setIsPasswordRequired] = useState(false);
 
-  const fetchPaste = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      setErrorStatus(null);
-      setErrorMessage(null);
-      setIsPasswordRequired(false);
-
-      const vaultToken = getToken(id);
-      const effectiveToken = paramManagementToken || vaultToken;
-
-      const data = await getPaste(id, {
-        shareToken,
-        managementToken: effectiveToken,
-      });
-
-      setPaste(data);
-    } catch (err: unknown) {
-      const axiosErr = err as {
-        response?: { status?: number; data?: { error?: { code?: string; message?: string } } };
-        message?: string;
-      };
-      const status = axiosErr.response?.status;
-      const code = axiosErr.response?.data?.error?.code;
-      const msg = axiosErr.response?.data?.error?.message || axiosErr.message || "Failed to load paste";
-
-      setErrorStatus(status || 500);
-      setErrorMessage(msg);
-
-      if (status === 401 && (code === "PASSWORD_REQUIRED" || msg.toLowerCase().includes("password"))) {
-        setIsPasswordRequired(true);
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  }, [id, shareToken, paramManagementToken, getToken]);
-
   useEffect(() => {
-    fetchPaste();
-  }, [fetchPaste]);
+    let isCancelled = false;
+
+    async function load() {
+      try {
+        setIsLoading(true);
+        setErrorStatus(null);
+        setErrorMessage(null);
+        setIsPasswordRequired(false);
+
+        const vaultToken = getToken(id);
+        const effectiveToken = paramManagementToken || vaultToken;
+
+        const data = await getPaste(id, {
+          shareToken,
+          managementToken: effectiveToken,
+        });
+
+        if (!isCancelled) {
+          setPaste(data);
+        }
+      } catch (err: unknown) {
+        if (isCancelled) return;
+        const axiosErr = err as {
+          response?: { status?: number; data?: { error?: { code?: string; message?: string } } };
+          message?: string;
+        };
+        const status = axiosErr.response?.status;
+        const code = axiosErr.response?.data?.error?.code;
+        const msg = axiosErr.response?.data?.error?.message || axiosErr.message || "Failed to load paste";
+
+        setErrorStatus(status || 500);
+        setErrorMessage(msg);
+
+        if (status === 401 && (code === "PASSWORD_REQUIRED" || msg.toLowerCase().includes("password"))) {
+          setIsPasswordRequired(true);
+        }
+      } finally {
+        if (!isCancelled) {
+          setIsLoading(false);
+        }
+      }
+    }
+
+    load();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [id, shareToken, paramManagementToken, getToken]);
 
   const handleUnlocked = (unlocked: PasteView) => {
     setPaste(unlocked);

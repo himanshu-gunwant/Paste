@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 export interface VaultPaste {
   id: string;
@@ -26,30 +26,45 @@ export function usePasteVault() {
     }
   }, []);
 
-  const savePaste = (item: VaultPaste) => {
+  const savePaste = useCallback((item: VaultPaste) => {
     try {
-      const updated = [item, ...vault.filter((p) => p.id !== item.id)];
-      setVault(updated);
-      localStorage.setItem(VAULT_STORAGE_KEY, JSON.stringify(updated));
+      setVault((prev) => {
+        const updated = [item, ...prev.filter((p) => p.id !== item.id)];
+        localStorage.setItem(VAULT_STORAGE_KEY, JSON.stringify(updated));
+        return updated;
+      });
     } catch {
       // ignore storage errors
     }
-  };
+  }, []);
 
-  const removePaste = (id: string) => {
+  const removePaste = useCallback((id: string) => {
     try {
-      const updated = vault.filter((p) => p.id !== id);
-      setVault(updated);
-      localStorage.setItem(VAULT_STORAGE_KEY, JSON.stringify(updated));
+      setVault((prev) => {
+        const updated = prev.filter((p) => p.id !== id);
+        localStorage.setItem(VAULT_STORAGE_KEY, JSON.stringify(updated));
+        return updated;
+      });
     } catch {
       // ignore
     }
-  };
+  }, []);
 
-  const getManagementToken = (id: string): string | undefined => {
-    const found = vault.find((p) => p.id === id || p.slug === id);
-    return found?.managementToken;
-  };
+  const getManagementToken = useCallback((id: string): string | undefined => {
+    if (typeof window !== "undefined") {
+      try {
+        const stored = localStorage.getItem(VAULT_STORAGE_KEY);
+        if (stored) {
+          const list: VaultPaste[] = JSON.parse(stored);
+          const item = list.find((p) => p.id === id || p.slug === id);
+          if (item?.managementToken) return item.managementToken;
+        }
+      } catch {
+        // ignore
+      }
+    }
+    return undefined;
+  }, []);
 
   return {
     vault,
