@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "@/components/providers";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { CommandPalette } from "@/components/layout/command-palette";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,6 +40,7 @@ export default function RootLayout({
       >
         <Providers>
           <SiteHeader />
+          <CommandPalette />
           <main className="flex-1 flex flex-col">{children}</main>
           <SiteFooter />
         </Providers>

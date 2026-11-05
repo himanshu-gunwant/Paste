@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserNav } from "./user-nav";
 import { Button } from "@/components/ui/button";
-import { Plus, Compass, Terminal } from "lucide-react";
+import { Plus, Compass, Terminal, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
@@ -48,7 +48,20 @@ export function SiteHeader() {
           </nav>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => window.dispatchEvent(new CustomEvent("open-command-palette"))}
+            className="hidden sm:flex h-8 gap-2 text-xs border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:text-zinc-200 hover:border-zinc-700 px-2.5"
+          >
+            <Search className="h-3.5 w-3.5" />
+            <span className="text-[11px]">Quick search...</span>
+            <kbd className="ml-1 text-[10px] bg-zinc-800 px-1 py-0.5 rounded font-mono text-zinc-400 border border-zinc-700">
+              ⌘K
+            </kbd>
+          </Button>
+
           <Link href="/new">
             <Button size="sm" variant="outline" className="h-8 gap-1.5 text-xs border-border bg-subtle hover:bg-muted text-foreground">
               <Plus className="h-3.5 w-3.5" />
