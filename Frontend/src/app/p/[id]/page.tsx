@@ -53,19 +53,23 @@ export default function PastePage({ params }: PastePageProps) {
         }
       } catch (err: unknown) {
         if (isCancelled) return;
-        const axiosErr = err as {
-          response?: { status?: number; data?: { error?: { code?: string; message?: string } } };
+        const anyErr = err as {
+          statusCode?: number;
+          code?: string;
           message?: string;
+          response?: { status?: number; data?: { error?: { code?: string; message?: string } } };
         };
-        const status = axiosErr.response?.status;
-        const code = axiosErr.response?.data?.error?.code;
-        const msg = axiosErr.response?.data?.error?.message || axiosErr.message || "Failed to load paste";
-
-        setErrorStatus(status || 500);
-        setErrorMessage(msg);
+        const status = anyErr.statusCode || anyErr.response?.status || 500;
+        const code = anyErr.code || anyErr.response?.data?.error?.code || "UNKNOWN";
+        const msg = anyErr.response?.data?.error?.message || anyErr.message || "Failed to load paste";
 
         if (status === 401 && (code === "PASSWORD_REQUIRED" || msg.toLowerCase().includes("password"))) {
           setIsPasswordRequired(true);
+          setErrorStatus(null);
+          setErrorMessage(null);
+        } else {
+          setErrorStatus(status);
+          setErrorMessage(msg);
         }
       } finally {
         if (!isCancelled) {

@@ -30,27 +30,27 @@ export function AdminStatsCards() {
           <Users className="h-4 w-4 text-violet-400" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold text-zinc-100">{stats.users.toLocaleString()}</div>
+          <div className="text-2xl font-bold text-zinc-100">{(stats.users ?? 0).toLocaleString()}</div>
         </CardContent>
       </Card>
 
       <Card className="bg-zinc-950/70 border-zinc-800/80">
         <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <CardTitle className="text-xs font-medium text-zinc-400">Active Pastes</CardTitle>
+          <CardTitle className="text-xs font-medium text-zinc-400">Live Pastes</CardTitle>
           <FileText className="h-4 w-4 text-emerald-400" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold text-zinc-100">{stats.activePastes.toLocaleString()}</div>
+          <div className="text-2xl font-bold text-zinc-100">{(stats.livePastes ?? stats.activePastes ?? 0).toLocaleString()}</div>
         </CardContent>
       </Card>
 
       <Card className="bg-zinc-950/70 border-zinc-800/80">
         <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <CardTitle className="text-xs font-medium text-zinc-400">Tombstones</CardTitle>
+          <CardTitle className="text-xs font-medium text-zinc-400">API Keys</CardTitle>
           <Archive className="h-4 w-4 text-zinc-500" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold text-zinc-100">{stats.tombstones.toLocaleString()}</div>
+          <div className="text-2xl font-bold text-zinc-100">{(stats.apiKeys ?? stats.tombstones ?? 0).toLocaleString()}</div>
         </CardContent>
       </Card>
 
@@ -60,17 +60,17 @@ export function AdminStatsCards() {
           <AlertTriangle className="h-4 w-4 text-rose-400" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold text-rose-300">{stats.openReports.toLocaleString()}</div>
+          <div className="text-2xl font-bold text-rose-300">{(stats.openReports ?? 0).toLocaleString()}</div>
         </CardContent>
       </Card>
 
       <Card className="bg-zinc-950/70 border-zinc-800/80">
         <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <CardTitle className="text-xs font-medium text-zinc-400">IP Bans</CardTitle>
+          <CardTitle className="text-xs font-medium text-zinc-400">Active Users</CardTitle>
           <ShieldAlert className="h-4 w-4 text-amber-400" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold text-zinc-100">{stats.activeBans.toLocaleString()}</div>
+          <div className="text-2xl font-bold text-zinc-100">{(stats.activeUsers ?? stats.activeBans ?? 0).toLocaleString()}</div>
         </CardContent>
       </Card>
     </div>

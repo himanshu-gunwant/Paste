@@ -1,9 +1,12 @@
 export interface AdminStats {
   users: number;
-  activePastes: number;
-  tombstones: number;
+  activeUsers?: number;
+  livePastes?: number;
+  activePastes?: number;
+  tombstones?: number;
   openReports: number;
-  activeBans: number;
+  apiKeys?: number;
+  activeBans?: number;
 }
 
 export interface AdminUserView {

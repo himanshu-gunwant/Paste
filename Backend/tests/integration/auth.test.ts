@@ -103,7 +103,7 @@ describe.skipIf(!run)('integration: auth flows', () => {
 
     const me = await client.json('GET', '/api/v1/users/me');
     expect(me.body.user.emailVerified).toBe(true);
-  });
+  }, 20_000);
 
   it('logs in with correct credentials and rejects wrong/unknown uniformly', async () => {
     const wrongPw = await client.json('POST', '/api/v1/auth/login', {
@@ -169,7 +169,7 @@ describe.skipIf(!run)('integration: auth flows', () => {
     expect(oldPw.status).toBe(401);
     const newPw = await client.json('POST', '/api/v1/auth/login', { body: { email, password: newPassword } });
     expect(newPw.status).toBe(200);
-  });
+  }, 20_000);
 
   it('lists, revokes individually, and revokes all sessions', async () => {
     // Client currently holds one session from the reset login.

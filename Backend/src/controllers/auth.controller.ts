@@ -27,7 +27,7 @@ import type {
 function cookieOptions(maxAgeMs?: number) {
   return {
     httpOnly: true,
-    secure: env.NODE_ENV === 'production',
+    secure: true,
     sameSite: 'lax' as const,
     path: '/',
     ...(maxAgeMs ? { maxAge: maxAgeMs } : {}),
