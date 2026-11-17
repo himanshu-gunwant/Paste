@@ -48,7 +48,7 @@ export function PasteViewer({
   const [tab, setTab] = useState<"code" | "preview">(isMarkdown ? "preview" : "code");
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-6 animate-enter delay-1">
       {/* Burned Notice if applicable */}
       {paste.burnAfterRead && <BurnNotice burnedAt={paste.burnedAt} />}
 
@@ -64,7 +64,7 @@ export function PasteViewer({
             onValueChange={(val) => setTab(val as "code" | "preview")}
             className="w-auto"
           >
-            <TabsList className="bg-zinc-900 border border-zinc-800">
+            <TabsList className="bg-white/[0.03] border border-white/10">
               <TabsTrigger value="preview" className="gap-1.5 text-xs">
                 <Eye className="h-3.5 w-3.5" />
                 Preview
@@ -93,13 +93,13 @@ export function PasteViewer({
       </div>
 
       {/* Code or Markdown Display */}
-      <div className="rounded-lg border border-zinc-800/80 bg-zinc-950 overflow-hidden shadow-sm">
+      <div className="rounded-lg border border-white/10 bg-[#0f0f0f] overflow-hidden">
         {isMarkdown && tab === "preview" ? (
           <div className="p-6">
             <MarkdownView content={content} />
           </div>
         ) : (
-          <div className="min-h-[300px]">
+          <div className="min-h-[350px]">
             <CodeEditor
               value={content}
               language={paste.language || paste.detectedLanguage || "plaintext"}

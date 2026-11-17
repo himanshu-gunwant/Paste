@@ -32,13 +32,13 @@ export function PasteAnalyticsSheet({
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="sm:max-w-lg bg-zinc-950 border-zinc-800 overflow-y-auto">
+      <SheetContent className="sm:max-w-lg overflow-y-auto">
         <SheetHeader>
-          <div className="flex items-center gap-2 text-violet-400">
-            <BarChart2 className="h-5 w-5" />
-            <SheetTitle className="text-zinc-100">Paste Metrics</SheetTitle>
+          <div className="flex items-center gap-2 text-foreground">
+            <BarChart2 className="h-4 w-4 text-muted" />
+            <SheetTitle>Paste Metrics</SheetTitle>
           </div>
-          <SheetDescription className="text-zinc-400 text-xs">
+          <SheetDescription className="text-xs">
             30-day traffic breakdown and unique visitor analytics for p/{pasteId}.
           </SheetDescription>
         </SheetHeader>
@@ -46,36 +46,36 @@ export function PasteAnalyticsSheet({
         <div className="py-6 space-y-6">
           {isLoading ? (
             <div className="flex flex-col items-center justify-center py-20 gap-3">
-              <Loader2 className="h-8 w-8 animate-spin text-violet-500" />
-              <p className="text-xs text-zinc-400">Loading metrics...</p>
+              <Loader2 className="h-6 w-6 animate-spin text-muted" />
+              <p className="text-xs text-muted">Loading metrics...</p>
             </div>
           ) : !stats ? (
-            <div className="text-center py-12 text-zinc-500 text-sm">
+            <div className="text-center py-12 text-muted text-sm border border-white/10 rounded-lg bg-white/[0.02]">
               No analytics data recorded for this paste.
             </div>
           ) : (
             <div className="space-y-6">
               {/* Stat Cards */}
               <div className="grid grid-cols-2 gap-3">
-                <Card className="bg-zinc-900/60 border-zinc-800">
+                <Card>
                   <CardContent className="p-4 space-y-1">
-                    <div className="flex items-center gap-1.5 text-xs text-zinc-400">
-                      <Eye className="h-3.5 w-3.5 text-violet-400" />
+                    <div className="flex items-center gap-1.5 text-xs text-muted">
+                      <Eye className="h-3.5 w-3.5" />
                       <span>Total Views</span>
                     </div>
-                    <div className="text-xl font-bold text-zinc-100">
+                    <div className="text-xl font-bold tracking-tight text-foreground">
                       {Number(stats.totals.views).toLocaleString()}
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="bg-zinc-900/60 border-zinc-800">
+                <Card>
                   <CardContent className="p-4 space-y-1">
-                    <div className="flex items-center gap-1.5 text-xs text-zinc-400">
-                      <Users className="h-3.5 w-3.5 text-cyan-400" />
+                    <div className="flex items-center gap-1.5 text-xs text-muted">
+                      <Users className="h-3.5 w-3.5" />
                       <span>Unique Visitors</span>
                     </div>
-                    <div className="text-xl font-bold text-zinc-100">
+                    <div className="text-xl font-bold tracking-tight text-foreground">
                       {Number(stats.totals.uniqueVisitors).toLocaleString()}
                     </div>
                   </CardContent>
@@ -84,7 +84,7 @@ export function PasteAnalyticsSheet({
 
               {/* Daily Chart */}
               <div className="space-y-2">
-                <h4 className="text-xs font-semibold text-zinc-300">Daily Trend (30 Days)</h4>
+                <h4 className="text-xs font-medium uppercase tracking-wider text-muted">Daily Trend (30 Days)</h4>
                 <AnalyticsChart data={stats.daily} height={220} />
               </div>
             </div>

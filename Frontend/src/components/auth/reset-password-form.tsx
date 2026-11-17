@@ -61,7 +61,7 @@ export function ResetPasswordForm() {
   };
 
   return (
-    <Card className="border-border bg-card">
+    <Card>
       <CardHeader className="space-y-1 pb-4">
         <CardTitle className="text-lg">Set new password</CardTitle>
         <CardDescription className="text-xs">
@@ -90,7 +90,7 @@ export function ResetPasswordForm() {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
             {!tokenParam && (
               <div className="space-y-1.5">
-                <Label htmlFor="token">Reset Token</Label>
+                <Label htmlFor="token" className="text-xs text-muted">Reset Token</Label>
                 <Input
                   id="token"
                   placeholder="Paste token from email"
@@ -104,7 +104,7 @@ export function ResetPasswordForm() {
             )}
 
             <div className="space-y-1.5">
-              <Label htmlFor="newPassword">New Password (min 10 characters)</Label>
+              <Label htmlFor="newPassword" className="text-xs text-muted">New Password (min 10 characters)</Label>
               <Input
                 id="newPassword"
                 type="password"
@@ -119,7 +119,7 @@ export function ResetPasswordForm() {
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="confirmPassword">Confirm Password</Label>
+              <Label htmlFor="confirmPassword" className="text-xs text-muted">Confirm Password</Label>
               <Input
                 id="confirmPassword"
                 type="password"
@@ -140,8 +140,8 @@ export function ResetPasswordForm() {
           </form>
         )}
       </CardContent>
-      <CardFooter className="flex justify-center border-t border-border pt-4 text-xs text-muted-foreground">
-        <Link href="/login" className="text-primary hover:underline font-medium">
+      <CardFooter className="flex justify-center border-t border-white/10 pt-4 text-xs text-muted">
+        <Link href="/login" className="text-foreground hover:underline font-medium">
           Back to sign in
         </Link>
       </CardFooter>

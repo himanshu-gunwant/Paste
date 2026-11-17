@@ -51,22 +51,22 @@ export default function UserProfilePage({ params }: UserProfilePageProps) {
   if (isProfileLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh] gap-3">
-        <Loader2 className="h-8 w-8 animate-spin text-violet-500" />
-        <p className="text-sm text-zinc-400">Loading profile...</p>
+        <Loader2 className="h-6 w-6 animate-spin text-muted" />
+        <p className="text-sm text-muted">Loading profile...</p>
       </div>
     );
   }
 
   if (isProfileError || !profile) {
     return (
-      <div className="max-w-md mx-auto py-16">
-        <Card className="bg-zinc-900/60 border-zinc-800 p-6 text-center">
+      <div className="max-w-md mx-auto py-16 animate-enter">
+        <Card className="p-6 text-center">
           <CardContent className="pt-4 space-y-4">
-            <div className="inline-flex p-3 rounded-full bg-rose-500/10 text-rose-400">
-              <AlertCircle className="h-7 w-7" />
+            <div className="inline-flex p-3 rounded-full bg-red-500/10 text-red-400 border border-red-500/20">
+              <AlertCircle className="h-6 w-6" />
             </div>
-            <h2 className="text-lg font-bold text-zinc-100">User Not Found</h2>
-            <p className="text-sm text-zinc-400">
+            <h2 className="text-lg font-semibold tracking-tight text-foreground">User Not Found</h2>
+            <p className="text-sm text-muted">
               No developer profile was found matching @{username}.
             </p>
           </CardContent>
@@ -76,33 +76,33 @@ export default function UserProfilePage({ params }: UserProfilePageProps) {
   }
 
   return (
-    <div className="w-full max-w-7xl mx-auto py-4 space-y-8">
+    <div className="w-full max-w-5xl mx-auto py-4 space-y-8 animate-enter">
       {/* Profile Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 p-6 rounded-xl border border-zinc-800/80 bg-zinc-950/60">
-        <Avatar className="h-20 w-20 border-2 border-violet-500/30">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 p-6 rounded-lg border border-white/10 bg-white/[0.02]">
+        <Avatar className="h-20 w-20 border border-white/20">
           <AvatarImage src={profile.avatarUrl || undefined} alt={profile.username} />
-          <AvatarFallback className="bg-zinc-800 text-zinc-300 text-xl font-bold">
+          <AvatarFallback className="bg-white/10 text-foreground text-xl font-bold">
             {profile.displayName?.slice(0, 2).toUpperCase() || profile.username.slice(0, 2).toUpperCase()}
           </AvatarFallback>
         </Avatar>
 
         <div className="space-y-2 flex-1">
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="text-2xl font-bold tracking-tight text-zinc-100">
+            <h1 className="text-2xl font-bold tracking-tight text-foreground">
               {profile.displayName || profile.username}
             </h1>
-            <Badge variant="outline" className="font-mono text-xs text-zinc-400 border-zinc-800">
+            <Badge variant="outline" className="font-mono text-xs border-white/10 bg-white/5 text-muted">
               @{profile.username}
             </Badge>
           </div>
 
           {profile.bio && (
-            <p className="text-sm text-zinc-300 max-w-2xl leading-relaxed">
+            <p className="text-sm text-foreground/90 max-w-2xl leading-relaxed">
               {profile.bio}
             </p>
           )}
 
-          <div className="flex flex-wrap items-center gap-4 text-xs text-zinc-500 pt-1">
+          <div className="flex flex-wrap items-center gap-4 text-xs text-muted pt-1">
             <span className="flex items-center gap-1.5">
               <Calendar className="h-3.5 w-3.5" />
               Member since {new Date(profile.createdAt).toLocaleDateString()}
@@ -113,9 +113,9 @@ export default function UserProfilePage({ params }: UserProfilePageProps) {
                 href={profile.websiteUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1.5 text-violet-400 hover:underline"
+                className="flex items-center gap-1.5 text-foreground hover:underline"
               >
-                <Globe className="h-3.5 w-3.5" />
+                <Globe className="h-3.5 w-3.5 text-muted" />
                 {profile.websiteUrl.replace(/^https?:\/\//, "")}
               </a>
             )}
@@ -126,7 +126,7 @@ export default function UserProfilePage({ params }: UserProfilePageProps) {
       {/* Tabs */}
       <div className="space-y-6">
         <Tabs value={tab} onValueChange={(val) => setTab(val as typeof tab)}>
-          <TabsList className="bg-zinc-900 border border-zinc-800">
+          <TabsList>
             <TabsTrigger value="pastes" className="gap-2 text-xs">
               <FileText className="h-3.5 w-3.5" />
               Public Pastes ({pastes.length})
@@ -142,11 +142,11 @@ export default function UserProfilePage({ params }: UserProfilePageProps) {
           <div>
             {isPastesLoading ? (
               <div className="flex flex-col items-center justify-center py-16 gap-2">
-                <Loader2 className="h-6 w-6 animate-spin text-violet-500" />
-                <p className="text-xs text-zinc-400">Loading pastes...</p>
+                <Loader2 className="h-6 w-6 animate-spin text-muted" />
+                <p className="text-xs text-muted">Loading pastes...</p>
               </div>
             ) : pastes.length === 0 ? (
-              <div className="text-center py-16 text-zinc-500 text-sm">
+              <div className="text-center py-16 text-muted text-sm border border-white/10 rounded-lg bg-white/[0.02]">
                 @{profile.username} hasn&apos;t published any public pastes yet.
               </div>
             ) : (
@@ -163,11 +163,11 @@ export default function UserProfilePage({ params }: UserProfilePageProps) {
           <div>
             {isCollectionsLoading ? (
               <div className="flex flex-col items-center justify-center py-16 gap-2">
-                <Loader2 className="h-6 w-6 animate-spin text-violet-500" />
-                <p className="text-xs text-zinc-400">Loading collections...</p>
+                <Loader2 className="h-6 w-6 animate-spin text-muted" />
+                <p className="text-xs text-muted">Loading collections...</p>
               </div>
             ) : !collections || collections.length === 0 ? (
-              <div className="text-center py-16 text-zinc-500 text-sm">
+              <div className="text-center py-16 text-muted text-sm border border-white/10 rounded-lg bg-white/[0.02]">
                 @{profile.username} hasn&apos;t created any public collections yet.
               </div>
             ) : (

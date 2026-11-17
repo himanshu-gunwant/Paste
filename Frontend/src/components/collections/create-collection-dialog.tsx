@@ -74,22 +74,22 @@ export function CreateCollectionDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md bg-zinc-950 border-zinc-800">
+      <DialogContent className="sm:max-w-md">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
-            <div className="flex items-center gap-2 text-violet-400">
-              <FolderPlus className="h-5 w-5" />
-              <DialogTitle className="text-zinc-100">Create New Collection</DialogTitle>
+            <div className="flex items-center gap-2 text-foreground">
+              <FolderPlus className="h-4 w-4 text-muted" />
+              <DialogTitle>Create New Collection</DialogTitle>
             </div>
-            <DialogDescription className="text-zinc-400 text-xs">
+            <DialogDescription className="text-xs">
               Organize related snippets and scripts into a curated folder.
             </DialogDescription>
           </DialogHeader>
 
           <div className="flex flex-col gap-4 py-4">
             <div className="space-y-1.5">
-              <Label htmlFor="col-title" className="text-xs text-zinc-300">
-                Title <span className="text-rose-400">*</span>
+              <Label htmlFor="col-title" className="text-xs text-muted">
+                Title <span className="text-red-400">*</span>
               </Label>
               <Input
                 id="col-title"
@@ -97,12 +97,12 @@ export function CreateCollectionDialog({
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g. Dotfiles, Next.js Utilities, SQL Scripts"
                 required
-                className="bg-zinc-900 border-zinc-800 text-sm"
+                className="text-sm"
               />
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="col-desc" className="text-xs text-zinc-300">
+              <Label htmlFor="col-desc" className="text-xs text-muted">
                 Description
               </Label>
               <Textarea
@@ -111,12 +111,12 @@ export function CreateCollectionDialog({
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Optional description for this collection"
                 rows={2}
-                className="bg-zinc-900 border-zinc-800 text-sm resize-none"
+                className="text-sm resize-none"
               />
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="col-slug" className="text-xs text-zinc-300">
+              <Label htmlFor="col-slug" className="text-xs text-muted">
                 Custom Slug
               </Label>
               <Input
@@ -124,32 +124,32 @@ export function CreateCollectionDialog({
                 value={slug}
                 onChange={(e) => setSlug(e.target.value.toLowerCase().replace(/[^a-z0-9_-]/g, ""))}
                 placeholder="optional-custom-slug"
-                className="bg-zinc-900 border-zinc-800 text-sm font-mono"
+                className="text-sm font-mono"
               />
             </div>
 
             <div className="space-y-1.5">
-              <Label className="text-xs text-zinc-300">Visibility</Label>
+              <Label className="text-xs text-muted">Visibility</Label>
               <Select value={visibility} onValueChange={(val) => setVisibility(val as Visibility)}>
-                <SelectTrigger className="bg-zinc-900 border-zinc-800 text-sm">
+                <SelectTrigger className="text-sm">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-zinc-900 border-zinc-800 text-zinc-200">
+                <SelectContent>
                   <SelectItem value="public">
                     <span className="flex items-center gap-2">
-                      <Globe className="h-3.5 w-3.5 text-emerald-400" />
+                      <Globe className="h-3.5 w-3.5 text-muted" />
                       Public (Visible on your profile & explore)
                     </span>
                   </SelectItem>
                   <SelectItem value="unlisted">
                     <span className="flex items-center gap-2">
-                      <LinkIcon className="h-3.5 w-3.5 text-amber-400" />
+                      <LinkIcon className="h-3.5 w-3.5 text-muted" />
                       Unlisted (Only accessible via direct link)
                     </span>
                   </SelectItem>
                   <SelectItem value="private">
                     <span className="flex items-center gap-2">
-                      <Lock className="h-3.5 w-3.5 text-rose-400" />
+                      <Lock className="h-3.5 w-3.5 text-muted" />
                       Private (Only accessible by you)
                     </span>
                   </SelectItem>
@@ -164,7 +164,6 @@ export function CreateCollectionDialog({
               variant="ghost"
               size="sm"
               onClick={() => onOpenChange(false)}
-              className="text-zinc-400 hover:text-white"
             >
               Cancel
             </Button>
@@ -172,7 +171,7 @@ export function CreateCollectionDialog({
               type="submit"
               size="sm"
               disabled={isSubmitting || !title.trim()}
-              className="gap-1.5 bg-violet-600 hover:bg-violet-700 text-white"
+              className="gap-1.5"
             >
               {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <FolderPlus className="h-4 w-4" />}
               Create Collection

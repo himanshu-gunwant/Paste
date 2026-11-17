@@ -51,13 +51,13 @@ export function DeleteConfirmDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md border-border bg-card">
+      <DialogContent className="sm:max-w-md border-white/10 bg-[#141414]">
         <DialogHeader>
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 mb-2">
             <Trash2 className="h-5 w-5" />
           </div>
-          <DialogTitle className="text-base font-semibold">Delete Paste</DialogTitle>
-          <DialogDescription className="text-xs">
+          <DialogTitle className="text-base font-semibold text-foreground">Delete Paste</DialogTitle>
+          <DialogDescription className="text-xs text-muted">
             Are you sure you want to delete this paste? The content will be immediately tombstoned and scheduled
             for physical purge. This action cannot be undone.
           </DialogDescription>
@@ -75,7 +75,7 @@ export function DeleteConfirmDialog({
             size="sm"
             onClick={() => onOpenChange(false)}
             disabled={isDeleting}
-            className="text-xs"
+            className="text-xs border-white/10 text-muted hover:text-foreground"
           >
             Cancel
           </Button>

@@ -29,19 +29,24 @@ export function UserNav() {
   const { user, isAuthenticated, isLoading, logout, isAdmin } = useAuth();
 
   if (isLoading) {
-    return <div className="h-8 w-8 rounded-full bg-zinc-800 animate-pulse" />;
+    return (
+      <div className="flex items-center gap-2">
+        <div className="h-8 w-14 rounded-md bg-white/5 animate-pulse" />
+        <div className="h-8 w-16 rounded-md bg-white/5 animate-pulse" />
+      </div>
+    );
   }
 
   if (!isAuthenticated || !user) {
     return (
       <div className="flex items-center gap-2">
         <LinkNext href="/login">
-          <Button variant="ghost" size="sm" className="text-xs">
+          <Button variant="ghost" size="sm" className="text-xs text-zinc-300 hover:text-white hover:bg-white/5">
             Sign In
           </Button>
         </LinkNext>
         <LinkNext href="/register">
-          <Button size="sm" className="text-xs bg-primary hover:bg-primary/90 text-primary-foreground">
+          <Button size="sm" className="text-xs bg-foreground text-background font-medium hover:bg-white">
             Sign Up
           </Button>
         </LinkNext>
@@ -56,79 +61,79 @@ export function UserNav() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-8 w-8 rounded-full p-0">
+        <Button variant="ghost" className="relative h-8 w-8 rounded-full p-0 ring-1 ring-white/10">
           <Avatar className="h-8 w-8">
             {user.avatarUrl && <AvatarImage src={user.avatarUrl} alt={user.username} />}
-            <AvatarFallback>{initials}</AvatarFallback>
+            <AvatarFallback className="bg-white/5 text-foreground text-xs font-mono">{initials}</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end" forceMount>
+      <DropdownMenuContent className="w-56 bg-[#141414] border-white/10" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="text-xs font-medium leading-none text-foreground">{user.displayName || user.username}</p>
-            <p className="text-[11px] leading-none text-muted-foreground">{user.email}</p>
+            <p className="text-[11px] leading-none text-muted">{user.email}</p>
           </div>
         </DropdownMenuLabel>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="bg-white/10" />
         <DropdownMenuGroup>
           <LinkNext href="/dashboard">
-            <DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer text-muted hover:text-foreground">
               <Code2 className="mr-2 h-4 w-4" />
               <span>Dashboard</span>
             </DropdownMenuItem>
           </LinkNext>
           <LinkNext href="/my-pastes">
-            <DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer text-muted hover:text-foreground">
               <UserIcon className="mr-2 h-4 w-4" />
               <span>My Pastes</span>
             </DropdownMenuItem>
           </LinkNext>
           <LinkNext href="/collections">
-            <DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer text-muted hover:text-foreground">
               <FolderGit2 className="mr-2 h-4 w-4" />
               <span>Collections</span>
             </DropdownMenuItem>
           </LinkNext>
           <LinkNext href="/bookmarks">
-            <DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer text-muted hover:text-foreground">
               <Bookmark className="mr-2 h-4 w-4" />
               <span>Bookmarks</span>
             </DropdownMenuItem>
           </LinkNext>
           <LinkNext href="/analytics">
-            <DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer text-muted hover:text-foreground">
               <BarChart3 className="mr-2 h-4 w-4" />
               <span>Analytics</span>
             </DropdownMenuItem>
           </LinkNext>
         </DropdownMenuGroup>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="bg-white/10" />
         <DropdownMenuGroup>
           <LinkNext href="/settings">
-            <DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer text-muted hover:text-foreground">
               <Settings className="mr-2 h-4 w-4" />
               <span>Settings</span>
             </DropdownMenuItem>
           </LinkNext>
           <LinkNext href="/settings/api-keys">
-            <DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer text-muted hover:text-foreground">
               <Key className="mr-2 h-4 w-4" />
               <span>API Keys</span>
             </DropdownMenuItem>
           </LinkNext>
           {isAdmin && (
             <LinkNext href="/admin">
-              <DropdownMenuItem className="text-purple-400 focus:text-purple-300">
+              <DropdownMenuItem className="cursor-pointer text-muted hover:text-foreground">
                 <Shield className="mr-2 h-4 w-4" />
                 <span>Administration</span>
               </DropdownMenuItem>
             </LinkNext>
           )}
         </DropdownMenuGroup>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="bg-white/10" />
         <DropdownMenuItem
-          className="text-red-400 focus:text-red-300 cursor-pointer"
+          className="text-red-400 focus:text-red-300 focus:bg-red-500/10 cursor-pointer"
           onClick={() => logout()}
         >
           <LogOut className="mr-2 h-4 w-4" />

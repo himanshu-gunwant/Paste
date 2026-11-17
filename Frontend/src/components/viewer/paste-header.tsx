@@ -71,35 +71,35 @@ export function PasteHeader({ paste, lineCount }: PasteHeaderProps) {
   const displayLang = paste.language || paste.detectedLanguage || "plaintext";
 
   return (
-    <div className="flex flex-col gap-3 pb-4 border-b border-zinc-800">
+    <div className="flex flex-col gap-3 pb-5 border-b border-white/10 animate-enter delay-1">
       {/* Title & Visibility */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-2.5">
-          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-100">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
             {paste.title || "Untitled Paste"}
           </h1>
           <div className="flex items-center gap-1.5">
             {paste.visibility === "public" && (
-              <Badge variant="secondary" className="gap-1 text-xs">
-                <Globe className="h-3 w-3 text-emerald-400" />
+              <Badge variant="emerald" className="gap-1 text-xs">
+                <Globe className="h-3 w-3" />
                 Public
               </Badge>
             )}
             {paste.visibility === "unlisted" && (
-              <Badge variant="outline" className="gap-1 text-xs text-amber-400 border-amber-900/60">
+              <Badge variant="amber" className="gap-1 text-xs">
                 <LinkIcon className="h-3 w-3" />
                 Unlisted
               </Badge>
             )}
             {paste.visibility === "private" && (
-              <Badge variant="outline" className="gap-1 text-xs text-rose-400 border-rose-900/60">
+              <Badge variant="destructive" className="gap-1 text-xs">
                 <Lock className="h-3 w-3" />
                 Private
               </Badge>
             )}
             {paste.burnAfterRead && (
               <Badge variant="destructive" className="gap-1 text-xs">
-                🔥 Burn on read
+                Burn on read
               </Badge>
             )}
           </div>
@@ -107,8 +107,8 @@ export function PasteHeader({ paste, lineCount }: PasteHeaderProps) {
 
         {/* Language Badge */}
         <div className="flex items-center gap-2">
-          <Badge variant="outline" className="font-mono text-xs uppercase bg-zinc-900/80 border-zinc-700">
-            <FileCode className="h-3 w-3 mr-1 text-violet-400" />
+          <Badge variant="outline" className="font-mono text-xs uppercase bg-white/5 border-white/10 text-muted">
+            <FileCode className="h-3 w-3 mr-1 text-muted" />
             {displayLang}
           </Badge>
         </div>
@@ -116,37 +116,37 @@ export function PasteHeader({ paste, lineCount }: PasteHeaderProps) {
 
       {/* Description if present */}
       {paste.description && (
-        <p className="text-sm text-zinc-400 leading-relaxed max-w-3xl">
+        <p className="text-sm text-muted leading-relaxed max-w-3xl">
           {paste.description}
         </p>
       )}
 
       {/* Metadata Row */}
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-zinc-400">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted">
         {/* Author */}
         <div className="flex items-center gap-1.5">
-          <User className="h-3.5 w-3.5 text-zinc-500" />
+          <User className="h-3.5 w-3.5 text-muted" />
           {paste.author?.username ? (
             <Link
               href={`/u/${paste.author.username}`}
-              className="text-zinc-300 hover:text-white hover:underline transition-colors"
+              className="text-foreground hover:text-white transition-colors"
             >
               @{paste.author.username}
             </Link>
           ) : (
-            <span className="text-zinc-500 italic">Anonymous</span>
+            <span className="text-muted italic">Anonymous</span>
           )}
         </div>
 
         {/* Created date */}
-        <div className="flex items-center gap-1.5" title={new Date(paste.createdAt).toLocaleString()}>
-          <Calendar className="h-3.5 w-3.5 text-zinc-500" />
+        <div className="flex items-center gap-1.5 font-mono" title={new Date(paste.createdAt).toLocaleString()}>
+          <Calendar className="h-3.5 w-3.5 text-muted" />
           <span>{formatRelativeTime(paste.createdAt)}</span>
         </div>
 
         {/* Expiration date */}
         {paste.expiresAt && (
-          <div className="flex items-center gap-1.5 text-amber-400/90" title={new Date(paste.expiresAt).toLocaleString()}>
+          <div className="flex items-center gap-1.5 text-amber-300 font-mono" title={new Date(paste.expiresAt).toLocaleString()}>
             <Clock className="h-3.5 w-3.5" />
             <span>{formatExpiryTime(paste.expiresAt)}</span>
           </div>
@@ -155,11 +155,11 @@ export function PasteHeader({ paste, lineCount }: PasteHeaderProps) {
         {/* Forked of */}
         {paste.forkOfId && (
           <div className="flex items-center gap-1.5">
-            <GitFork className="h-3.5 w-3.5 text-violet-400" />
+            <GitFork className="h-3.5 w-3.5 text-muted" />
             <span>Forked from</span>
             <Link
               href={`/p/${paste.forkOfId}`}
-              className="text-violet-400 hover:underline font-mono"
+              className="text-foreground hover:underline font-mono"
             >
               p/{paste.forkOfId}
             </Link>
@@ -167,8 +167,8 @@ export function PasteHeader({ paste, lineCount }: PasteHeaderProps) {
         )}
 
         {/* Content size & lines */}
-        <div className="flex items-center gap-1.5 text-zinc-500">
-          <HardDrive className="h-3.5 w-3.5" />
+        <div className="flex items-center gap-1.5 text-muted font-mono">
+          <HardDrive className="h-3.5 w-3.5 text-muted" />
           <span>{formatBytes(paste.contentSize)}</span>
           {typeof lineCount === "number" && (
             <span>· {lineCount} {lineCount === 1 ? "line" : "lines"}</span>
@@ -177,8 +177,8 @@ export function PasteHeader({ paste, lineCount }: PasteHeaderProps) {
 
         {/* View count if available */}
         {typeof paste.viewCount === "number" && (
-          <div className="flex items-center gap-1.5 text-zinc-400 ml-auto">
-            <Eye className="h-3.5 w-3.5 text-zinc-500" />
+          <div className="flex items-center gap-1.5 text-muted font-mono ml-auto">
+            <Eye className="h-3.5 w-3.5 text-muted" />
             <span>
               {paste.viewCount.toLocaleString()} {paste.viewCount === 1 ? "view" : "views"}
               {paste.maxViews ? ` / ${paste.maxViews}` : ""}

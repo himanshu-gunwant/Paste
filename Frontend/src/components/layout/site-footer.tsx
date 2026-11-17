@@ -1,28 +1,56 @@
+"use client";
+
 import Link from "next/link";
-import { Terminal } from "lucide-react";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border bg-background py-4 text-xs text-muted-foreground">
-      <div className="container max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-3 px-4 sm:px-6">
+    <footer className="border-t border-white/10 bg-[#0f0f0f] py-6 text-xs text-zinc-400">
+      <div className="container max-w-7xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-4 sm:px-6">
         <div className="flex items-center gap-2">
-          <Terminal className="h-3.5 w-3.5 text-primary" />
-          <span>paste.bin — developer code sharing platform</span>
+          <span className="text-zinc-400 font-mono">paste.himanshugunwant.com</span>
         </div>
-        <div className="flex items-center gap-4 text-[11px]">
-          <Link href="/explore" className="hover:text-foreground transition-colors">
-            Explore
-          </Link>
+        <div className="flex flex-wrap items-center gap-4 text-xs">
           <a
-            href="/api/docs"
+            href="https://himanshugunwant.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-foreground transition-colors"
+            className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded inline-flex items-center gap-0.5"
           >
-            Swagger API
+            <span>himanshugunwant.com</span>
+            <span className="text-[10px] text-zinc-500">↗</span>
           </a>
-          <span className="text-zinc-600">•</span>
-          <span className="font-mono text-zinc-500">Press ⌘K for command palette</span>
+          <span className="text-zinc-600">·</span>
+          <Link
+            href="/explore"
+            className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded"
+          >
+            Explore
+          </Link>
+          <span className="text-zinc-600">·</span>
+          <Link
+            href="/languages"
+            className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded"
+          >
+            Languages
+          </Link>
+          <span className="text-zinc-600">·</span>
+          <a
+            href="https://github.com/himanshu-gunwant/Paste"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded inline-flex items-center gap-0.5"
+          >
+            <span>GitHub</span>
+            <span className="text-[10px] text-zinc-500">↗</span>
+          </a>
+          <span className="text-zinc-600">·</span>
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent("open-command-palette"))}
+            className="font-mono text-zinc-400 hover:text-white text-[11px] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded"
+          >
+            ⌘K
+          </button>
         </div>
       </div>
     </footer>

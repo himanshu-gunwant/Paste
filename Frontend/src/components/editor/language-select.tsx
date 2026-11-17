@@ -20,8 +20,8 @@ export function LanguageSelect({ value, onChange, detectedLanguage }: LanguageSe
   return (
     <div className="flex items-center gap-1.5">
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="h-8 w-[140px] text-xs gap-1.5 border-border bg-subtle">
-          <Code2 className="h-3.5 w-3.5 text-primary shrink-0" />
+        <SelectTrigger className="h-8 w-[140px] text-xs gap-1.5 border-white/10 bg-white/[0.03] hover:bg-white/5 transition-colors">
+          <Code2 className="h-3.5 w-3.5 text-zinc-400 shrink-0" />
           <SelectValue placeholder="Select Language" />
         </SelectTrigger>
         <SelectContent align="start" className="max-h-[300px]">
@@ -29,7 +29,7 @@ export function LanguageSelect({ value, onChange, detectedLanguage }: LanguageSe
             <SelectItem key={lang.id} value={lang.id} className="text-xs">
               {lang.name}
               {detectedLanguage === lang.id && (
-                <span className="ml-1.5 text-[10px] text-muted-foreground">(detected)</span>
+                <span className="ml-1.5 text-[10px] text-muted">(detected)</span>
               )}
             </SelectItem>
           ))}

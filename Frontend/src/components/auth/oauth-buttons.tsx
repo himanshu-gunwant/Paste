@@ -14,7 +14,7 @@ export function OAuthButtons() {
         type="button"
         variant="outline"
         size="sm"
-        className="w-full text-xs gap-2 border-border bg-canvas hover:bg-muted"
+        className="w-full text-xs gap-2"
         onClick={() => handleOAuth("github")}
       >
         <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
@@ -26,7 +26,7 @@ export function OAuthButtons() {
         type="button"
         variant="outline"
         size="sm"
-        className="w-full text-xs gap-2 border-border bg-canvas hover:bg-muted"
+        className="w-full text-xs gap-2"
         onClick={() => handleOAuth("google")}
       >
         <svg className="h-4 w-4" viewBox="0 0 24 24">

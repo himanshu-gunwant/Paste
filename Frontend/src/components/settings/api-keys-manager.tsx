@@ -121,10 +121,10 @@ export function ApiKeysManager() {
   return (
     <div className="space-y-6 max-w-4xl">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
         <div className="space-y-1">
-          <h2 className="text-base font-semibold text-zinc-100">Personal API Keys</h2>
-          <p className="text-xs text-zinc-400">
+          <h2 className="text-base font-semibold text-foreground">Personal API Keys</h2>
+          <p className="text-xs text-muted">
             Use API keys to authenticate command-line tools, bots, and CI/CD pipelines.
           </p>
         </div>
@@ -132,7 +132,7 @@ export function ApiKeysManager() {
         <Button
           size="sm"
           onClick={() => setCreateOpen(true)}
-          className="gap-1.5 bg-violet-600 hover:bg-violet-700 text-white"
+          className="gap-1.5"
         >
           <Plus className="h-4 w-4" />
           Generate New Key
@@ -141,25 +141,25 @@ export function ApiKeysManager() {
 
       {/* Usage Quota Card */}
       {usageData && (
-        <div className="p-4 rounded-lg border border-zinc-800 bg-zinc-950/60 space-y-2.5">
+        <div className="p-4 rounded-lg border border-white/10 bg-white/[0.02] space-y-2.5">
           <div className="flex items-center justify-between text-xs">
-            <span className="flex items-center gap-2 text-zinc-300 font-medium">
-              <Activity className="h-3.5 w-3.5 text-violet-400" />
+            <span className="flex items-center gap-2 text-foreground font-medium">
+              <Activity className="h-3.5 w-3.5 text-muted" />
               API Daily Quota
             </span>
-            <span className="font-mono text-zinc-400">
+            <span className="font-mono text-muted">
               {totalRequests.toLocaleString()} / {dailyLimit.toLocaleString()} requests
             </span>
           </div>
 
-          <div className="h-1.5 w-full bg-zinc-900 rounded-full overflow-hidden">
+          <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
             <div
               className={`h-full transition-all ${
                 usagePercentage > 90
-                  ? "bg-rose-500"
+                  ? "bg-red-400"
                   : usagePercentage > 75
-                  ? "bg-amber-500"
-                  : "bg-violet-500"
+                  ? "bg-amber-400"
+                  : "bg-white"
               }`}
               style={{ width: `${usagePercentage}%` }}
             />
@@ -170,35 +170,35 @@ export function ApiKeysManager() {
       {/* Keys List */}
       {isLoadingKeys ? (
         <div className="flex flex-col items-center justify-center py-16 gap-3">
-          <Loader2 className="h-8 w-8 animate-spin text-violet-500" />
-          <p className="text-sm text-zinc-400">Loading API keys...</p>
+          <Loader2 className="h-6 w-6 animate-spin text-muted" />
+          <p className="text-sm text-muted">Loading API keys...</p>
         </div>
       ) : !apiKeys || apiKeys.length === 0 ? (
-        <div className="text-center py-16 border border-zinc-800/80 rounded-xl bg-zinc-950/40 p-8 space-y-3">
-          <Key className="h-8 w-8 text-zinc-600 mx-auto" />
-          <h3 className="text-base font-medium text-zinc-200">No API keys created</h3>
-          <p className="text-xs text-zinc-500 max-w-sm mx-auto">
+        <div className="text-center py-16 border border-white/10 rounded-lg bg-white/[0.02] p-8 space-y-3">
+          <Key className="h-8 w-8 text-muted/60 mx-auto" />
+          <h3 className="text-base font-medium text-foreground">No API keys created</h3>
+          <p className="text-xs text-muted max-w-sm mx-auto">
             Generate an API key to create and manage pastes directly from the terminal or your own scripts.
           </p>
           <Button
             size="sm"
             onClick={() => setCreateOpen(true)}
-            className="mt-2 bg-violet-600 hover:bg-violet-700 text-white"
+            className="mt-2"
           >
             Generate Key
           </Button>
         </div>
       ) : (
-        <div className="divide-y divide-zinc-800/80 rounded-lg border border-zinc-800 bg-zinc-950/80 overflow-hidden">
+        <div className="divide-y divide-white/5 rounded-lg border border-white/10 bg-white/[0.02] overflow-hidden">
           {apiKeys.map((k: ApiKeyView) => (
             <div
               key={k.id}
-              className="flex items-center justify-between p-4 hover:bg-zinc-900/40 transition-colors gap-3"
+              className="flex items-center justify-between p-4 hover:bg-white/5 transition-colors gap-3"
             >
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-semibold text-zinc-200">{k.name}</span>
-                  <Badge variant="outline" className="font-mono text-[10px] bg-zinc-900 text-zinc-400 border-zinc-800">
+                  <span className="text-sm font-semibold text-foreground">{k.name}</span>
+                  <Badge variant="outline" className="font-mono text-[10px] border-white/10 bg-white/5 text-muted">
                     {k.prefix}...
                   </Badge>
                   {k.revokedAt && (
@@ -208,7 +208,7 @@ export function ApiKeysManager() {
                   )}
                 </div>
 
-                <div className="flex flex-wrap items-center gap-3 text-xs text-zinc-500">
+                <div className="flex flex-wrap items-center gap-3 text-xs text-muted">
                   <span className="flex items-center gap-1">
                     <Calendar className="h-3 w-3" />
                     Created {new Date(k.createdAt).toLocaleDateString()}
@@ -227,7 +227,7 @@ export function ApiKeysManager() {
                   variant="ghost"
                   size="sm"
                   onClick={() => handleRevoke(k.id)}
-                  className="text-zinc-500 hover:text-rose-400 hover:bg-rose-950/20 h-8"
+                  className="text-muted hover:text-red-400 hover:bg-red-500/10 h-8"
                 >
                   <Trash2 className="h-3.5 w-3.5" />
                 </Button>
@@ -239,33 +239,33 @@ export function ApiKeysManager() {
 
       {/* Create Key Modal */}
       <Dialog open={createOpen} onOpenChange={setCreateOpen}>
-        <DialogContent className="sm:max-w-md bg-zinc-950 border-zinc-800">
+        <DialogContent className="sm:max-w-md">
           <form onSubmit={handleCreate}>
             <DialogHeader>
-              <div className="flex items-center gap-2 text-violet-400">
-                <Key className="h-5 w-5" />
-                <DialogTitle className="text-zinc-100">Create API Key</DialogTitle>
+              <div className="flex items-center gap-2 text-foreground">
+                <Key className="h-4 w-4 text-muted" />
+                <DialogTitle>Create API Key</DialogTitle>
               </div>
-              <DialogDescription className="text-zinc-400 text-xs">
+              <DialogDescription className="text-xs">
                 Enter a descriptive name to identify where this token is being used.
               </DialogDescription>
             </DialogHeader>
 
             <div className="space-y-4 py-4">
               <div className="space-y-1.5">
-                <Label htmlFor="key-name" className="text-xs text-zinc-300">Key Name</Label>
+                <Label htmlFor="key-name" className="text-xs text-muted">Key Name</Label>
                 <Input
                   id="key-name"
                   value={keyName}
                   onChange={(e) => setKeyName(e.target.value)}
                   placeholder="e.g. CLI tool, GitHub Action, Backup Bot"
                   required
-                  className="bg-zinc-900 border-zinc-800 text-sm"
+                  className="text-sm"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="key-exp" className="text-xs text-zinc-300">Expiration (Days)</Label>
+                <Label htmlFor="key-exp" className="text-xs text-muted">Expiration (Days)</Label>
                 <Input
                   id="key-exp"
                   type="number"
@@ -273,7 +273,7 @@ export function ApiKeysManager() {
                   value={expiresInDays}
                   onChange={(e) => setExpiresInDays(e.target.value)}
                   placeholder="30"
-                  className="bg-zinc-900 border-zinc-800 text-sm"
+                  className="text-sm"
                 />
               </div>
             </div>
@@ -284,7 +284,6 @@ export function ApiKeysManager() {
                 variant="ghost"
                 size="sm"
                 onClick={() => setCreateOpen(false)}
-                className="text-zinc-400 hover:text-white"
               >
                 Cancel
               </Button>
@@ -292,7 +291,6 @@ export function ApiKeysManager() {
                 type="submit"
                 size="sm"
                 disabled={isCreating || !keyName.trim()}
-                className="bg-violet-600 hover:bg-violet-700 text-white"
               >
                 {isCreating ? <Loader2 className="h-4 w-4 animate-spin" /> : "Generate Key"}
               </Button>
@@ -303,13 +301,13 @@ export function ApiKeysManager() {
 
       {/* One-Time Key Reveal Modal */}
       <Dialog open={Boolean(revealedKey)} onOpenChange={(open) => !open && setRevealedKey(null)}>
-        <DialogContent className="sm:max-w-lg bg-zinc-950 border-zinc-800">
+        <DialogContent className="sm:max-w-lg">
           <DialogHeader>
             <div className="flex items-center gap-2 text-amber-400">
-              <AlertTriangle className="h-5 w-5" />
-              <DialogTitle className="text-zinc-100">Save Your API Key</DialogTitle>
+              <AlertTriangle className="h-4 w-4" />
+              <DialogTitle>Save Your API Key</DialogTitle>
             </div>
-            <DialogDescription className="text-zinc-400 text-xs leading-relaxed pt-2">
+            <DialogDescription className="text-xs leading-relaxed pt-2">
               Please copy your API key now. For security purposes, <strong>you will not be able to view it again</strong> once this dialog is closed.
             </DialogDescription>
           </DialogHeader>
@@ -319,12 +317,12 @@ export function ApiKeysManager() {
               <Input
                 readOnly
                 value={revealedKey || ""}
-                className="font-mono text-xs bg-zinc-900 border-zinc-800 select-all"
+                className="font-mono text-xs select-all"
               />
               <Button
                 size="sm"
                 onClick={handleCopyKey}
-                className="shrink-0 bg-violet-600 hover:bg-violet-700 text-white"
+                className="shrink-0"
               >
                 {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
               </Button>
@@ -335,8 +333,9 @@ export function ApiKeysManager() {
             <Button
               type="button"
               size="sm"
+              variant="outline"
               onClick={() => setRevealedKey(null)}
-              className="w-full bg-zinc-800 hover:bg-zinc-700 text-zinc-100"
+              className="w-full"
             >
               I have safely copied my key
             </Button>

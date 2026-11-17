@@ -30,26 +30,26 @@ export default function CollectionDetailPage({ params }: CollectionDetailPagePro
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh] gap-3">
-        <Loader2 className="h-8 w-8 animate-spin text-violet-500" />
-        <p className="text-sm text-zinc-400">Loading collection...</p>
+        <Loader2 className="h-6 w-6 animate-spin text-muted" />
+        <p className="text-sm text-muted">Loading collection...</p>
       </div>
     );
   }
 
   if (isError || !data) {
     return (
-      <div className="max-w-md mx-auto py-16">
-        <Card className="bg-zinc-900/60 border-zinc-800 p-6 text-center">
+      <div className="max-w-md mx-auto py-16 animate-enter">
+        <Card className="p-6 text-center">
           <CardContent className="pt-4 space-y-4">
-            <div className="inline-flex p-3 rounded-full bg-rose-500/10 text-rose-400">
-              <AlertCircle className="h-7 w-7" />
+            <div className="inline-flex p-3 rounded-full bg-red-500/10 text-red-400 border border-red-500/20">
+              <AlertCircle className="h-6 w-6" />
             </div>
-            <h2 className="text-lg font-bold text-zinc-100">Collection Not Found</h2>
-            <p className="text-sm text-zinc-400">
+            <h2 className="text-lg font-semibold tracking-tight text-foreground">Collection Not Found</h2>
+            <p className="text-sm text-muted">
               {(error as Error)?.message || "This collection is private or does not exist."}
             </p>
             <div className="pt-2">
-              <Button asChild variant="outline" size="sm" className="border-zinc-800">
+              <Button asChild variant="outline" size="sm">
                 <Link href="/collections" className="gap-1.5">
                   <ArrowLeft className="h-4 w-4" />
                   Back to Collections
@@ -63,9 +63,9 @@ export default function CollectionDetailPage({ params }: CollectionDetailPagePro
   }
 
   return (
-    <div className="w-full max-w-7xl mx-auto py-4 space-y-6">
+    <div className="w-full max-w-5xl mx-auto py-4 space-y-6 animate-enter">
       <div className="pb-2">
-        <Button asChild variant="ghost" size="sm" className="text-zinc-400 hover:text-white -ml-2 gap-1.5">
+        <Button asChild variant="ghost" size="sm" className="text-muted hover:text-foreground -ml-2 gap-1.5">
           <Link href="/collections">
             <ArrowLeft className="h-4 w-4" />
             Collections

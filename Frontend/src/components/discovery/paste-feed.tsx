@@ -8,7 +8,7 @@ import { SearchBar } from "./search-bar";
 import { LanguageFacets } from "./language-facets";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Loader2, Sparkles, TrendingUp, Clock, Flame, FileText } from "lucide-react";
+import { Loader2, TrendingUp, Clock, Flame, FileText } from "lucide-react";
 
 interface PasteFeedProps {
   initialSort?: "latest" | "popular" | "trending";
@@ -66,7 +66,7 @@ export function PasteFeed({
   const allPastes = data ? data.pages.flatMap((page) => page.data) : [];
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 animate-enter delay-2">
       {/* Search and Filters Header */}
       {!hideHeaderControls && (
         <div className="flex flex-col gap-4">
@@ -87,7 +87,7 @@ export function PasteFeed({
                 onValueChange={(val) => setSort(val as typeof sort)}
                 className="w-auto"
               >
-                <TabsList className="bg-zinc-900 border border-zinc-800">
+                <TabsList className="bg-white/[0.03] border border-white/10">
                   <TabsTrigger value="latest" className="gap-1.5 text-xs">
                     <Clock className="h-3.5 w-3.5" />
                     Latest
@@ -97,7 +97,7 @@ export function PasteFeed({
                     Popular
                   </TabsTrigger>
                   <TabsTrigger value="trending" className="gap-1.5 text-xs">
-                    <Flame className="h-3.5 w-3.5 text-orange-400" />
+                    <Flame className="h-3.5 w-3.5" />
                     Trending
                   </TabsTrigger>
                 </TabsList>
@@ -116,20 +116,20 @@ export function PasteFeed({
       {/* Content Area */}
       {isLoading ? (
         <div className="flex flex-col items-center justify-center py-24 gap-3">
-          <Loader2 className="h-8 w-8 animate-spin text-violet-500" />
-          <p className="text-sm text-zinc-400">Loading public pastes...</p>
+          <Loader2 className="h-6 w-6 animate-spin text-muted" />
+          <p className="text-sm text-muted">Loading public pastes...</p>
         </div>
       ) : isError ? (
-        <div className="text-center py-16 border border-zinc-800/80 rounded-lg bg-zinc-900/30 p-8 space-y-3">
-          <p className="text-sm text-rose-400">Failed to load pastes: {(error as Error)?.message || "Unknown error"}</p>
+        <div className="text-center py-16 border border-white/10 rounded-lg bg-white/[0.02] p-8 space-y-3">
+          <p className="text-sm text-red-400">Failed to load pastes: {(error as Error)?.message || "Unknown error"}</p>
         </div>
       ) : allPastes.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-20 text-center border border-zinc-800/60 rounded-xl bg-zinc-900/20 p-8 space-y-3">
-          <div className="p-3 rounded-full bg-zinc-800/60 text-zinc-400">
+        <div className="flex flex-col items-center justify-center py-20 text-center border border-white/10 rounded-xl bg-white/[0.02] p-8 space-y-3">
+          <div className="p-3 rounded-full bg-white/5 text-muted">
             <FileText className="h-6 w-6" />
           </div>
-          <h3 className="text-base font-medium text-zinc-200">No pastes found</h3>
-          <p className="text-xs text-zinc-500 max-w-sm">
+          <h3 className="text-base font-medium text-foreground">No pastes found</h3>
+          <p className="text-xs text-muted max-w-sm">
             {isSearching
               ? `No pastes matched "${searchQuery}". Try a different search term or clear the language filter.`
               : "There are currently no public pastes matching this criteria."}
@@ -152,18 +152,15 @@ export function PasteFeed({
                 size="sm"
                 onClick={() => fetchNextPage()}
                 disabled={isFetchingNextPage}
-                className="gap-2 border-zinc-800 bg-zinc-900/80 text-zinc-300 hover:text-white hover:bg-zinc-800 px-6"
+                className="gap-2 border-white/10 bg-white/[0.02] text-muted hover:text-white hover:bg-white/5 px-6"
               >
                 {isFetchingNextPage ? (
                   <>
-                    <Loader2 className="h-4 w-4 animate-spin text-violet-400" />
-                    Loading more...
+                    <Loader2 className="h-3.5 w-3.5 animate-spin text-muted" />
+                    <span>Loading more...</span>
                   </>
                 ) : (
-                  <>
-                    <Sparkles className="h-3.5 w-3.5 text-violet-400" />
-                    Load More Pastes
-                  </>
+                  <span>Load More Pastes</span>
                 )}
               </Button>
             </div>

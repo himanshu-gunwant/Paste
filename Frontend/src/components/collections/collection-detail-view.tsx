@@ -168,28 +168,28 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
   return (
     <div className="space-y-6">
       {/* Collection Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-zinc-800">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
         <div className="space-y-1.5">
           <div className="flex flex-wrap items-center gap-3">
-            <div className="p-2.5 rounded-lg bg-violet-950/40 border border-violet-800/40 text-violet-400">
-              <Folder className="h-6 w-6" />
+            <div className="p-2.5 rounded-md bg-white/5 border border-white/10 text-muted">
+              <Folder className="h-5 w-5" />
             </div>
-            <h1 className="text-2xl font-bold tracking-tight text-zinc-100">
+            <h1 className="text-2xl font-bold tracking-tight text-foreground">
               {collection.title}
             </h1>
             <div>
               {collection.visibility === "public" && (
-                <Badge variant="secondary" className="gap-1 text-xs text-emerald-400">
+                <Badge variant="secondary" className="gap-1 text-xs border-white/10 bg-white/5 text-muted">
                   <Globe className="h-3 w-3" /> Public
                 </Badge>
               )}
               {collection.visibility === "unlisted" && (
-                <Badge variant="outline" className="gap-1 text-xs text-amber-400 border-amber-900">
+                <Badge variant="outline" className="gap-1 text-xs border-white/10 bg-white/5 text-muted">
                   <LinkIcon className="h-3 w-3" /> Unlisted
                 </Badge>
               )}
               {collection.visibility === "private" && (
-                <Badge variant="outline" className="gap-1 text-xs text-rose-400 border-rose-900">
+                <Badge variant="outline" className="gap-1 text-xs border-white/10 bg-white/5 text-muted">
                   <Lock className="h-3 w-3" /> Private
                 </Badge>
               )}
@@ -197,12 +197,12 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
           </div>
 
           {collection.description && (
-            <p className="text-sm text-zinc-400 max-w-2xl pt-1 leading-relaxed">
+            <p className="text-sm text-muted max-w-2xl pt-1 leading-relaxed">
               {collection.description}
             </p>
           )}
 
-          <div className="flex items-center gap-3 text-xs text-zinc-500 pt-1">
+          <div className="flex items-center gap-3 text-xs text-muted pt-1">
             <span>Curated by @{collection.ownerUsername}</span>
             <span>·</span>
             <span>{items.length} {items.length === 1 ? "paste" : "pastes"}</span>
@@ -215,7 +215,7 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
             <Button
               size="sm"
               onClick={() => setAddPasteOpen(true)}
-              className="gap-1.5 bg-violet-600 hover:bg-violet-700 text-white"
+              className="gap-1.5"
             >
               <Plus className="h-4 w-4" />
               Add Paste
@@ -224,7 +224,6 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
               variant="outline"
               size="sm"
               onClick={() => setEditOpen(true)}
-              className="border-zinc-800 text-zinc-300"
             >
               <Edit2 className="h-4 w-4" />
             </Button>
@@ -241,32 +240,31 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
 
       {/* Items List */}
       <div className="space-y-3">
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-zinc-400">
+        <h2 className="text-sm font-medium uppercase tracking-wider text-muted">
           Pastes in Collection
         </h2>
 
         {items.length === 0 ? (
-          <div className="text-center py-16 border border-zinc-800/80 rounded-xl bg-zinc-950/40 p-8 space-y-3">
-            <p className="text-sm text-zinc-400">No pastes have been added to this collection yet.</p>
+          <div className="text-center py-16 border border-white/10 rounded-lg bg-white/[0.02] p-8 space-y-3">
+            <p className="text-sm text-muted">No pastes have been added to this collection yet.</p>
             {isOwner && (
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => setAddPasteOpen(true)}
-                className="border-zinc-800 text-zinc-300"
               >
                 Add Your First Paste
               </Button>
             )}
           </div>
         ) : (
-          <div className="divide-y divide-zinc-800/80 rounded-lg border border-zinc-800 bg-zinc-950/80 overflow-hidden">
+          <div className="divide-y divide-white/5 rounded-lg border border-white/10 bg-white/[0.02] overflow-hidden">
             {items.map((item: CollectionItem, idx: number) => {
               if (item.restricted || !item.paste) {
                 return (
-                  <div key={idx} className="flex items-center justify-between p-4 text-xs text-zinc-500 italic">
+                  <div key={idx} className="flex items-center justify-between p-4 text-xs text-muted italic">
                     <span className="flex items-center gap-2">
-                      <AlertCircle className="h-4 w-4 text-zinc-600" />
+                      <AlertCircle className="h-4 w-4 text-muted/60" />
                       [Private or deleted paste]
                     </span>
                     {isOwner && (
@@ -274,7 +272,7 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
                         variant="ghost"
                         size="sm"
                         onClick={() => handleRemovePaste(item.paste?.id || "")}
-                        className="text-zinc-500 hover:text-rose-400 h-7"
+                        className="text-muted hover:text-red-400 h-7"
                       >
                         Remove
                       </Button>
@@ -288,7 +286,7 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
               return (
                 <div
                   key={paste.id}
-                  className="flex items-center justify-between p-4 hover:bg-zinc-900/40 transition-colors gap-3"
+                  className="flex items-center justify-between p-4 hover:bg-white/5 transition-colors gap-3"
                 >
                   <div className="flex items-center gap-3">
                     {/* Reorder Buttons (owner only) */}
@@ -298,7 +296,7 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
                           type="button"
                           onClick={() => handleMove(idx, "up")}
                           disabled={idx === 0 || isReordering}
-                          className="p-1 text-zinc-500 hover:text-zinc-200 disabled:opacity-30 transition-colors"
+                          className="p-1 text-muted hover:text-foreground disabled:opacity-30 transition-colors"
                         >
                           <ArrowUp className="h-3 w-3" />
                         </button>
@@ -306,7 +304,7 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
                           type="button"
                           onClick={() => handleMove(idx, "down")}
                           disabled={idx === items.length - 1 || isReordering}
-                          className="p-1 text-zinc-500 hover:text-zinc-200 disabled:opacity-30 transition-colors"
+                          className="p-1 text-muted hover:text-foreground disabled:opacity-30 transition-colors"
                         >
                           <ArrowDown className="h-3 w-3" />
                         </button>
@@ -316,13 +314,13 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
                     <div className="space-y-1">
                       <Link
                         href={`/p/${paste.id}`}
-                        className="text-sm font-medium text-zinc-200 hover:text-violet-400 transition-colors flex items-center gap-1.5"
+                        className="text-sm font-medium text-foreground hover:underline transition-colors flex items-center gap-1.5"
                       >
                         {paste.title || "Untitled Paste"}
-                        <ExternalLink className="h-3 w-3 text-zinc-500" />
+                        <ExternalLink className="h-3 w-3 text-muted" />
                       </Link>
-                      <div className="flex items-center gap-2 text-xs text-zinc-500">
-                        <Badge variant="outline" className="text-[10px] font-mono border-zinc-800">
+                      <div className="flex items-center gap-2 text-xs text-muted">
+                        <Badge variant="outline" className="text-[10px] font-mono border-white/10 bg-white/5">
                           <FileCode className="h-2.5 w-2.5 mr-1" />
                           {paste.language || "text"}
                         </Badge>
@@ -339,7 +337,7 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
                       variant="ghost"
                       size="sm"
                       onClick={() => handleRemovePaste(paste.id)}
-                      className="text-zinc-500 hover:text-rose-400 hover:bg-rose-950/20 h-8"
+                      className="text-muted hover:text-red-400 hover:bg-red-500/10 h-8"
                     >
                       <Trash2 className="h-3.5 w-3.5" />
                     </Button>
@@ -353,23 +351,23 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
 
       {/* Add Paste Dialog */}
       <Dialog open={addPasteOpen} onOpenChange={setAddPasteOpen}>
-        <DialogContent className="sm:max-w-md bg-zinc-950 border-zinc-800">
+        <DialogContent className="sm:max-w-md">
           <form onSubmit={handleAddPaste}>
             <DialogHeader>
-              <DialogTitle className="text-zinc-100">Add Paste to Collection</DialogTitle>
-              <DialogDescription className="text-zinc-400 text-xs">
+              <DialogTitle>Add Paste to Collection</DialogTitle>
+              <DialogDescription>
                 Enter the paste ID or link to include it in this collection.
               </DialogDescription>
             </DialogHeader>
 
             <div className="py-4 space-y-2">
-              <Label htmlFor="paste-id-input" className="text-xs text-zinc-300">Paste ID</Label>
+              <Label htmlFor="paste-id-input" className="text-xs text-muted">Paste ID</Label>
               <Input
                 id="paste-id-input"
                 value={pasteIdToAdd}
                 onChange={(e) => setPasteIdToAdd(e.target.value)}
                 placeholder="e.g. 7f9a1b2c or https://.../p/7f9a1b2c"
-                className="bg-zinc-900 border-zinc-800 text-sm font-mono"
+                className="text-sm font-mono"
                 required
               />
             </div>
@@ -380,7 +378,6 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
                 variant="ghost"
                 size="sm"
                 onClick={() => setAddPasteOpen(false)}
-                className="text-zinc-400 hover:text-white"
               >
                 Cancel
               </Button>
@@ -388,7 +385,6 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
                 type="submit"
                 size="sm"
                 disabled={isAddingPaste || !pasteIdToAdd.trim()}
-                className="bg-violet-600 hover:bg-violet-700 text-white"
               >
                 {isAddingPaste ? <Loader2 className="h-4 w-4 animate-spin" /> : "Add to Collection"}
               </Button>
@@ -399,28 +395,28 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
 
       {/* Edit Dialog */}
       <Dialog open={editOpen} onOpenChange={setEditOpen}>
-        <DialogContent className="sm:max-w-md bg-zinc-950 border-zinc-800">
+        <DialogContent className="sm:max-w-md">
           <form onSubmit={handleUpdateCollection}>
             <DialogHeader>
-              <DialogTitle className="text-zinc-100">Edit Collection</DialogTitle>
+              <DialogTitle>Edit Collection</DialogTitle>
             </DialogHeader>
 
             <div className="space-y-4 py-4">
               <div className="space-y-1.5">
-                <Label className="text-xs text-zinc-300">Title</Label>
+                <Label className="text-xs text-muted">Title</Label>
                 <Input
                   value={editTitle}
                   onChange={(e) => setEditTitle(e.target.value)}
                   required
-                  className="bg-zinc-900 border-zinc-800 text-sm"
+                  className="text-sm"
                 />
               </div>
               <div className="space-y-1.5">
-                <Label className="text-xs text-zinc-300">Description</Label>
+                <Label className="text-xs text-muted">Description</Label>
                 <Input
                   value={editDesc}
                   onChange={(e) => setEditDesc(e.target.value)}
-                  className="bg-zinc-900 border-zinc-800 text-sm"
+                  className="text-sm"
                 />
               </div>
             </div>
@@ -431,7 +427,6 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
                 variant="ghost"
                 size="sm"
                 onClick={() => setEditOpen(false)}
-                className="text-zinc-400 hover:text-white"
               >
                 Cancel
               </Button>
@@ -439,7 +434,6 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
                 type="submit"
                 size="sm"
                 disabled={isUpdating}
-                className="bg-violet-600 hover:bg-violet-700 text-white"
               >
                 {isUpdating ? <Loader2 className="h-4 w-4 animate-spin" /> : "Save Changes"}
               </Button>
@@ -450,10 +444,10 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
 
       {/* Delete Collection Dialog */}
       <Dialog open={deleteOpen} onOpenChange={setDeleteOpen}>
-        <DialogContent className="sm:max-w-md bg-zinc-950 border-zinc-800">
+        <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-zinc-100">Delete Collection?</DialogTitle>
-            <DialogDescription className="text-zinc-400 text-xs leading-relaxed pt-2">
+            <DialogTitle>Delete Collection?</DialogTitle>
+            <DialogDescription className="text-xs leading-relaxed pt-2">
               Are you sure you want to delete &quot;{collection.title}&quot;? The pastes themselves will not be deleted, only the collection folder.
             </DialogDescription>
           </DialogHeader>
@@ -463,7 +457,6 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
               variant="ghost"
               size="sm"
               onClick={() => setDeleteOpen(false)}
-              className="text-zinc-400 hover:text-white"
             >
               Cancel
             </Button>

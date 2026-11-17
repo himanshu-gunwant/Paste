@@ -21,18 +21,18 @@ export function MarkdownView({ content, className = "" }: MarkdownViewProps) {
       theme: "dark",
       themeVariables: {
         darkMode: true,
-        background: "#0c0c0e",
-        primaryColor: "#8b5cf6",
-        primaryTextColor: "#f4f4f5",
-        primaryBorderColor: "#3f3f46",
-        lineColor: "#71717a",
+        background: "#0f0f0f",
+        primaryColor: "#f5f5f5",
+        primaryTextColor: "#f5f5f5",
+        primaryBorderColor: "rgba(255, 255, 255, 0.15)",
+        lineColor: "#9ca3af",
       },
     });
   }, []);
 
   return (
     <div
-      className={`prose prose-invert prose-zinc max-w-none p-6 text-sm leading-relaxed overflow-x-auto ${className}`}
+      className={`prose prose-invert prose-neutral max-w-none text-sm leading-relaxed overflow-x-auto prose-headings:text-foreground prose-headings:font-semibold prose-headings:tracking-tight prose-p:text-muted prose-p:leading-relaxed prose-li:text-muted prose-strong:text-foreground prose-blockquote:border-l-white/20 prose-blockquote:text-foreground/90 prose-code:text-foreground prose-code:font-mono prose-code:bg-white/5 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-white/[0.02] prose-pre:border prose-pre:border-white/10 prose-pre:rounded-lg prose-a:text-foreground hover:prose-a:text-white prose-a:underline-offset-4 ${className}`}
     >
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkMath]}
@@ -51,7 +51,7 @@ export function MarkdownView({ content, className = "" }: MarkdownViewProps) {
             if (!match) {
               return (
                 <code
-                  className="rounded bg-zinc-800/80 px-1.5 py-0.5 font-mono text-xs text-purple-300"
+                  className="rounded bg-white/5 border border-white/10 px-1.5 py-0.5 font-mono text-xs text-foreground"
                   {...props}
                 >
                   {children}
@@ -61,12 +61,12 @@ export function MarkdownView({ content, className = "" }: MarkdownViewProps) {
 
             // Code block with copy button
             return (
-              <div className="relative group my-4 rounded-lg border border-border bg-canvas overflow-hidden">
-                <div className="flex items-center justify-between border-b border-border/60 bg-muted/40 px-3 py-1.5 text-xs text-muted-foreground">
+              <div className="relative group my-4 rounded-lg border border-white/10 bg-[#0f0f0f] overflow-hidden not-prose">
+                <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.02] px-3.5 py-1.5 text-xs text-muted">
                   <span className="font-mono text-[11px] uppercase tracking-wider">{lang}</span>
                   <CodeCopyButton text={textContent} />
                 </div>
-                <pre className="p-4 overflow-x-auto text-xs font-mono leading-relaxed bg-canvas">
+                <pre className="p-4 overflow-x-auto text-xs font-mono leading-relaxed bg-[#0f0f0f] text-foreground m-0">
                   <code className={className} {...props}>
                     {children}
                   </code>
@@ -76,16 +76,16 @@ export function MarkdownView({ content, className = "" }: MarkdownViewProps) {
           },
           table({ children }) {
             return (
-              <div className="overflow-x-auto my-4 rounded-lg border border-border">
+              <div className="overflow-x-auto my-4 rounded-lg border border-white/10">
                 <table className="w-full text-xs text-left border-collapse">{children}</table>
               </div>
             );
           },
           th({ children }) {
-            return <th className="border-b border-border bg-muted/50 p-2.5 font-semibold text-foreground">{children}</th>;
+            return <th className="border-b border-white/10 bg-white/[0.03] p-2.5 font-semibold text-foreground">{children}</th>;
           },
           td({ children }) {
-            return <td className="border-b border-border/40 p-2.5 text-zinc-300">{children}</td>;
+            return <td className="border-b border-white/5 p-2.5 text-muted">{children}</td>;
           },
           a({ href, children }) {
             return (
@@ -93,7 +93,7 @@ export function MarkdownView({ content, className = "" }: MarkdownViewProps) {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary hover:underline underline-offset-4"
+                className="text-foreground hover:text-white underline underline-offset-4 transition-colors"
               >
                 {children}
               </a>
@@ -101,7 +101,7 @@ export function MarkdownView({ content, className = "" }: MarkdownViewProps) {
           },
           blockquote({ children }) {
             return (
-              <blockquote className="border-l-2 border-primary/60 bg-primary/5 pl-4 py-1 italic my-3 text-zinc-300">
+              <blockquote className="border-l-2 border-white/20 bg-white/[0.02] pl-4 py-1 italic my-3 text-foreground/90">
                 {children}
               </blockquote>
             );
@@ -144,7 +144,7 @@ function MermaidBlock({ code }: { code: string }) {
 
   if (error) {
     return (
-      <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-3 text-xs text-red-400 my-4">
+      <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-3 text-xs text-red-400 my-4 not-prose">
         <p className="font-semibold pb-1">Mermaid Render Error</p>
         <pre className="font-mono text-[11px] whitespace-pre-wrap">{code}</pre>
       </div>
@@ -154,7 +154,7 @@ function MermaidBlock({ code }: { code: string }) {
   return (
     <div
       ref={containerRef}
-      className="flex justify-center p-4 my-4 rounded-lg border border-border bg-canvas overflow-x-auto"
+      className="flex justify-center p-4 my-4 rounded-lg border border-white/10 bg-white/[0.02] overflow-x-auto not-prose"
       dangerouslySetInnerHTML={{ __html: svg }}
     />
   );
@@ -174,7 +174,7 @@ function CodeCopyButton({ text }: { text: string }) {
       variant="ghost"
       size="sm"
       onClick={handleCopy}
-      className="h-6 px-2 text-[10px] gap-1 hover:bg-muted"
+      className="h-6 px-2 text-[10px] gap-1 text-muted hover:text-foreground hover:bg-white/5"
     >
       {copied ? <Check className="h-3 w-3 text-emerald-400" /> : <Copy className="h-3 w-3" />}
       <span>{copied ? "Copied" : "Copy"}</span>

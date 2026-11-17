@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { PasteSummary } from "@/types/paste";
-import { Badge } from "@/components/ui/badge";
-import { Eye, User, Calendar, FileCode } from "lucide-react";
+import { Eye, User, Calendar } from "lucide-react";
 
 interface PasteCardProps {
   paste: PasteSummary;
@@ -35,66 +34,65 @@ export function PasteCard({ paste }: PasteCardProps) {
   const views = Number(paste.viewCount) || 0;
 
   return (
-    <div className="group relative flex flex-col justify-between p-4 rounded-lg border border-zinc-800/80 bg-zinc-950/70 hover:bg-zinc-900/40 hover:border-zinc-700/80 transition-all">
-      <div className="space-y-2.5">
+    <div className="group relative flex flex-col justify-between p-4 rounded-lg border border-white/10 bg-white/[0.02] hover:bg-white/5 transition-colors focus-within:ring-1 focus-within:ring-white/30">
+      <div className="space-y-2">
         {/* Header: Title and Language */}
-        <div className="flex items-start justify-between gap-2">
+        <div className="flex items-baseline justify-between gap-2">
           <Link
             href={`/p/${paste.id}`}
-            className="text-base font-semibold text-zinc-200 group-hover:text-violet-400 transition-colors line-clamp-1"
+            className="font-medium text-foreground group-hover:text-white transition-colors line-clamp-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded"
           >
-            {paste.title || "Untitled Paste"}
+            <span>{paste.title || "Untitled Paste"}</span>
+            <span className="inline-block ml-1 text-xs text-muted transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+              ↗
+            </span>
           </Link>
-          <Badge
-            variant="outline"
-            className="shrink-0 font-mono text-[11px] uppercase bg-zinc-900/90 border-zinc-700 text-zinc-300"
-          >
-            <FileCode className="h-3 w-3 mr-1 text-violet-400" />
+          <span className="shrink-0 font-mono text-[11px] uppercase text-muted bg-white/5 border border-white/10 px-2 py-0.5 rounded">
             {displayLang}
-          </Badge>
+          </span>
         </div>
 
         {/* Description snippet if available */}
         {paste.description ? (
-          <p className="text-xs text-zinc-400 line-clamp-2 leading-relaxed">
+          <p className="text-sm text-muted line-clamp-2 leading-relaxed">
             {paste.description}
           </p>
         ) : (
-          <p className="text-xs text-zinc-600 font-mono italic">
+          <p className="text-xs text-muted/70 font-mono italic">
             No description provided
           </p>
         )}
       </div>
 
       {/* Footer metadata */}
-      <div className="flex flex-wrap items-center justify-between gap-2 pt-4 mt-3 border-t border-zinc-900 text-xs text-zinc-500">
+      <div className="flex flex-wrap items-center justify-between gap-2 pt-3 mt-3 border-t border-white/5 text-xs text-muted font-mono">
         <div className="flex items-center gap-3">
           {/* Author */}
           <div className="flex items-center gap-1.5">
-            <User className="h-3.5 w-3.5" />
+            <User className="h-3 w-3 text-muted" />
             {paste.authorUsername ? (
               <Link
                 href={`/u/${paste.authorUsername}`}
-                className="text-zinc-400 hover:text-zinc-200 hover:underline"
+                className="text-muted hover:text-foreground hover:underline"
                 onClick={(e) => e.stopPropagation()}
               >
                 @{paste.authorUsername}
               </Link>
             ) : (
-              <span className="italic text-zinc-500">Anonymous</span>
+              <span className="italic text-muted/70">Anonymous</span>
             )}
           </div>
 
           {/* Date */}
-          <div className="flex items-center gap-1.5">
-            <Calendar className="h-3.5 w-3.5" />
+          <div className="flex items-center gap-1">
+            <Calendar className="h-3 w-3 text-muted" />
             <span>{formatRelativeTime(paste.createdAt)}</span>
           </div>
         </div>
 
         {/* View Count */}
-        <div className="flex items-center gap-1 text-zinc-400">
-          <Eye className="h-3.5 w-3.5" />
+        <div className="flex items-center gap-1">
+          <Eye className="h-3 w-3 text-muted" />
           <span>{views.toLocaleString()}</span>
         </div>
       </div>

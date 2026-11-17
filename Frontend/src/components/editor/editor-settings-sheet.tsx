@@ -51,13 +51,13 @@ export function EditorSettingsSheet({
 }: EditorSettingsSheetProps) {
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="w-full sm:max-w-md overflow-y-auto space-y-5 border-border bg-card">
+      <SheetContent className="w-full sm:max-w-md overflow-y-auto space-y-5 border-white/10 bg-[#141414]">
         <SheetHeader>
-          <SheetTitle className="text-base font-semibold flex items-center gap-2">
-            <FileText className="h-4 w-4 text-primary" />
+          <SheetTitle className="text-base font-semibold flex items-center gap-2 text-foreground">
+            <FileText className="h-4 w-4 text-muted" />
             <span>Paste Options & Protection</span>
           </SheetTitle>
-          <SheetDescription className="text-xs">
+          <SheetDescription className="text-xs text-muted">
             Configure privacy, self-destruction, custom links, and metadata.
           </SheetDescription>
         </SheetHeader>
@@ -65,7 +65,7 @@ export function EditorSettingsSheet({
         <div className="space-y-4 pt-2">
           {/* Title */}
           <div className="space-y-1.5">
-            <Label htmlFor="paste-title">Title (optional)</Label>
+            <Label htmlFor="paste-title" className="text-xs text-foreground/90">Title (optional)</Label>
             <Input
               id="paste-title"
               placeholder="e.g. Docker Compose for PostgreSQL 16"
@@ -77,7 +77,7 @@ export function EditorSettingsSheet({
 
           {/* Description */}
           <div className="space-y-1.5">
-            <Label htmlFor="paste-desc">Description (optional)</Label>
+            <Label htmlFor="paste-desc" className="text-xs text-foreground/90">Description (optional)</Label>
             <Textarea
               id="paste-desc"
               placeholder="Add optional notes, context, or instructions..."
@@ -91,12 +91,12 @@ export function EditorSettingsSheet({
           {/* Custom Slug */}
           <div className="space-y-1.5">
             <div className="flex items-center gap-1.5">
-              <Globe className="h-3.5 w-3.5 text-zinc-400" />
-              <Label htmlFor="custom-slug">Custom Link Slug (optional)</Label>
+              <Globe className="h-3.5 w-3.5 text-muted" />
+              <Label htmlFor="custom-slug" className="text-xs text-foreground/90">Custom Link Slug (optional)</Label>
             </div>
             <div className="flex items-center">
-              <span className="flex h-9 items-center rounded-l-md border border-r-0 border-border bg-muted px-3 text-xs text-muted-foreground select-none">
-                paste.bin/p/
+              <span className="flex h-9 items-center rounded-l-md border border-r-0 border-white/10 bg-white/[0.03] px-3 text-xs text-muted select-none">
+                /p/
               </span>
               <Input
                 id="custom-slug"
@@ -107,7 +107,7 @@ export function EditorSettingsSheet({
                 maxLength={64}
               />
             </div>
-            <p className="text-[10px] text-muted-foreground">
+            <p className="text-[10px] text-muted">
               3 to 64 letters, numbers, hyphens, and underscores.
             </p>
           </div>
@@ -116,7 +116,7 @@ export function EditorSettingsSheet({
           <div className="space-y-1.5 pt-1">
             <div className="flex items-center gap-1.5">
               <Lock className="h-3.5 w-3.5 text-amber-400" />
-              <Label htmlFor="paste-password">Password Protection (optional)</Label>
+              <Label htmlFor="paste-password" className="text-xs text-foreground/90">Password Protection (optional)</Label>
             </div>
             <Input
               id="paste-password"
@@ -126,13 +126,13 @@ export function EditorSettingsSheet({
               maxLength={128}
               onChange={(e) => onPasswordChange(e.target.value)}
             />
-            <p className="text-[10px] text-muted-foreground">
+            <p className="text-[10px] text-muted">
               Anyone with the link must supply this password to decrypt and view the content.
             </p>
           </div>
 
           {/* Burn After Read */}
-          <div className="flex items-start gap-3 rounded-lg border border-red-500/20 bg-red-500/5 p-3">
+          <div className="flex items-start gap-3 rounded-lg border border-red-500/20 bg-red-500/5 p-3.5">
             <Flame className="h-4 w-4 text-red-400 mt-0.5 shrink-0" />
             <div className="space-y-1 flex-1">
               <div className="flex items-center justify-between">
@@ -144,10 +144,10 @@ export function EditorSettingsSheet({
                   id="burn-after-read"
                   checked={burnAfterRead}
                   onChange={(e) => onBurnAfterReadChange(e.target.checked)}
-                  className="h-4 w-4 rounded border-border text-primary focus:ring-ring cursor-pointer"
+                  className="h-4 w-4 rounded border-white/10 bg-white/5 accent-white cursor-pointer"
                 />
               </div>
-              <p className="text-[11px] text-red-400/80 leading-relaxed">
+              <p className="text-[11px] text-red-300 leading-relaxed">
                 The paste is destroyed from the database permanently immediately after the first view.
               </p>
             </div>
@@ -156,8 +156,8 @@ export function EditorSettingsSheet({
           {/* Max Views */}
           <div className="space-y-1.5">
             <div className="flex items-center gap-1.5">
-              <Eye className="h-3.5 w-3.5 text-zinc-400" />
-              <Label htmlFor="max-views">Maximum View Count (optional)</Label>
+              <Eye className="h-3.5 w-3.5 text-muted" />
+              <Label htmlFor="max-views" className="text-xs text-foreground/90">Maximum View Count (optional)</Label>
             </div>
             <Input
               id="max-views"
@@ -172,7 +172,7 @@ export function EditorSettingsSheet({
 
           {/* Custom Expiry Date */}
           <div className="space-y-1.5">
-            <Label htmlFor="custom-expires">Custom Expiration Date/Time (optional)</Label>
+            <Label htmlFor="custom-expires" className="text-xs text-foreground/90">Custom Expiration Date/Time (optional)</Label>
             <Input
               id="custom-expires"
               type="datetime-local"

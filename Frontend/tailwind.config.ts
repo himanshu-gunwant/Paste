@@ -13,12 +13,12 @@ export default {
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        canvas: "#0c0c0e",
-        subtle: "#141417",
+        canvas: "#0f0f0f",
+        subtle: "#141414",
         surface: {
-          DEFAULT: "#0f0f12",
-          secondary: "#16161a",
-          border: "#242429",
+          DEFAULT: "#141414",
+          secondary: "#191919",
+          border: "rgba(255, 255, 255, 0.1)",
         },
         card: {
           DEFAULT: "hsl(var(--card))",
@@ -37,20 +37,23 @@ export default {
           foreground: "hsl(var(--secondary-foreground))",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "#a1a1aa",
+          foreground: "#a1a1aa",
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
-          violet: "#8b5cf6",
-          indigo: "#6366f1",
+          violet: "#f5f5f5",
+          indigo: "#e5e5e5",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
-        border: "hsl(var(--border))",
+        border: {
+          DEFAULT: "hsl(var(--border))",
+          hairline: "rgba(255, 255, 255, 0.1)",
+        },
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
       },
@@ -60,8 +63,8 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
-        mono: ["var(--font-geist-mono)", "JetBrains Mono", "monospace"],
+        sans: ["var(--font-geist-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
       },
     },
   },

@@ -57,21 +57,21 @@ export function SessionsTable() {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
         <div className="space-y-1">
-          <h2 className="text-base font-semibold text-zinc-100">Active Login Sessions</h2>
-          <p className="text-xs text-zinc-400">
+          <h2 className="text-base font-semibold text-foreground">Active Login Sessions</h2>
+          <p className="text-xs text-muted">
             Devices that are currently signed into your account via session cookies.
           </p>
         </div>
 
         {sessions && sessions.length > 1 && (
           <Button
-            variant="outline"
+            variant="destructive"
             size="sm"
             onClick={handleRevokeAll}
             disabled={isRevokingAll}
-            className="text-xs border-rose-900/60 text-rose-400 hover:bg-rose-950/20"
+            className="text-xs"
           >
             {isRevokingAll ? (
               <Loader2 className="h-3.5 w-3.5 animate-spin mr-1" />
@@ -85,39 +85,41 @@ export function SessionsTable() {
 
       {isLoading ? (
         <div className="flex flex-col items-center justify-center py-16 gap-3">
-          <Loader2 className="h-8 w-8 animate-spin text-violet-500" />
-          <p className="text-sm text-zinc-400">Loading active sessions...</p>
+          <Loader2 className="h-6 w-6 animate-spin text-muted" />
+          <p className="text-sm text-muted">Loading active sessions...</p>
         </div>
       ) : !sessions || sessions.length === 0 ? (
-        <div className="text-center py-12 text-zinc-500 text-sm">No active sessions found.</div>
+        <div className="text-center py-12 text-muted text-sm border border-white/10 rounded-lg bg-white/[0.02]">
+          No active sessions found.
+        </div>
       ) : (
-        <div className="divide-y divide-zinc-800/80 rounded-lg border border-zinc-800 bg-zinc-950/80 overflow-hidden">
+        <div className="divide-y divide-white/5 rounded-lg border border-white/10 bg-white/[0.02] overflow-hidden">
           {sessions.map((s: SessionInfo) => {
             const isMobile = /mobile|iphone|android/i.test(s.userAgent || "");
 
             return (
               <div
                 key={s.id}
-                className="flex items-center justify-between p-4 hover:bg-zinc-900/40 transition-colors gap-3"
+                className="flex items-center justify-between p-4 hover:bg-white/5 transition-colors gap-3"
               >
                 <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-400 mt-0.5">
+                  <div className="p-2 rounded-md bg-white/5 border border-white/10 text-muted mt-0.5">
                     {isMobile ? <Smartphone className="h-4 w-4" /> : <Laptop className="h-4 w-4" />}
                   </div>
 
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-medium text-zinc-200">
+                      <span className="text-sm font-medium text-foreground">
                         {s.userAgent ? s.userAgent.slice(0, 60) : "Unknown Client"}
                       </span>
                       {s.isCurrent && (
-                        <Badge variant="outline" className="text-[10px] bg-emerald-950/40 text-emerald-400 border-emerald-800">
+                        <Badge variant="outline" className="text-[10px] border-white/10 bg-white/5 text-muted">
                           Current Session
                         </Badge>
                       )}
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-3 text-xs text-zinc-500">
+                    <div className="flex flex-wrap items-center gap-3 text-xs text-muted">
                       <span className="flex items-center gap-1 font-mono">
                         <Globe className="h-3 w-3" />
                         {s.ip || "Unknown IP"}
@@ -137,7 +139,7 @@ export function SessionsTable() {
                     variant="ghost"
                     size="sm"
                     onClick={() => handleRevokeSingle(s.id)}
-                    className="text-zinc-500 hover:text-rose-400 hover:bg-rose-950/20 h-8"
+                    className="text-muted hover:text-red-400 hover:bg-red-500/10 h-8"
                   >
                     <Trash2 className="h-3.5 w-3.5" />
                   </Button>

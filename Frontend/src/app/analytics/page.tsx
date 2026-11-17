@@ -40,23 +40,23 @@ export default function AnalyticsPage() {
   if (isAuthLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh] gap-3">
-        <Loader2 className="h-8 w-8 animate-spin text-violet-500" />
+        <Loader2 className="h-6 w-6 animate-spin text-muted" />
       </div>
     );
   }
 
   if (!isAuthenticated) {
     return (
-      <div className="max-w-md mx-auto py-20 text-center space-y-4">
-        <div className="p-3 rounded-full bg-zinc-800 text-zinc-400 inline-flex">
-          <Lock className="h-6 w-6" />
+      <div className="max-w-md mx-auto py-20 text-center space-y-4 animate-enter">
+        <div className="p-3 rounded-full border border-white/10 bg-white/5 text-muted inline-flex">
+          <Lock className="h-5 w-5" />
         </div>
-        <h2 className="text-xl font-bold text-zinc-100">Sign in to view Analytics</h2>
-        <p className="text-sm text-zinc-400">
+        <h2 className="text-xl font-semibold tracking-tight text-foreground">Sign in to view Analytics</h2>
+        <p className="text-sm text-muted">
           Track traffic trends, total views, and unique visitors across all your public pastes.
         </p>
         <div className="pt-2">
-          <Button asChild size="sm" className="bg-violet-600 hover:bg-violet-700 text-white">
+          <Button asChild size="sm">
             <Link href="/login">Sign In</Link>
           </Button>
         </div>
@@ -65,74 +65,74 @@ export default function AnalyticsPage() {
   }
 
   return (
-    <div className="w-full max-w-7xl mx-auto py-4 space-y-8">
+    <div className="w-full max-w-5xl mx-auto py-4 space-y-8 animate-enter">
       {/* Page Header */}
-      <div className="flex flex-col gap-1 pb-4 border-b border-zinc-800">
-        <div className="flex items-center gap-2.5 text-zinc-100">
-          <BarChart3 className="h-6 w-6 text-violet-400" />
+      <div className="flex flex-col gap-1 pb-4 border-b border-white/10">
+        <div className="flex items-center gap-2.5 text-foreground">
+          <BarChart3 className="h-5 w-5 text-muted" />
           <h1 className="text-2xl font-bold tracking-tight">Account Analytics</h1>
         </div>
-        <p className="text-sm text-zinc-400">
+        <p className="text-sm text-muted">
           Aggregated 30-day view statistics and audience engagement across your developer pastes.
         </p>
       </div>
 
       {isAnalyticsLoading ? (
         <div className="flex flex-col items-center justify-center py-24 gap-3">
-          <Loader2 className="h-8 w-8 animate-spin text-violet-500" />
-          <p className="text-sm text-zinc-400">Loading analytics metrics...</p>
+          <Loader2 className="h-6 w-6 animate-spin text-muted" />
+          <p className="text-sm text-muted">Loading analytics metrics...</p>
         </div>
       ) : !analytics ? (
-        <div className="text-center py-16 text-zinc-500 text-sm">
+        <div className="text-center py-16 text-muted text-sm border border-white/10 rounded-lg bg-white/[0.02]">
           No analytics data recorded for your account yet.
         </div>
       ) : (
         <div className="space-y-8">
           {/* Metrics Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Card className="bg-zinc-950/70 border-zinc-800/80">
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-xs font-medium text-zinc-400">Total Pastes</CardTitle>
-                <FileText className="h-4 w-4 text-violet-400" />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                <CardTitle className="text-xs font-medium text-muted">Total Pastes</CardTitle>
+                <FileText className="h-4 w-4 text-muted/70" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-zinc-100">
+                <div className="text-2xl font-bold tracking-tight text-foreground">
                   {analytics.totals.pastes}
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-zinc-950/70 border-zinc-800/80">
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-xs font-medium text-zinc-400">30-Day Views</CardTitle>
-                <Eye className="h-4 w-4 text-emerald-400" />
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                <CardTitle className="text-xs font-medium text-muted">30-Day Views</CardTitle>
+                <Eye className="h-4 w-4 text-muted/70" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-zinc-100">
+                <div className="text-2xl font-bold tracking-tight text-foreground">
                   {Number(analytics.totals.views).toLocaleString()}
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-zinc-950/70 border-zinc-800/80">
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-xs font-medium text-zinc-400">Unique Visitors</CardTitle>
-                <Users className="h-4 w-4 text-cyan-400" />
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                <CardTitle className="text-xs font-medium text-muted">Unique Visitors</CardTitle>
+                <Users className="h-4 w-4 text-muted/70" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-zinc-100">
+                <div className="text-2xl font-bold tracking-tight text-foreground">
                   {Number(analytics.totals.uniqueVisitors).toLocaleString()}
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-zinc-950/70 border-zinc-800/80">
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-xs font-medium text-zinc-400">Storage Used</CardTitle>
-                <HardDrive className="h-4 w-4 text-amber-400" />
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                <CardTitle className="text-xs font-medium text-muted">Storage Used</CardTitle>
+                <HardDrive className="h-4 w-4 text-muted/70" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-zinc-100">
+                <div className="text-2xl font-bold tracking-tight text-foreground">
                   {formatBytes(analytics.totals.storageUsed)}
                 </div>
               </CardContent>
@@ -141,7 +141,7 @@ export default function AnalyticsPage() {
 
           {/* 30-Day Chart */}
           <div className="space-y-3">
-            <h3 className="text-sm font-semibold text-zinc-200">Traffic Over Time (30 Days)</h3>
+            <h3 className="text-sm font-medium uppercase tracking-wider text-muted">Traffic Over Time (30 Days)</h3>
             <AnalyticsChart data={analytics.daily} height={320} />
           </div>
         </div>

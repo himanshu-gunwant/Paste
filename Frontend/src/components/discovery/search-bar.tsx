@@ -35,13 +35,13 @@ export function SearchBar({
 
   return (
     <div className={`relative flex items-center w-full ${className}`}>
-      <Search className="absolute left-3.5 h-4 w-4 text-zinc-500 pointer-events-none" />
+      <Search className="absolute left-3.5 h-4 w-4 text-zinc-400 pointer-events-none" />
       <Input
         type="search"
         value={internalValue}
         onChange={(e) => setInternalValue(e.target.value)}
         placeholder={placeholder}
-        className="pl-10 pr-9 bg-zinc-900/80 border-zinc-800 text-sm focus-visible:ring-violet-500/50"
+        className="pl-10 pr-9 bg-white/[0.03] border-white/10 text-sm text-foreground placeholder:text-zinc-500 focus-visible:ring-1 focus-visible:ring-white/30"
       />
       {internalValue && (
         <button
@@ -50,7 +50,7 @@ export function SearchBar({
             setInternalValue("");
             onChange("");
           }}
-          className="absolute right-3 p-0.5 rounded-full text-zinc-500 hover:text-zinc-200 transition-colors"
+          className="absolute right-3 p-0.5 rounded-full text-muted hover:text-foreground transition-colors"
         >
           <X className="h-3.5 w-3.5" />
         </button>

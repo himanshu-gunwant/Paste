@@ -23,23 +23,23 @@ export default function RevisionsPage({ params }: RevisionsPageProps) {
   const effectiveToken = paramToken || vaultToken;
 
   return (
-    <div className="w-full max-w-7xl mx-auto py-4 space-y-6">
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 animate-enter delay-1">
       {/* Top Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-zinc-800">
+      <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-white/10">
         <div className="flex items-center gap-3">
           <Button
             variant="ghost"
             size="sm"
             onClick={() => router.push(`/p/${id}`)}
-            className="text-zinc-400 hover:text-white gap-1.5"
+            className="text-muted hover:text-foreground gap-1.5"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Paste
           </Button>
           <div className="flex items-center gap-2">
-            <History className="h-5 w-5 text-violet-400" />
-            <h1 className="text-xl font-bold text-zinc-100">Revision History</h1>
-            <span className="text-xs text-zinc-500 font-mono">p/{id}</span>
+            <History className="h-4 w-4 text-muted" />
+            <h1 className="text-xl font-semibold text-foreground">Revision History</h1>
+            <span className="text-xs text-muted/80 font-mono">p/{id}</span>
           </div>
         </div>
       </div>

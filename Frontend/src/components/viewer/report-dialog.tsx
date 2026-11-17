@@ -56,20 +56,20 @@ export function ReportDialog({ pasteId, open, onOpenChange }: ReportDialogProps)
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md border-border bg-card">
+      <DialogContent className="sm:max-w-md border-white/10 bg-[#141414]">
         <DialogHeader>
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 mb-2">
             <Flag className="h-5 w-5" />
           </div>
-          <DialogTitle className="text-base font-semibold">Report Paste</DialogTitle>
-          <DialogDescription className="text-xs">
+          <DialogTitle className="text-base font-semibold text-foreground">Report Paste</DialogTitle>
+          <DialogDescription className="text-xs text-muted">
             Report terms of service violations, malware, spam, harassment, or copyright infringement.
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4 pt-2">
           <div className="space-y-1.5">
-            <Label htmlFor="report-reason">Reason</Label>
+            <Label htmlFor="report-reason" className="text-xs text-foreground/90">Reason</Label>
             <Select value={reason} onValueChange={(val) => setReason(val as typeof reason)}>
               <SelectTrigger id="report-reason" className="h-9 text-xs">
                 <SelectValue />
@@ -85,7 +85,7 @@ export function ReportDialog({ pasteId, open, onOpenChange }: ReportDialogProps)
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="report-details">Details (optional)</Label>
+            <Label htmlFor="report-details" className="text-xs text-foreground/90">Details (optional)</Label>
             <Textarea
               id="report-details"
               placeholder="Provide additional context or links to assist review..."
@@ -102,7 +102,7 @@ export function ReportDialog({ pasteId, open, onOpenChange }: ReportDialogProps)
               variant="outline"
               size="sm"
               onClick={() => onOpenChange(false)}
-              className="text-xs"
+              className="text-xs border-white/10 text-muted hover:text-foreground"
             >
               Cancel
             </Button>

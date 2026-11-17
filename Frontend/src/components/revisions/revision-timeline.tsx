@@ -94,8 +94,8 @@ export function RevisionTimeline({
   if (isLoadingList) {
     return (
       <div className="flex flex-col items-center justify-center py-24 gap-3">
-        <Loader2 className="h-8 w-8 animate-spin text-violet-500" />
-        <p className="text-sm text-zinc-400">Loading revision history...</p>
+        <Loader2 className="h-6 w-6 animate-spin text-muted" />
+        <p className="text-sm text-muted">Loading revision history...</p>
       </div>
     );
   }
@@ -104,16 +104,16 @@ export function RevisionTimeline({
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
       {/* Timeline List on the left */}
       <div className="lg:col-span-4 space-y-3">
-        <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
-          <div className="flex items-center gap-2 text-zinc-200 font-semibold text-sm">
-            <History className="h-4 w-4 text-violet-400" />
+        <div className="flex items-center justify-between pb-2 border-b border-white/10">
+          <div className="flex items-center gap-2 text-foreground font-semibold text-sm">
+            <History className="h-4 w-4 text-muted" />
             <span>Revisions ({revisions.length})</span>
           </div>
-          <span className="text-xs text-zinc-500 font-mono">v{latestNo}</span>
+          <span className="text-xs text-muted font-mono">v{latestNo}</span>
         </div>
 
         {revisions.length === 0 ? (
-          <p className="text-xs text-zinc-500 py-4">No revisions recorded.</p>
+          <p className="text-xs text-muted py-4">No revisions recorded.</p>
         ) : (
           <div className="space-y-2 max-h-[700px] overflow-y-auto pr-1">
             {revisions.map((rev: RevisionMetadata, idx) => {
@@ -126,45 +126,45 @@ export function RevisionTimeline({
                   key={rev.revisionNo}
                   className={`p-3 rounded-lg border transition-all ${
                     isSelected
-                      ? "bg-violet-950/20 border-violet-500/50"
-                      : "bg-zinc-950/70 border-zinc-800/80 hover:border-zinc-700"
+                      ? "bg-white/[0.05] border-white/30"
+                      : "bg-white/[0.02] border-white/10 hover:border-white/20 hover:bg-white/[0.04]"
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-1.5">
-                      <span className="font-mono text-xs font-semibold text-zinc-200">
+                      <span className="font-mono text-xs font-semibold text-foreground">
                         #{rev.revisionNo}
                       </span>
                       {isCurrent && (
-                        <Badge variant="outline" className="text-[10px] bg-emerald-950/40 text-emerald-400 border-emerald-800">
+                        <Badge variant="emerald" className="text-[10px]">
                           Latest
                         </Badge>
                       )}
                     </div>
-                    <Badge variant="outline" className="text-[10px] font-mono text-zinc-400 border-zinc-800">
+                    <Badge variant="outline" className="text-[10px] font-mono text-muted border-white/10">
                       <FileCode className="h-2.5 w-2.5 mr-1" />
                       {rev.language || "text"}
                     </Badge>
                   </div>
 
-                  <div className="flex items-center gap-3 text-[11px] text-zinc-500 mt-2">
+                  <div className="flex items-center gap-3 text-[11px] text-muted font-mono mt-2">
                     <span className="flex items-center gap-1">
-                      <Calendar className="h-3 w-3" />
+                      <Calendar className="h-3 w-3 text-muted/60" />
                       {new Date(rev.createdAt).toLocaleDateString()}
                     </span>
                     <span className="flex items-center gap-1">
-                      <HardDrive className="h-3 w-3" />
+                      <HardDrive className="h-3 w-3 text-muted/60" />
                       {formatBytes(rev.contentSize)}
                     </span>
                   </div>
 
                   {/* Actions for this revision */}
-                  <div className="flex flex-wrap items-center gap-1.5 mt-3 pt-2 border-t border-zinc-900">
+                  <div className="flex flex-wrap items-center gap-1.5 mt-3 pt-2 border-t border-white/5">
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => handleSelectSnapshot(rev.revisionNo)}
-                      className="h-7 text-xs px-2 text-zinc-400 hover:text-white"
+                      className="h-7 text-xs px-2 text-muted hover:text-foreground hover:bg-white/5"
                     >
                       <Eye className="h-3 w-3 mr-1" />
                       View
@@ -175,9 +175,9 @@ export function RevisionTimeline({
                         variant="ghost"
                         size="sm"
                         onClick={() => handleCompare(prevRev.revisionNo, rev.revisionNo)}
-                        className="h-7 text-xs px-2 text-zinc-400 hover:text-white"
+                        className="h-7 text-xs px-2 text-muted hover:text-foreground hover:bg-white/5"
                       >
-                        <GitCompare className="h-3 w-3 mr-1 text-violet-400" />
+                        <GitCompare className="h-3 w-3 mr-1" />
                         Diff #{prevRev.revisionNo}
                       </Button>
                     )}
@@ -187,7 +187,7 @@ export function RevisionTimeline({
                         variant="ghost"
                         size="sm"
                         onClick={() => setRestoreRevisionNo(rev.revisionNo)}
-                        className="h-7 text-xs px-2 text-amber-400 hover:text-amber-300 ml-auto"
+                        className="h-7 text-xs px-2 text-amber-300 hover:text-amber-200 hover:bg-amber-500/10 ml-auto"
                       >
                         <RotateCcw className="h-3 w-3 mr-1" />
                         Restore
@@ -206,9 +206,9 @@ export function RevisionTimeline({
         {diffFromNo !== null && diffToNo !== null ? (
           <div>
             {isLoadingDiff ? (
-              <div className="flex flex-col items-center justify-center py-20 gap-3 border border-zinc-800 rounded-lg bg-zinc-950">
-                <Loader2 className="h-6 w-6 animate-spin text-violet-400" />
-                <p className="text-xs text-zinc-400">Computing diff...</p>
+              <div className="flex flex-col items-center justify-center py-20 gap-3 border border-white/10 rounded-lg bg-[#0f0f0f]">
+                <Loader2 className="h-6 w-6 animate-spin text-muted" />
+                <p className="text-xs text-muted">Computing diff...</p>
               </div>
             ) : diffData ? (
               <DiffViewer
@@ -217,7 +217,7 @@ export function RevisionTimeline({
                 toRevision={diffToNo}
               />
             ) : (
-              <div className="p-8 border border-zinc-800 rounded-lg bg-zinc-950 text-center text-zinc-500 text-sm">
+              <div className="p-8 border border-white/10 rounded-lg bg-[#0f0f0f] text-center text-muted text-sm">
                 No diff data available.
               </div>
             )}
@@ -225,21 +225,21 @@ export function RevisionTimeline({
         ) : selectedRevisionNo !== null ? (
           <div>
             {isLoadingSnapshot ? (
-              <div className="flex flex-col items-center justify-center py-20 gap-3 border border-zinc-800 rounded-lg bg-zinc-950">
-                <Loader2 className="h-6 w-6 animate-spin text-violet-400" />
-                <p className="text-xs text-zinc-400">Loading snapshot #{selectedRevisionNo}...</p>
+              <div className="flex flex-col items-center justify-center py-20 gap-3 border border-white/10 rounded-lg bg-[#0f0f0f]">
+                <Loader2 className="h-6 w-6 animate-spin text-muted" />
+                <p className="text-xs text-muted">Loading snapshot #{selectedRevisionNo}...</p>
               </div>
             ) : snapshotData ? (
               <div className="space-y-3">
-                <div className="flex items-center justify-between px-4 py-2.5 bg-zinc-900/80 rounded-t-lg border border-zinc-800">
-                  <span className="font-semibold text-sm text-zinc-200">
+                <div className="flex items-center justify-between px-4 py-2.5 bg-white/[0.02] rounded-t-lg border border-white/10">
+                  <span className="font-medium text-sm text-foreground">
                     Snapshot of Revision #{snapshotData.revisionNo}
                   </span>
-                  <Badge variant="outline" className="font-mono text-xs">
+                  <Badge variant="outline" className="font-mono text-xs border-white/10 text-muted">
                     {snapshotData.language || "plaintext"}
                   </Badge>
                 </div>
-                <div className="rounded-b-lg border-x border-b border-zinc-800 bg-zinc-950 overflow-hidden">
+                <div className="rounded-b-lg border-x border-b border-white/10 bg-[#0f0f0f] overflow-hidden">
                   <CodeEditor
                     value={snapshotData.content}
                     language={snapshotData.language || "plaintext"}
@@ -249,17 +249,17 @@ export function RevisionTimeline({
                 </div>
               </div>
             ) : (
-              <div className="p-8 border border-zinc-800 rounded-lg bg-zinc-950 text-center text-zinc-500 text-sm">
+              <div className="p-8 border border-white/10 rounded-lg bg-[#0f0f0f] text-center text-muted text-sm">
                 Select a revision to view snapshot.
               </div>
             )}
           </div>
         ) : (
-          <Card className="bg-zinc-950/60 border-zinc-800 p-8 text-center">
+          <Card className="bg-white/[0.02] border-white/10 p-8 text-center rounded-xl">
             <CardContent className="pt-6 space-y-2">
-              <History className="h-8 w-8 text-zinc-600 mx-auto" />
-              <h3 className="text-sm font-semibold text-zinc-300">Select a revision</h3>
-              <p className="text-xs text-zinc-500 max-w-sm mx-auto">
+              <History className="h-8 w-8 text-muted/50 mx-auto" />
+              <h3 className="text-sm font-semibold text-foreground">Select a revision</h3>
+              <p className="text-xs text-muted max-w-sm mx-auto leading-relaxed">
                 Choose any snapshot from the revision timeline to preview the code at that point in time,
                 or compare differences between versions.
               </p>

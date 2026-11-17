@@ -6,62 +6,97 @@
 
 @layer base {
   :root {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 4.5%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 5%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 263 70% 62%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 240 4% 12%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 4% 14%;
+    --background: 0 0% 5.9%;
+    --foreground: 0 0% 96.1%;
+    --card: 0 0% 7.8%;
+    --card-foreground: 0 0% 96.1%;
+    --popover: 0 0% 7.8%;
+    --popover-foreground: 0 0% 96.1%;
+    --primary: 0 0% 96.1%;
+    --primary-foreground: 0 0% 5.9%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 96.1%;
+    --muted: 240 5% 65%;
     --muted-foreground: 240 5% 65%;
-    --accent: 263 70% 55%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 4% 16%;
-    --input: 240 4% 16%;
-    --ring: 263 70% 62%;
+    --accent: 0 0% 12%;
+    --accent-foreground: 0 0% 96.1%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 100% / 0.1;
+    --input: 0 0% 100% / 0.12;
+    --ring: 0 0% 100% / 0.3;
     --radius: 0.5rem;
+    color-scheme: dark;
   }
 }
 
 body {
   color: hsl(var(--foreground));
-  background: hsl(var(--background));
-  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #0f0f0f;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   min-height: 100vh;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Custom scrollbar for dark theme */
+/* Custom scrollbar matching dark minimal theme */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #09090b;
+  background: #0f0f0f;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
-  border-radius: 4px;
+  background: #262626;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+  background: #383838;
 }
 
-/* CodeMirror height fill */
+/* CodeMirror height fill & font alignment */
 .cm-editor {
   height: 100%;
-  font-family: var(--font-geist-mono), "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
 }
 
 .cm-scroller {
   overflow: auto;
+}
+
+/* Entrance animation matching reference website */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-enter {
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.delay-1 { animation-delay: 50ms; }
+.delay-2 { animation-delay: 100ms; }
+.delay-3 { animation-delay: 160ms; }
+.delay-4 { animation-delay: 220ms; }
+.delay-5 { animation-delay: 280ms; }
+.delay-6 { animation-delay: 340ms; }
+.delay-7 { animation-delay: 400ms; }
+.delay-8 { animation-delay: 460ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-enter {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
 }

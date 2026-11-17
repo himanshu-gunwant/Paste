@@ -57,22 +57,22 @@ export function AdminPastesTable() {
       {/* Search & Filter Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div className="relative flex-1 max-w-sm">
-          <Search className="absolute left-3 top-2.5 h-4 w-4 text-zinc-500" />
+          <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted" />
           <Input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search pastes by title or author..."
-            className="pl-9 bg-zinc-900 border-zinc-800 text-xs"
+            className="pl-9 text-xs"
           />
         </div>
 
         <div className="flex items-center gap-2">
-          <label className="flex items-center gap-2 text-xs text-zinc-400 cursor-pointer">
+          <label className="flex items-center gap-2 text-xs text-muted cursor-pointer">
             <input
               type="checkbox"
               checked={showDeleted}
               onChange={(e) => setShowDeleted(e.target.checked)}
-              className="h-3.5 w-3.5 rounded border-zinc-700 bg-zinc-900 accent-violet-600"
+              className="h-3.5 w-3.5 rounded border-white/20 bg-white/5 accent-foreground"
             />
             Show Deleted / Tombstones
           </label>
@@ -81,36 +81,36 @@ export function AdminPastesTable() {
 
       {isLoading ? (
         <div className="flex flex-col items-center justify-center py-20 gap-3">
-          <Loader2 className="h-8 w-8 animate-spin text-violet-500" />
-          <p className="text-sm text-zinc-400">Loading pastes...</p>
+          <Loader2 className="h-6 w-6 animate-spin text-muted" />
+          <p className="text-sm text-muted">Loading pastes...</p>
         </div>
       ) : !pastes || pastes.length === 0 ? (
-        <div className="text-center py-12 text-zinc-500 text-sm border border-zinc-800 rounded-lg">
+        <div className="text-center py-12 text-muted text-sm border border-white/10 rounded-lg bg-white/[0.02]">
           No pastes found matching query.
         </div>
       ) : (
-        <div className="divide-y divide-zinc-800/80 rounded-lg border border-zinc-800 bg-zinc-950/80 overflow-hidden">
+        <div className="divide-y divide-white/5 rounded-lg border border-white/10 bg-white/[0.02] overflow-hidden">
           {pastes.map((p: AdminPasteView) => (
             <div
               key={p.id}
-              className="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-zinc-900/40 transition-colors gap-3"
+              className="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-white/5 transition-colors gap-3"
             >
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
                   <Link
                     href={`/p/${p.id}`}
-                    className="text-sm font-semibold text-zinc-200 hover:text-violet-400 transition-colors flex items-center gap-1.5"
+                    className="text-sm font-semibold text-foreground hover:underline transition-colors flex items-center gap-1.5"
                   >
                     {p.title || `Paste ${p.id}`}
-                    <ExternalLink className="h-3 w-3 text-zinc-500" />
+                    <ExternalLink className="h-3 w-3 text-muted" />
                   </Link>
 
-                  <Badge variant="outline" className="font-mono text-[10px] border-zinc-800">
+                  <Badge variant="outline" className="font-mono text-[10px] border-white/10 bg-white/5">
                     <FileCode className="h-2.5 w-2.5 mr-1" />
                     {p.language || "text"}
                   </Badge>
 
-                  <Badge variant="secondary" className="text-[10px] uppercase">
+                  <Badge variant="secondary" className="text-[10px] uppercase border-white/10 bg-white/5 text-muted">
                     {p.visibility}
                   </Badge>
 
@@ -121,7 +121,7 @@ export function AdminPastesTable() {
                   )}
                 </div>
 
-                <div className="flex flex-wrap items-center gap-3 text-xs text-zinc-500">
+                <div className="flex flex-wrap items-center gap-3 text-xs text-muted">
                   <span>Author: {p.authorUsername ? `@${p.authorUsername}` : "Anonymous"}</span>
                   <span>·</span>
                   <span className="flex items-center gap-1">

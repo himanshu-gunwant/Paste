@@ -50,13 +50,13 @@ export function RestoreDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md bg-zinc-950 border-zinc-800">
+      <DialogContent className="sm:max-w-md bg-[#141414] border-white/10">
         <DialogHeader>
-          <div className="flex items-center gap-2 text-amber-400">
+          <div className="flex items-center gap-2 text-amber-300">
             <AlertTriangle className="h-5 w-5" />
-            <DialogTitle className="text-zinc-100">Restore Revision #{revisionNo}?</DialogTitle>
+            <DialogTitle className="text-foreground">Restore Revision #{revisionNo}?</DialogTitle>
           </div>
-          <DialogDescription className="text-zinc-400 text-xs leading-relaxed pt-2">
+          <DialogDescription className="text-muted text-xs leading-relaxed pt-2">
             Restoring this revision will copy its contents and metadata to create a brand new latest revision.
             Your current revision history will remain intact.
           </DialogDescription>
@@ -68,7 +68,7 @@ export function RestoreDialog({
             variant="ghost"
             size="sm"
             onClick={() => onOpenChange(false)}
-            className="text-zinc-400 hover:text-white"
+            className="text-muted hover:text-foreground"
           >
             Cancel
           </Button>
@@ -77,7 +77,7 @@ export function RestoreDialog({
             size="sm"
             onClick={handleRestore}
             disabled={isRestoring}
-            className="gap-1.5 bg-violet-600 hover:bg-violet-700 text-white"
+            className="gap-1.5 bg-foreground text-background hover:bg-white font-medium"
           >
             {isRestoring ? <Loader2 className="h-4 w-4 animate-spin" /> : <RotateCcw className="h-4 w-4" />}
             Confirm Restore

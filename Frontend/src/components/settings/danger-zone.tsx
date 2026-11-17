@@ -42,14 +42,14 @@ export function DangerZone() {
   };
 
   return (
-    <div className="max-w-2xl pt-6 border-t border-zinc-800">
-      <div className="rounded-lg border border-rose-900/40 bg-rose-950/10 p-5 space-y-4">
-        <div className="flex items-center gap-2.5 text-rose-400">
+    <div className="max-w-2xl pt-6 border-t border-white/10">
+      <div className="rounded-lg border border-red-500/20 bg-red-500/[0.03] p-5 space-y-4">
+        <div className="flex items-center gap-2.5 text-red-400">
           <AlertTriangle className="h-5 w-5" />
           <h3 className="text-base font-semibold">Danger Zone</h3>
         </div>
 
-        <p className="text-xs text-zinc-400 leading-relaxed">
+        <p className="text-xs text-muted leading-relaxed">
           Once you delete your account, there is no going back. All of your public and private pastes, collections, bookmarks, and API keys will be immediately purged.
         </p>
 
@@ -65,27 +65,27 @@ export function DangerZone() {
       </div>
 
       <Dialog open={deleteOpen} onOpenChange={setDeleteOpen}>
-        <DialogContent className="sm:max-w-md bg-zinc-950 border-zinc-800">
+        <DialogContent className="sm:max-w-md">
           <form onSubmit={handleDelete}>
             <DialogHeader>
-              <div className="flex items-center gap-2 text-rose-400">
+              <div className="flex items-center gap-2 text-red-400">
                 <AlertTriangle className="h-5 w-5" />
-                <DialogTitle className="text-zinc-100">Permanently Delete Account</DialogTitle>
+                <DialogTitle>Permanently Delete Account</DialogTitle>
               </div>
-              <DialogDescription className="text-zinc-400 text-xs leading-relaxed pt-2">
+              <DialogDescription className="text-xs leading-relaxed pt-2">
                 This action is irreversible. Enter your account password to confirm permanent deletion.
               </DialogDescription>
             </DialogHeader>
 
             <div className="py-4 space-y-2">
-              <Label htmlFor="del-pwd" className="text-xs text-zinc-300">Account Password</Label>
+              <Label htmlFor="del-pwd" className="text-xs text-muted">Account Password</Label>
               <Input
                 id="del-pwd"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Confirm your password"
-                className="bg-zinc-900 border-zinc-800 text-sm"
+                className="text-sm"
               />
             </div>
 
@@ -95,7 +95,6 @@ export function DangerZone() {
                 variant="ghost"
                 size="sm"
                 onClick={() => setDeleteOpen(false)}
-                className="text-zinc-400 hover:text-white"
               >
                 Cancel
               </Button>

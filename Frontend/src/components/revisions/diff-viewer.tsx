@@ -22,20 +22,20 @@ export function DiffViewer({
   }, [diffText]);
 
   return (
-    <div className={`rounded-lg border border-zinc-800 bg-zinc-950 overflow-hidden font-mono text-xs ${className}`}>
+    <div className={`rounded-lg border border-white/10 bg-[#0f0f0f] overflow-hidden font-mono text-xs ${className}`}>
       {/* Diff Header */}
-      <div className="flex items-center justify-between px-4 py-2.5 bg-zinc-900 border-b border-zinc-800">
-        <div className="flex items-center gap-2 text-zinc-300 font-sans font-medium">
-          <GitCompare className="h-4 w-4 text-violet-400" />
+      <div className="flex items-center justify-between px-4 py-2.5 bg-white/[0.02] border-b border-white/10">
+        <div className="flex items-center gap-2 text-foreground font-sans font-medium">
+          <GitCompare className="h-4 w-4 text-muted" />
           <span>Comparing Revision #{fromRevision} → Revision #{toRevision}</span>
         </div>
-        <span className="text-zinc-500 text-xs">Unified Diff</span>
+        <span className="text-muted text-xs font-mono">Unified Diff</span>
       </div>
 
       {/* Diff Content */}
-      <div className="overflow-x-auto p-2 max-h-[600px] divide-y divide-zinc-900/50">
+      <div className="overflow-x-auto p-2 max-h-[600px] divide-y divide-white/[0.03]">
         {lines.length === 0 ? (
-          <div className="py-8 text-center text-zinc-500 font-sans">
+          <div className="py-8 text-center text-muted font-sans">
             No changes detected between revisions.
           </div>
         ) : (
@@ -45,15 +45,15 @@ export function DiffViewer({
             const isHeader = line.startsWith("@@");
             const isMeta = line.startsWith("---") || line.startsWith("+++");
 
-            let rowBg = "bg-transparent text-zinc-300";
+            let rowBg = "bg-transparent text-foreground/90";
             if (isAdd) {
-              rowBg = "bg-emerald-950/40 text-emerald-300 hover:bg-emerald-950/60";
+              rowBg = "bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/15";
             } else if (isDel) {
-              rowBg = "bg-rose-950/40 text-rose-300 hover:bg-rose-950/60";
+              rowBg = "bg-red-500/10 text-red-300 hover:bg-red-500/15";
             } else if (isHeader) {
-              rowBg = "bg-zinc-900 text-cyan-400 font-semibold";
+              rowBg = "bg-white/[0.04] text-foreground font-semibold";
             } else if (isMeta) {
-              rowBg = "bg-zinc-900/80 text-zinc-500";
+              rowBg = "bg-white/[0.02] text-muted";
             }
 
             return (
@@ -61,7 +61,7 @@ export function DiffViewer({
                 key={idx}
                 className={`flex items-start px-3 py-0.5 rounded-sm transition-colors whitespace-pre font-mono ${rowBg}`}
               >
-                <span className="w-8 shrink-0 select-none text-zinc-600 text-right pr-3">
+                <span className="w-8 shrink-0 select-none text-muted/60 text-right pr-3">
                   {idx + 1}
                 </span>
                 <span className="w-4 shrink-0 select-none font-bold">

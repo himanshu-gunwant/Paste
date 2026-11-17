@@ -44,24 +44,24 @@ export function ProfileForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
       {/* Account Info Readonly */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4 border-b border-zinc-800">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4 border-b border-white/10">
         <div className="space-y-1.5">
-          <Label className="text-xs text-zinc-400">Username</Label>
-          <div className="flex items-center gap-2 px-3 py-2 rounded-md bg-zinc-900 border border-zinc-800 text-sm text-zinc-300 font-mono">
-            <User className="h-4 w-4 text-zinc-500" />
+          <Label className="text-xs text-muted">Username</Label>
+          <div className="flex items-center gap-2 px-3 py-2 rounded-md bg-white/[0.03] border border-white/10 text-sm text-foreground font-mono">
+            <User className="h-4 w-4 text-muted" />
             <span>@{user?.username}</span>
           </div>
         </div>
 
         <div className="space-y-1.5">
-          <Label className="text-xs text-zinc-400">Email Address</Label>
-          <div className="flex items-center justify-between px-3 py-2 rounded-md bg-zinc-900 border border-zinc-800 text-sm text-zinc-300">
+          <Label className="text-xs text-muted">Email Address</Label>
+          <div className="flex items-center justify-between px-3 py-2 rounded-md bg-white/[0.03] border border-white/10 text-sm text-foreground">
             <span className="flex items-center gap-2 truncate">
-              <Mail className="h-4 w-4 text-zinc-500 shrink-0" />
+              <Mail className="h-4 w-4 text-muted shrink-0" />
               {user?.email}
             </span>
             {user?.emailVerified && (
-              <Badge variant="outline" className="text-[10px] text-emerald-400 border-emerald-900/60 shrink-0">
+              <Badge variant="outline" className="text-[10px] border-white/10 bg-white/5 text-muted shrink-0">
                 <CheckCircle2 className="h-2.5 w-2.5 mr-1" />
                 Verified
               </Badge>
@@ -73,50 +73,50 @@ export function ProfileForm() {
       {/* Editable fields */}
       <div className="space-y-4">
         <div className="space-y-1.5">
-          <Label htmlFor="prof-name" className="text-xs text-zinc-300">Display Name</Label>
+          <Label htmlFor="prof-name" className="text-xs text-muted">Display Name</Label>
           <Input
             id="prof-name"
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
             placeholder="Your name or nickname"
-            className="bg-zinc-900 border-zinc-800 text-sm"
+            className="text-sm"
           />
         </div>
 
         <div className="space-y-1.5">
-          <Label htmlFor="prof-bio" className="text-xs text-zinc-300">Bio</Label>
+          <Label htmlFor="prof-bio" className="text-xs text-muted">Bio</Label>
           <Textarea
             id="prof-bio"
             value={bio}
             onChange={(e) => setBio(e.target.value)}
             placeholder="A short note about yourself..."
             rows={3}
-            className="bg-zinc-900 border-zinc-800 text-sm resize-none"
+            className="text-sm resize-none"
           />
         </div>
 
         <div className="space-y-1.5">
-          <Label htmlFor="prof-website" className="text-xs text-zinc-300">Website or GitHub</Label>
+          <Label htmlFor="prof-website" className="text-xs text-muted">Website or GitHub</Label>
           <div className="relative">
-            <Globe className="absolute left-3 top-3 h-4 w-4 text-zinc-500" />
+            <Globe className="absolute left-3 top-3 h-4 w-4 text-muted" />
             <Input
               id="prof-website"
               value={websiteUrl}
               onChange={(e) => setWebsiteUrl(e.target.value)}
               placeholder="https://github.com/..."
-              className="pl-9 bg-zinc-900 border-zinc-800 text-sm font-mono"
+              className="pl-9 text-sm font-mono"
             />
           </div>
         </div>
 
         <div className="space-y-1.5">
-          <Label htmlFor="prof-avatar" className="text-xs text-zinc-300">Avatar Image URL</Label>
+          <Label htmlFor="prof-avatar" className="text-xs text-muted">Avatar Image URL</Label>
           <Input
             id="prof-avatar"
             value={avatarUrl}
             onChange={(e) => setAvatarUrl(e.target.value)}
             placeholder="https://avatars.githubusercontent.com/..."
-            className="bg-zinc-900 border-zinc-800 text-sm font-mono"
+            className="text-sm font-mono"
           />
         </div>
       </div>
@@ -126,7 +126,7 @@ export function ProfileForm() {
           type="submit"
           size="sm"
           disabled={isSubmitting}
-          className="gap-1.5 bg-violet-600 hover:bg-violet-700 text-white"
+          className="gap-1.5"
         >
           {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
           Save Profile

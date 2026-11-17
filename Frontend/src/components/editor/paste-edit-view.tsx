@@ -100,20 +100,20 @@ export function PasteEditView({ paste, managementToken }: PasteEditViewProps) {
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-5 animate-enter delay-1">
       {/* Top action bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-zinc-800">
+      <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-white/10">
         <div className="flex items-center gap-3">
           <Button
             variant="ghost"
             size="sm"
             onClick={() => router.push(`/p/${paste.id}`)}
-            className="text-zinc-400 hover:text-white gap-1.5"
+            className="text-muted hover:text-foreground gap-1.5"
           >
             <ArrowLeft className="h-4 w-4" />
             Back
           </Button>
-          <span className="text-sm font-semibold text-zinc-200">
+          <span className="text-sm font-semibold text-foreground">
             Editing {paste.title ? `"${paste.title}"` : `p/${paste.id}`}
           </span>
         </div>
@@ -122,65 +122,65 @@ export function PasteEditView({ paste, managementToken }: PasteEditViewProps) {
           {/* Settings sheet trigger */}
           <Sheet open={settingsOpen} onOpenChange={setSettingsOpen}>
             <SheetTrigger asChild>
-              <Button variant="outline" size="sm" className="gap-1.5 border-zinc-800 text-zinc-300">
+              <Button variant="outline" size="sm" className="gap-1.5 border-white/10 bg-white/[0.02] hover:bg-white/5 text-foreground">
                 <SlidersHorizontal className="h-4 w-4" />
                 Options
               </Button>
             </SheetTrigger>
-            <SheetContent className="bg-zinc-950 border-zinc-800 overflow-y-auto">
+            <SheetContent className="bg-[#141414] border-white/10 overflow-y-auto">
               <SheetHeader>
-                <SheetTitle className="text-zinc-100">Paste Settings</SheetTitle>
-                <SheetDescription className="text-zinc-400 text-xs">
+                <SheetTitle className="text-foreground">Paste Settings</SheetTitle>
+                <SheetDescription className="text-muted text-xs">
                   Modify metadata, privacy, expiration and security parameters.
                 </SheetDescription>
               </SheetHeader>
 
               <div className="mt-6 flex flex-col gap-5">
                 <div className="space-y-1.5">
-                  <Label htmlFor="edit-title" className="text-xs text-zinc-300">Title</Label>
+                  <Label htmlFor="edit-title" className="text-xs text-foreground/90">Title</Label>
                   <Input
                     id="edit-title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Optional title"
-                    className="bg-zinc-900 border-zinc-800 text-sm"
+                    className="bg-white/[0.03] border-white/10 text-sm"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label htmlFor="edit-desc" className="text-xs text-zinc-300">Description</Label>
+                  <Label htmlFor="edit-desc" className="text-xs text-foreground/90">Description</Label>
                   <Textarea
                     id="edit-desc"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Short description"
                     rows={3}
-                    className="bg-zinc-900 border-zinc-800 text-sm resize-none"
+                    className="bg-white/[0.03] border-white/10 text-sm resize-none"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label htmlFor="edit-pwd" className="text-xs text-zinc-300">New Password</Label>
+                  <Label htmlFor="edit-pwd" className="text-xs text-foreground/90">New Password</Label>
                   <Input
                     id="edit-pwd"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Leave blank to keep unchanged"
-                    className="bg-zinc-900 border-zinc-800 text-sm"
+                    className="bg-white/[0.03] border-white/10 text-sm"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label className="text-xs text-zinc-300">Reset Expiration</Label>
+                  <Label className="text-xs text-foreground/90">Reset Expiration</Label>
                   <Select
                     value={expiresIn || "keep"}
                     onValueChange={(val) => setExpiresIn(val === "keep" ? undefined : (val as typeof expiresIn))}
                   >
-                    <SelectTrigger className="bg-zinc-900 border-zinc-800 text-sm">
+                    <SelectTrigger className="bg-white/[0.03] border-white/10 text-sm">
                       <SelectValue placeholder="Keep current expiration" />
                     </SelectTrigger>
-                    <SelectContent className="bg-zinc-900 border-zinc-800 text-zinc-200">
+                    <SelectContent className="bg-[#141414] border-white/10 text-foreground">
                       <SelectItem value="keep">Keep current</SelectItem>
                       <SelectItem value="10min">10 Minutes</SelectItem>
                       <SelectItem value="1h">1 Hour</SelectItem>
@@ -192,7 +192,7 @@ export function PasteEditView({ paste, managementToken }: PasteEditViewProps) {
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label htmlFor="edit-max-views" className="text-xs text-zinc-300">Max Views</Label>
+                  <Label htmlFor="edit-max-views" className="text-xs text-foreground/90">Max Views</Label>
                   <Input
                     id="edit-max-views"
                     type="number"
@@ -200,20 +200,20 @@ export function PasteEditView({ paste, managementToken }: PasteEditViewProps) {
                     value={maxViews ?? ""}
                     onChange={(e) => setMaxViews(e.target.value ? parseInt(e.target.value) : undefined)}
                     placeholder="No limit"
-                    className="bg-zinc-900 border-zinc-800 text-sm"
+                    className="bg-white/[0.03] border-white/10 text-sm"
                   />
                 </div>
 
                 <div className="flex items-center justify-between pt-2">
                   <div className="space-y-0.5">
-                    <Label className="text-sm text-zinc-200">Burn after read</Label>
-                    <p className="text-xs text-zinc-500">Deletes immediately after being viewed</p>
+                    <Label className="text-sm text-foreground">Burn after read</Label>
+                    <p className="text-xs text-muted">Deletes immediately after being viewed</p>
                   </div>
                   <input
                     type="checkbox"
                     checked={burnAfterRead}
                     onChange={(e) => setBurnAfterRead(e.target.checked)}
-                    className="h-4 w-4 rounded border-zinc-700 bg-zinc-900 accent-violet-600"
+                    className="h-4 w-4 rounded border-white/10 bg-white/5 accent-white cursor-pointer"
                   />
                 </div>
               </div>
@@ -225,7 +225,7 @@ export function PasteEditView({ paste, managementToken }: PasteEditViewProps) {
             size="sm"
             onClick={handleSave}
             disabled={isSubmitting || !content.trim()}
-            className="gap-1.5 bg-violet-600 hover:bg-violet-700 text-white font-medium"
+            className="gap-1.5 bg-foreground text-background hover:bg-white font-medium"
           >
             {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
             Save Changes
@@ -234,15 +234,15 @@ export function PasteEditView({ paste, managementToken }: PasteEditViewProps) {
       </div>
 
       {/* Language, Visibility, Preview Toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 bg-zinc-900/60 p-2.5 rounded-lg border border-zinc-800/80">
+      <div className="flex flex-wrap items-center justify-between gap-3 bg-white/[0.02] p-2.5 rounded-lg border border-white/10">
         <div className="flex items-center gap-2">
           <LanguageSelect value={language} onChange={setLanguage} />
 
           <Select value={visibility} onValueChange={(val) => setVisibility(val as Visibility)}>
-            <SelectTrigger className="w-[125px] h-9 bg-zinc-900 border-zinc-800 text-xs">
+            <SelectTrigger className="w-[125px] h-9 bg-white/[0.03] border-white/10 text-xs">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent className="bg-zinc-900 border-zinc-800 text-zinc-200">
+            <SelectContent className="bg-[#141414] border-white/10 text-foreground">
               <SelectItem value="public">
                 <span className="flex items-center gap-1.5">
                   <Globe className="h-3.5 w-3.5 text-emerald-400" />
@@ -251,13 +251,13 @@ export function PasteEditView({ paste, managementToken }: PasteEditViewProps) {
               </SelectItem>
               <SelectItem value="unlisted">
                 <span className="flex items-center gap-1.5">
-                  <LinkIcon className="h-3.5 w-3.5 text-amber-400" />
+                  <LinkIcon className="h-3.5 w-3.5 text-amber-300" />
                   Unlisted
                 </span>
               </SelectItem>
               <SelectItem value="private">
                 <span className="flex items-center gap-1.5">
-                  <Lock className="h-3.5 w-3.5 text-rose-400" />
+                  <Lock className="h-3.5 w-3.5 text-rose-300" />
                   Private
                 </span>
               </SelectItem>
@@ -270,7 +270,7 @@ export function PasteEditView({ paste, managementToken }: PasteEditViewProps) {
             variant="ghost"
             size="sm"
             onClick={() => setPreviewMode(!previewMode)}
-            className="text-xs gap-1.5 text-zinc-400 hover:text-white"
+            className="text-xs gap-1.5 text-muted hover:text-foreground"
           >
             {previewMode ? (
               <>
@@ -286,7 +286,7 @@ export function PasteEditView({ paste, managementToken }: PasteEditViewProps) {
       </div>
 
       {/* Editor or Markdown Preview */}
-      <div className="rounded-lg border border-zinc-800/80 bg-zinc-950 overflow-hidden min-h-[400px]">
+      <div className="rounded-lg border border-white/10 bg-[#0f0f0f] overflow-hidden min-h-[400px]">
         {previewMode && isMarkdown ? (
           <div className="p-6">
             <MarkdownView content={content} />

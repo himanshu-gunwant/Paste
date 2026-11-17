@@ -48,9 +48,9 @@ export function ReportsQueue() {
   return (
     <div className="space-y-4">
       <Tabs value={statusFilter} onValueChange={(val) => setStatusFilter(val as typeof statusFilter)}>
-        <TabsList className="bg-zinc-900 border border-zinc-800">
+        <TabsList>
           <TabsTrigger value="OPEN" className="gap-1.5 text-xs">
-            <AlertTriangle className="h-3.5 w-3.5 text-rose-400" />
+            <AlertTriangle className="h-3.5 w-3.5 text-red-400" />
             Open
           </TabsTrigger>
           <TabsTrigger value="REVIEWED" className="text-xs">Reviewed</TabsTrigger>
@@ -61,19 +61,19 @@ export function ReportsQueue() {
 
       {isLoading ? (
         <div className="flex flex-col items-center justify-center py-20 gap-3">
-          <Loader2 className="h-8 w-8 animate-spin text-violet-500" />
-          <p className="text-sm text-zinc-400">Loading abuse reports...</p>
+          <Loader2 className="h-6 w-6 animate-spin text-muted" />
+          <p className="text-sm text-muted">Loading abuse reports...</p>
         </div>
       ) : !reports || reports.length === 0 ? (
-        <div className="text-center py-16 text-zinc-500 text-sm border border-zinc-800 rounded-lg">
+        <div className="text-center py-16 text-muted text-sm border border-white/10 rounded-lg bg-white/[0.02]">
           No reports found with status: {statusFilter}.
         </div>
       ) : (
-        <div className="divide-y divide-zinc-800/80 rounded-lg border border-zinc-800 bg-zinc-950/80 overflow-hidden">
+        <div className="divide-y divide-white/5 rounded-lg border border-white/10 bg-white/[0.02] overflow-hidden">
           {reports.map((r: AbuseReportView) => (
             <div
               key={r.id}
-              className="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-zinc-900/40 transition-colors gap-3"
+              className="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-white/5 transition-colors gap-3"
             >
               <div className="space-y-1.5 max-w-2xl">
                 <div className="flex items-center gap-2">
@@ -83,27 +83,27 @@ export function ReportsQueue() {
                   <Link
                     href={`/p/${r.pasteId}`}
                     target="_blank"
-                    className="text-xs font-mono text-violet-400 hover:underline flex items-center gap-1"
+                    className="text-xs font-mono text-foreground hover:underline flex items-center gap-1"
                   >
                     p/{r.pasteId}
-                    <ExternalLink className="h-3 w-3" />
+                    <ExternalLink className="h-3 w-3 text-muted" />
                   </Link>
-                  <span className="text-xs text-zinc-500">
+                  <span className="text-xs text-muted">
                     reported by {r.reporterUsername ? `@${r.reporterUsername}` : "Anonymous"}
                   </span>
                 </div>
 
                 {r.details && (
-                  <p className="text-xs text-zinc-300 bg-zinc-900/80 p-2.5 rounded border border-zinc-800">
+                  <p className="text-xs text-foreground bg-white/[0.03] p-2.5 rounded border border-white/10">
                     &quot;{r.details}&quot;
                   </p>
                 )}
 
-                <div className="flex items-center gap-2 text-[11px] text-zinc-500">
+                <div className="flex items-center gap-2 text-[11px] text-muted">
                   <Calendar className="h-3 w-3" />
                   <span>Reported on {new Date(r.createdAt).toLocaleString()}</span>
                   {r.resolutionNote && (
-                    <span className="text-zinc-400">· Resolution: {r.resolutionNote}</span>
+                    <span className="text-muted/70">· Resolution: {r.resolutionNote}</span>
                   )}
                 </div>
               </div>
@@ -115,7 +115,7 @@ export function ReportsQueue() {
                     size="sm"
                     onClick={() => handleResolve(r.id, "dismiss")}
                     disabled={isProcessing}
-                    className="h-8 text-xs border-zinc-800 text-zinc-400 hover:text-white"
+                    className="h-8 text-xs text-muted hover:text-foreground"
                   >
                     <XCircle className="h-3.5 w-3.5 mr-1" />
                     Dismiss

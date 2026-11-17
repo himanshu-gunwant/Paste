@@ -46,7 +46,7 @@ export function ForgotPasswordForm() {
   };
 
   return (
-    <Card className="border-border bg-card">
+    <Card>
       <CardHeader className="space-y-1 pb-4">
         <CardTitle className="text-lg">Reset password</CardTitle>
         <CardDescription className="text-xs">
@@ -67,14 +67,14 @@ export function ForgotPasswordForm() {
               <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
               <span>If an account exists with that email, a password reset link has been sent.</span>
             </div>
-            <p className="text-[11px] text-muted-foreground text-center">
+            <p className="text-[11px] text-muted text-center">
               Please check your spam folder if you do not see it within a few minutes.
             </p>
           </div>
         ) : (
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
             <div className="space-y-1.5">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email" className="text-xs text-muted">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -95,8 +95,8 @@ export function ForgotPasswordForm() {
           </form>
         )}
       </CardContent>
-      <CardFooter className="flex justify-center border-t border-border pt-4 text-xs text-muted-foreground">
-        <Link href="/login" className="flex items-center gap-1.5 text-primary hover:underline font-medium">
+      <CardFooter className="flex justify-center border-t border-white/10 pt-4 text-xs text-muted">
+        <Link href="/login" className="flex items-center gap-1.5 text-foreground hover:underline font-medium">
           <ArrowLeft className="h-3 w-3" />
           <span>Back to sign in</span>
         </Link>

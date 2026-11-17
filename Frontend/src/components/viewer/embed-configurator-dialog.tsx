@@ -38,7 +38,7 @@ export function EmbedConfiguratorDialog({
   const [copied, setCopied] = useState(false);
   const lineNumbersId = useId();
 
-  const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://pastebin.local";
+  const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://paste.himanshugunwant.com";
   const params = new URLSearchParams();
   if (theme !== "dark") params.set("theme", theme);
   if (!showLineNumbers) params.set("lines", "false");
@@ -57,13 +57,13 @@ export function EmbedConfiguratorDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-lg bg-zinc-950 border-zinc-800">
+      <DialogContent className="sm:max-w-lg bg-[#141414] border-white/10">
         <DialogHeader>
-          <div className="flex items-center gap-2 text-violet-400">
-            <Code2 className="h-5 w-5" />
-            <DialogTitle className="text-zinc-100">Embed Paste</DialogTitle>
+          <div className="flex items-center gap-2 text-foreground">
+            <Code2 className="h-5 w-5 text-muted" />
+            <DialogTitle className="text-foreground">Embed Paste</DialogTitle>
           </div>
-          <DialogDescription className="text-zinc-400 text-xs">
+          <DialogDescription className="text-muted text-xs">
             Embed this paste into your blog, documentation, or developer portal.
           </DialogDescription>
         </DialogHeader>
@@ -72,12 +72,12 @@ export function EmbedConfiguratorDialog({
           {/* Options */}
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
-              <Label className="text-xs text-zinc-300">Theme</Label>
+              <Label className="text-xs text-foreground/90">Theme</Label>
               <Select value={theme} onValueChange={(val) => setTheme(val as "dark" | "light")}>
-                <SelectTrigger className="bg-zinc-900 border-zinc-800 text-xs">
+                <SelectTrigger className="bg-white/[0.03] border-white/10 text-xs">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-zinc-900 border-zinc-800 text-zinc-200">
+                <SelectContent className="bg-[#141414] border-white/10 text-foreground">
                   <SelectItem value="dark">Dark Theme</SelectItem>
                   <SelectItem value="light">Light Theme</SelectItem>
                 </SelectContent>
@@ -85,13 +85,13 @@ export function EmbedConfiguratorDialog({
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="embed-hl" className="text-xs text-zinc-300">Highlight Lines</Label>
+              <Label htmlFor="embed-hl" className="text-xs text-foreground/90">Highlight Lines</Label>
               <Input
                 id="embed-hl"
                 value={highlightLines}
                 onChange={(e) => setHighlightLines(e.target.value)}
                 placeholder="e.g. 1-4,8"
-                className="bg-zinc-900 border-zinc-800 text-xs font-mono"
+                className="bg-white/[0.03] border-white/10 text-xs font-mono"
               />
             </div>
           </div>
@@ -102,29 +102,29 @@ export function EmbedConfiguratorDialog({
               id={lineNumbersId}
               checked={showLineNumbers}
               onChange={(e) => setShowLineNumbers(e.target.checked)}
-              className="h-4 w-4 rounded border-zinc-700 bg-zinc-900 accent-violet-600"
+              className="h-4 w-4 rounded border-white/10 bg-white/5 accent-white cursor-pointer"
             />
-            <Label htmlFor={lineNumbersId} className="text-xs text-zinc-300 cursor-pointer">
+            <Label htmlFor={lineNumbersId} className="text-xs text-muted cursor-pointer">
               Show line numbers
             </Label>
           </div>
 
           {/* Snippet box */}
           <div className="space-y-1.5 pt-2">
-            <Label className="text-xs text-zinc-400">HTML Embed Code</Label>
+            <Label className="text-xs text-muted">HTML Embed Code</Label>
             <div className="relative">
               <textarea
                 readOnly
                 value={embedSnippet}
                 rows={3}
-                className="w-full p-2.5 font-mono text-xs rounded-md bg-zinc-900 border border-zinc-800 text-zinc-300 resize-none select-all focus:outline-none"
+                className="w-full p-2.5 font-mono text-xs rounded-md bg-white/[0.03] border border-white/10 text-foreground resize-none select-all focus:outline-none"
               />
               <Button
                 size="sm"
                 onClick={handleCopy}
-                className="absolute right-2 bottom-3 h-7 text-xs gap-1.5 bg-violet-600 hover:bg-violet-700 text-white"
+                className="absolute right-2 bottom-3 h-7 text-xs gap-1.5 bg-foreground text-background hover:bg-white font-medium"
               >
-                {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                {copied ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
                 Copy Code
               </Button>
             </div>

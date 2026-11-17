@@ -4,21 +4,24 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 select-none",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 disabled:pointer-events-none disabled:opacity-40 select-none",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+          "bg-foreground text-background font-medium hover:bg-white transition-colors",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20 hover:text-red-300 transition-colors",
         outline:
-          "border border-border bg-transparent shadow-sm hover:bg-muted hover:text-foreground",
+          "border border-white/10 bg-white/[0.02] text-foreground hover:bg-white/5 hover:text-white transition-colors",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-muted hover:text-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-        subtle: "bg-surface-secondary border border-surface-border text-foreground hover:bg-muted",
+          "border border-white/10 bg-white/5 text-foreground hover:bg-white/10 hover:text-white transition-colors",
+        ghost:
+          "text-zinc-300 hover:text-white hover:bg-white/5 transition-colors",
+        link:
+          "text-foreground underline-offset-4 hover:underline hover:text-white transition-colors",
+        subtle:
+          "border border-white/10 bg-white/[0.03] text-foreground hover:bg-white/5 transition-colors",
       },
       size: {
         default: "h-9 px-4 py-2",

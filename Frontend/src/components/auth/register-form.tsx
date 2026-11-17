@@ -57,11 +57,11 @@ export function RegisterForm() {
   };
 
   return (
-    <Card className="border-border bg-card">
+    <Card>
       <CardHeader className="space-y-1 pb-4">
         <CardTitle className="text-lg">Create an account</CardTitle>
         <CardDescription className="text-xs">
-          Join paste.bin to manage pastes, revisions, bookmarks, and developer API keys.
+          Join paste.himanshugunwant.com to manage pastes, revisions, bookmarks, and API keys.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -74,7 +74,7 @@ export function RegisterForm() {
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
           <div className="space-y-1.5">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-xs">Email</Label>
             <Input
               id="email"
               type="email"
@@ -89,7 +89,7 @@ export function RegisterForm() {
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="username">Username</Label>
+            <Label htmlFor="username" className="text-xs">Username</Label>
             <Input
               id="username"
               type="text"
@@ -104,7 +104,7 @@ export function RegisterForm() {
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="password">Password (min 10 characters)</Label>
+            <Label htmlFor="password" className="text-xs">Password (min 10 characters)</Label>
             <Input
               id="password"
               type="password"
@@ -128,16 +128,16 @@ export function RegisterForm() {
           <div className="absolute inset-0 flex items-center">
             <Separator />
           </div>
-          <div className="relative flex justify-center text-[10px] uppercase">
-            <span className="bg-card px-2 text-muted-foreground">Or sign up with</span>
+          <div className="relative flex justify-center text-[10px] uppercase tracking-wider">
+            <span className="bg-[#141414] px-2 text-muted">Or sign up with</span>
           </div>
         </div>
 
         <OAuthButtons />
       </CardContent>
-      <CardFooter className="flex justify-center border-t border-border pt-4 text-xs text-muted-foreground">
+      <CardFooter className="flex justify-center border-t border-white/10 pt-4 text-xs text-muted">
         Already have an account?{" "}
-        <Link href="/login" className="ml-1 text-primary hover:underline font-medium">
+        <Link href="/login" className="ml-1 text-foreground hover:underline font-medium">
           Sign in
         </Link>
       </CardFooter>

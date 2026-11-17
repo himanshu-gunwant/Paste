@@ -26,7 +26,7 @@ export function EditorStatusbar({
   const isExceeded = byteSize > 1_000_000;
 
   return (
-    <div className="flex items-center justify-between border-t border-border bg-card px-4 py-1.5 text-[11px] text-muted-foreground select-none">
+    <div className="flex items-center justify-between border-t border-white/10 bg-[#0f0f0f] px-4 py-1.5 text-[11px] text-zinc-400 font-mono select-none">
       <div className="flex items-center gap-4">
         <span>{lineCount} {lineCount === 1 ? "line" : "lines"}</span>
         <span>{charCount} {charCount === 1 ? "char" : "chars"}</span>
@@ -47,7 +47,7 @@ export function EditorStatusbar({
             variant="ghost"
             size="sm"
             onClick={onTogglePreview}
-            className="h-6 px-2 text-[10px] gap-1 text-primary hover:text-primary hover:bg-primary/10"
+            className="h-6 px-2 text-[10px] gap-1 text-foreground hover:text-white hover:bg-white/5"
           >
             {isPreview ? (
               <>
@@ -64,11 +64,11 @@ export function EditorStatusbar({
         )}
 
         {detectedLanguage && detectedLanguage !== language && (
-          <span className="text-[10px] text-zinc-500">
-            Detected: <strong className="text-zinc-400">{detectedLanguage}</strong>
+          <span className="text-[10px] text-zinc-400">
+            Detected: <strong className="text-foreground">{detectedLanguage}</strong>
           </span>
         )}
-        <span className="font-mono uppercase text-[10px] tracking-wider text-zinc-400">{language}</span>
+        <span className="font-mono uppercase text-[10px] tracking-wider text-zinc-300">{language}</span>
       </div>
     </div>
   );

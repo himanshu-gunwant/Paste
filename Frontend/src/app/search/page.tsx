@@ -3,7 +3,7 @@
 import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { PasteFeed } from "@/components/discovery/paste-feed";
-import { Search, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 function SearchContent() {
   const searchParams = useSearchParams();
@@ -15,13 +15,12 @@ function SearchContent() {
 
 export default function SearchPage() {
   return (
-    <div className="w-full max-w-7xl mx-auto py-4 space-y-6">
-      <div className="flex flex-col gap-1 pb-4 border-b border-zinc-800">
-        <div className="flex items-center gap-2 text-zinc-100">
-          <Search className="h-6 w-6 text-violet-400" />
-          <h1 className="text-2xl font-bold tracking-tight">Search Pastes</h1>
-        </div>
-        <p className="text-sm text-zinc-400">
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8 animate-enter delay-1">
+      <div className="pb-4 border-b border-white/10 space-y-1">
+        <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
+          Search Pastes
+        </h1>
+        <p className="text-sm text-muted leading-relaxed">
           Search across public paste titles, syntax grammars, and snippet content.
         </p>
       </div>
@@ -29,8 +28,8 @@ export default function SearchPage() {
       <Suspense
         fallback={
           <div className="flex flex-col items-center justify-center py-20 gap-3">
-            <Loader2 className="h-8 w-8 animate-spin text-violet-500" />
-            <p className="text-sm text-zinc-400">Initializing search...</p>
+            <Loader2 className="h-6 w-6 animate-spin text-muted" />
+            <p className="text-sm text-muted">Initializing search...</p>
           </div>
         }
       >

@@ -13,8 +13,8 @@ function VerifiedContent() {
   const isSuccess = status === "success";
 
   return (
-    <div className="flex-1 flex flex-col items-center justify-center p-4">
-      <Card className="w-full max-w-sm border-border bg-card text-center">
+    <div className="flex-1 flex flex-col items-center justify-center p-4 animate-enter">
+      <Card className="w-full max-w-sm text-center">
         <CardHeader className="pb-4">
           <div className="flex justify-center pb-2">
             {isSuccess ? (
@@ -43,9 +43,9 @@ function VerifiedContent() {
             </Button>
           </Link>
         </CardContent>
-        <CardFooter className="justify-center border-t border-border pt-4 text-xs text-muted-foreground">
-          <Link href="/" className="hover:underline">
-            Return to paste.bin
+        <CardFooter className="justify-center border-t border-white/10 pt-4 text-xs text-muted">
+          <Link href="/" className="hover:underline text-foreground">
+            Return to paste.himanshugunwant.com
           </Link>
         </CardFooter>
       </Card>
@@ -55,7 +55,7 @@ function VerifiedContent() {
 
 export default function VerifiedPage() {
   return (
-    <Suspense fallback={<div className="h-48 flex items-center justify-center text-xs text-muted-foreground">Verifying...</div>}>
+    <Suspense fallback={<div className="h-48 flex items-center justify-center text-xs text-muted">Verifying...</div>}>
       <VerifiedContent />
     </Suspense>
   );

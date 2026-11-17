@@ -45,23 +45,23 @@ export default function BookmarksPage() {
   if (isAuthLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh] gap-3">
-        <Loader2 className="h-8 w-8 animate-spin text-violet-500" />
+        <Loader2 className="h-6 w-6 animate-spin text-muted" />
       </div>
     );
   }
 
   if (!isAuthenticated) {
     return (
-      <div className="max-w-md mx-auto py-20 text-center space-y-4">
-        <div className="p-3 rounded-full bg-zinc-800 text-zinc-400 inline-flex">
-          <Lock className="h-6 w-6" />
+      <div className="max-w-md mx-auto py-20 text-center space-y-4 animate-enter">
+        <div className="p-3 rounded-full border border-white/10 bg-white/5 text-muted inline-flex">
+          <Lock className="h-5 w-5" />
         </div>
-        <h2 className="text-xl font-bold text-zinc-100">Sign in to view Bookmarks</h2>
-        <p className="text-sm text-zinc-400">
+        <h2 className="text-xl font-semibold tracking-tight text-foreground">Sign in to view Bookmarks</h2>
+        <p className="text-sm text-muted">
           Save pastes to your bookmarks so you can quickly return to them at any time.
         </p>
         <div className="pt-2">
-          <Button asChild size="sm" className="bg-violet-600 hover:bg-violet-700 text-white">
+          <Button asChild size="sm">
             <Link href="/login">Sign In</Link>
           </Button>
         </div>
@@ -70,52 +70,52 @@ export default function BookmarksPage() {
   }
 
   return (
-    <div className="w-full max-w-7xl mx-auto py-4 space-y-6">
+    <div className="w-full max-w-5xl mx-auto py-4 space-y-6 animate-enter">
       {/* Header */}
-      <div className="flex flex-col gap-1 pb-4 border-b border-zinc-800">
-        <div className="flex items-center gap-2.5 text-zinc-100">
-          <Bookmark className="h-6 w-6 text-violet-400" />
+      <div className="flex flex-col gap-1 pb-4 border-b border-white/10">
+        <div className="flex items-center gap-2.5 text-foreground">
+          <Bookmark className="h-5 w-5 text-muted" />
           <h1 className="text-2xl font-bold tracking-tight">Saved Bookmarks</h1>
         </div>
-        <p className="text-sm text-zinc-400">
+        <p className="text-sm text-muted">
           Quickly access reference scripts, code templates, and notes you have saved.
         </p>
       </div>
 
       {isLoading ? (
         <div className="flex flex-col items-center justify-center py-20 gap-3">
-          <Loader2 className="h-8 w-8 animate-spin text-violet-500" />
-          <p className="text-sm text-zinc-400">Loading bookmarks...</p>
+          <Loader2 className="h-6 w-6 animate-spin text-muted" />
+          <p className="text-sm text-muted">Loading bookmarks...</p>
         </div>
       ) : !bookmarks || bookmarks.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-20 text-center border border-zinc-800/80 rounded-xl bg-zinc-950/40 p-8 space-y-3">
-          <Bookmark className="h-8 w-8 text-zinc-600" />
-          <h3 className="text-base font-medium text-zinc-200">No bookmarks saved yet</h3>
-          <p className="text-xs text-zinc-500 max-w-sm">
+        <div className="flex flex-col items-center justify-center py-20 text-center border border-white/10 rounded-lg bg-white/[0.02] p-8 space-y-3">
+          <Bookmark className="h-8 w-8 text-muted/60" />
+          <h3 className="text-base font-medium text-foreground">No bookmarks saved yet</h3>
+          <p className="text-xs text-muted max-w-sm">
             When browsing public pastes, click the Bookmark button to save them here for easy retrieval.
           </p>
-          <Button asChild variant="outline" size="sm" className="border-zinc-800 text-zinc-300">
+          <Button asChild variant="outline" size="sm" className="mt-2">
             <Link href="/explore">Browse Public Pastes</Link>
           </Button>
         </div>
       ) : (
-        <div className="divide-y divide-zinc-800/80 rounded-lg border border-zinc-800 bg-zinc-950/80 overflow-hidden">
+        <div className="divide-y divide-white/5 rounded-lg border border-white/10 bg-white/[0.02] overflow-hidden">
           {bookmarks.map((bm: BookmarkItem) => (
             <div
               key={bm.pasteId}
-              className="flex items-center justify-between p-4 hover:bg-zinc-900/40 transition-colors gap-3"
+              className="flex items-center justify-between p-4 hover:bg-white/5 transition-colors gap-3"
             >
               <div className="space-y-1">
                 <Link
                   href={`/p/${bm.pasteId}`}
-                  className="text-sm font-medium text-zinc-200 hover:text-violet-400 transition-colors flex items-center gap-1.5"
+                  className="text-sm font-medium text-foreground hover:underline transition-colors flex items-center gap-1.5"
                 >
                   {bm.title || `Paste ${bm.pasteId}`}
-                  <ExternalLink className="h-3 w-3 text-zinc-500" />
+                  <ExternalLink className="h-3 w-3 text-muted" />
                 </Link>
-                <div className="flex items-center gap-3 text-xs text-zinc-500">
-                  <Badge variant="outline" className="text-[10px] font-mono border-zinc-800">
-                    <FileCode className="h-2.5 w-2.5 mr-1 text-violet-400" />
+                <div className="flex items-center gap-3 text-xs text-muted">
+                  <Badge variant="outline" className="text-[10px] font-mono border-white/10 bg-white/5">
+                    <FileCode className="h-2.5 w-2.5 mr-1 text-muted" />
                     {bm.language || "text"}
                   </Badge>
                   <span className="flex items-center gap-1">
@@ -129,7 +129,7 @@ export default function BookmarksPage() {
                 variant="ghost"
                 size="sm"
                 onClick={() => handleRemove(bm.pasteId)}
-                className="text-zinc-500 hover:text-rose-400 hover:bg-rose-950/20 h-8"
+                className="text-muted hover:text-red-400 hover:bg-red-500/10 h-8"
               >
                 <Trash2 className="h-3.5 w-3.5" />
               </Button>

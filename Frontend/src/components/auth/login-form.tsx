@@ -48,7 +48,7 @@ export function LoginForm() {
   };
 
   return (
-    <Card className="border-border bg-card">
+    <Card>
       <CardHeader className="space-y-1 pb-4">
         <CardTitle className="text-lg">Sign in</CardTitle>
         <CardDescription className="text-xs">
@@ -65,7 +65,7 @@ export function LoginForm() {
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
           <div className="space-y-1.5">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-xs">Email</Label>
             <Input
               id="email"
               type="email"
@@ -81,10 +81,10 @@ export function LoginForm() {
 
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" className="text-xs">Password</Label>
               <Link
                 href="/forgot-password"
-                className="text-[11px] text-muted-foreground hover:text-primary transition-colors"
+                className="text-[11px] text-zinc-400 hover:text-white transition-colors"
               >
                 Forgot password?
               </Link>
@@ -112,16 +112,16 @@ export function LoginForm() {
           <div className="absolute inset-0 flex items-center">
             <Separator />
           </div>
-          <div className="relative flex justify-center text-[10px] uppercase">
-            <span className="bg-card px-2 text-muted-foreground">Or continue with</span>
+          <div className="relative flex justify-center text-[10px] uppercase tracking-wider">
+            <span className="bg-[#141414] px-2 text-muted">Or continue with</span>
           </div>
         </div>
 
         <OAuthButtons />
       </CardContent>
-      <CardFooter className="flex justify-center border-t border-border pt-4 text-xs text-muted-foreground">
+      <CardFooter className="flex justify-center border-t border-white/10 pt-4 text-xs text-muted">
         Don&apos;t have an account?{" "}
-        <Link href="/register" className="ml-1 text-primary hover:underline font-medium">
+        <Link href="/register" className="ml-1 text-foreground hover:underline font-medium">
           Sign up
         </Link>
       </CardFooter>

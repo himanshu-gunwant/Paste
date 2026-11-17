@@ -95,8 +95,8 @@ export default function PastePage({ params }: PastePageProps) {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh] gap-3">
-        <Loader2 className="h-8 w-8 animate-spin text-violet-500" />
-        <p className="text-sm text-zinc-400">Loading paste...</p>
+        <Loader2 className="h-6 w-6 animate-spin text-muted" />
+        <p className="text-sm text-muted">Loading paste...</p>
       </div>
     );
   }
@@ -104,7 +104,7 @@ export default function PastePage({ params }: PastePageProps) {
   // Password required gate
   if (isPasswordRequired) {
     return (
-      <div className="max-w-md mx-auto py-12">
+      <div className="max-w-md mx-auto px-4 py-16">
         <PasswordGate pasteId={id} shareToken={shareToken} onUnlocked={handleUnlocked} />
       </div>
     );
@@ -113,30 +113,30 @@ export default function PastePage({ params }: PastePageProps) {
   // Error view (404, 410, 403, etc.)
   if (errorStatus && !paste) {
     return (
-      <div className="max-w-lg mx-auto py-16">
-        <Card className="bg-zinc-900/60 border-zinc-800 p-6 text-center">
+      <div className="max-w-lg mx-auto px-4 py-20">
+        <Card className="bg-white/[0.02] border-white/10 p-6 text-center rounded-xl">
           <CardContent className="pt-6 space-y-4">
-            <div className="inline-flex p-3 rounded-full bg-rose-500/10 text-rose-400">
-              <AlertCircle className="h-8 w-8" />
+            <div className="inline-flex p-3 rounded-full bg-red-500/10 text-red-400">
+              <AlertCircle className="h-7 w-7" />
             </div>
-            <h2 className="text-xl font-bold text-zinc-100">
+            <h2 className="text-xl font-semibold text-foreground">
               {errorStatus === 404
                 ? "Paste Not Found"
                 : errorStatus === 410
                 ? "Paste Expired or Burned"
                 : "Unable to Access Paste"}
             </h2>
-            <p className="text-sm text-zinc-400 max-w-sm mx-auto">
+            <p className="text-sm text-muted max-w-sm mx-auto leading-relaxed">
               {errorMessage || "This paste may have expired, been burned, or removed by its creator."}
             </p>
-            <div className="flex items-center justify-center gap-3 pt-4">
-              <Button asChild variant="outline" size="sm" className="border-zinc-800">
+            <div className="flex items-center justify-center gap-3 pt-3">
+              <Button asChild variant="outline" size="sm" className="border-white/10 text-foreground hover:bg-white/5">
                 <Link href="/" className="gap-1.5">
                   <Home className="h-4 w-4" />
                   Home
                 </Link>
               </Button>
-              <Button asChild size="sm" className="bg-violet-600 hover:bg-violet-700 text-white">
+              <Button asChild size="sm" className="bg-foreground text-background font-medium hover:bg-white">
                 <Link href="/new" className="gap-1.5">
                   <FilePlus className="h-4 w-4" />
                   Create Paste
@@ -152,7 +152,7 @@ export default function PastePage({ params }: PastePageProps) {
   if (!paste) return null;
 
   return (
-    <div className="w-full max-w-7xl mx-auto py-2">
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
       <PasteViewer
         paste={paste}
         initialContent={paste.content}

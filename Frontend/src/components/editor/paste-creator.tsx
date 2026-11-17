@@ -142,7 +142,7 @@ export function PasteCreator() {
   };
 
   return (
-    <div className="flex-1 flex flex-col h-[calc(100vh-3rem-3.5rem)] min-h-[500px]">
+    <div className="flex-1 flex flex-col h-[calc(100vh-3.5rem-4.5rem)] min-h-[520px]">
       {/* Top action toolbar */}
       <EditorToolbar
         language={language}
@@ -163,7 +163,7 @@ export function PasteCreator() {
       {/* Editor & Preview Area */}
       <div className="flex-1 relative overflow-hidden bg-background">
         {isPreview && language === "markdown" ? (
-          <div className="h-full overflow-y-auto bg-canvas">
+          <div className="h-full overflow-y-auto bg-canvas p-6">
             <MarkdownView content={content} />
           </div>
         ) : (
@@ -208,14 +208,14 @@ export function PasteCreator() {
 
       {/* Anonymous Creation Management Token Modal */}
       <Dialog open={!!createdAnonToken} onOpenChange={() => handleProceedToPaste()}>
-        <DialogContent className="sm:max-w-md border-border bg-card">
+        <DialogContent className="sm:max-w-md border-white/10 bg-[#141414]">
           <DialogHeader>
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 border border-primary/20 text-primary mb-2">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 border border-white/10 text-foreground mb-2">
               <Key className="h-5 w-5" />
             </div>
-            <DialogTitle className="text-base font-semibold">Save your Management Token</DialogTitle>
-            <DialogDescription className="text-xs">
-              Because you are creating this paste anonymously, this token is your only proof of ownership.
+            <DialogTitle className="text-base font-semibold text-foreground">Save your Management Token</DialogTitle>
+            <DialogDescription className="text-xs text-muted">
+              Because you created this paste anonymously, this token is your proof of ownership.
               Save it to edit or delete your paste later.
             </DialogDescription>
           </DialogHeader>
@@ -225,26 +225,26 @@ export function PasteCreator() {
               <Input
                 readOnly
                 value={createdAnonToken || ""}
-                className="font-mono text-xs bg-canvas select-all"
+                className="font-mono text-xs bg-white/[0.03] border-white/10 select-all text-foreground"
               />
               <Button
                 type="button"
                 variant="outline"
                 size="sm"
                 onClick={handleCopyAnonToken}
-                className="gap-1.5 shrink-0"
+                className="gap-1.5 shrink-0 border-white/10 bg-white/5 text-foreground hover:bg-white/10"
               >
                 {copiedToken ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
                 <span>{copiedToken ? "Copied" : "Copy"}</span>
               </Button>
             </div>
-            <p className="text-[11px] text-zinc-500">
+            <p className="text-[11px] text-muted">
               This token has also been saved to your local browser storage for quick edits on this device.
             </p>
           </div>
 
           <DialogFooter className="pt-2">
-            <Button onClick={handleProceedToPaste} className="w-full text-xs gap-1.5">
+            <Button onClick={handleProceedToPaste} className="w-full text-xs gap-1.5 bg-foreground text-background font-medium hover:bg-white">
               <span>View Your Paste</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </Button>

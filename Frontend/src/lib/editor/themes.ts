@@ -2,32 +2,32 @@ import { EditorView } from "@codemirror/view";
 import { HighlightStyle, syntaxHighlighting } from "@codemirror/language";
 import { tags as t } from "@lezer/highlight";
 
-// Custom dark theme matching our near-black zinc / violet design tokens
+// Custom dark theme matching the minimal personal site design system (#0f0f0f, monochrome highlights)
 export const pasteDarkTheme = EditorView.theme(
   {
     "&": {
-      color: "#f4f4f5",
-      backgroundColor: "#09090b",
+      color: "#f5f5f5",
+      backgroundColor: "#0f0f0f",
       height: "100%",
     },
     ".cm-content": {
-      caretColor: "#8b5cf6",
-      fontFamily: "var(--font-geist-mono), 'JetBrains Mono', Menlo, Monaco, monospace",
+      caretColor: "#f5f5f5",
+      fontFamily: "var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
       fontSize: "13px",
-      lineHeight: "1.6",
+      lineHeight: "1.65",
       padding: "16px 0",
     },
     "&.cm-focused .cm-cursor": {
-      borderLeftColor: "#8b5cf6",
+      borderLeftColor: "#f5f5f5",
       borderLeftWidth: "2px",
     },
     "&.cm-focused .cm-selectionBackground, ::selection": {
-      backgroundColor: "rgba(139, 92, 246, 0.25) !important",
+      backgroundColor: "rgba(255, 255, 255, 0.18) !important",
     },
     ".cm-gutters": {
-      backgroundColor: "#09090b",
-      color: "#52525b",
-      borderRight: "1px solid #18181b",
+      backgroundColor: "#0f0f0f",
+      color: "#888888",
+      borderRight: "1px solid rgba(255, 255, 255, 0.08)",
       paddingRight: "8px",
       userSelect: "none",
     },
@@ -35,13 +35,14 @@ export const pasteDarkTheme = EditorView.theme(
       padding: "0 12px 0 16px",
       minWidth: "30px",
       textAlign: "right",
+      fontSize: "12px",
     },
     ".cm-activeLine": {
       backgroundColor: "rgba(255, 255, 255, 0.025)",
     },
     ".cm-activeLineGutter": {
-      backgroundColor: "rgba(255, 255, 255, 0.03)",
-      color: "#a1a1aa",
+      backgroundColor: "rgba(255, 255, 255, 0.04)",
+      color: "#ffffff",
     },
     ".cm-selectionMatch": {
       backgroundColor: "rgba(255, 255, 255, 0.08)",
@@ -49,10 +50,14 @@ export const pasteDarkTheme = EditorView.theme(
     "&.cm-focused": {
       outline: "none",
     },
+    ".cm-placeholder": {
+      color: "#71717a",
+      fontStyle: "normal",
+    },
     ".cm-foldPlaceholder": {
-      backgroundColor: "#18181b",
-      border: "1px solid #27272a",
-      color: "#a1a1aa",
+      backgroundColor: "#171717",
+      border: "1px solid rgba(255, 255, 255, 0.1)",
+      color: "#9ca3af",
       borderRadius: "3px",
       padding: "0 4px",
     },
@@ -62,10 +67,10 @@ export const pasteDarkTheme = EditorView.theme(
 
 export const pasteSyntaxHighlighting = syntaxHighlighting(
   HighlightStyle.define([
-    { tag: t.keyword, color: "#c084fc", fontWeight: "500" }, // purple
-    { tag: [t.name, t.deleted, t.character, t.propertyName, t.macroName], color: "#e4e4e7" },
-    { tag: [t.function(t.variableName), t.labelName], color: "#60a5fa" }, // blue
-    { tag: [t.color, t.constant(t.name), t.standard(t.name)], color: "#f87171" }, // red
+    { tag: t.keyword, color: "#f5f5f5", fontWeight: "600" },
+    { tag: [t.name, t.deleted, t.character, t.propertyName, t.macroName], color: "#e5e5e5" },
+    { tag: [t.function(t.variableName), t.labelName], color: "#93c5fd" },
+    { tag: [t.color, t.constant(t.name), t.standard(t.name)], color: "#fca5a5" },
     { tag: [t.definition(t.name), t.separator], color: "#d4d4d8" },
     {
       tag: [
@@ -78,16 +83,16 @@ export const pasteSyntaxHighlighting = syntaxHighlighting(
         t.self,
         t.namespace,
       ],
-      color: "#fb923c", // orange
+      color: "#fde047",
     },
-    { tag: [t.operator, t.operatorKeyword, t.url, t.escape, t.regexp, t.link], color: "#38bdf8" }, // cyan
-    { tag: [t.meta, t.comment], color: "#71717a", fontStyle: "italic" }, // zinc-500
-    { tag: t.strong, fontWeight: "bold" },
+    { tag: [t.operator, t.operatorKeyword, t.url, t.escape, t.regexp, t.link], color: "#cbd5e1" },
+    { tag: [t.meta, t.comment], color: "#71717a", fontStyle: "italic" },
+    { tag: t.strong, fontWeight: "bold", color: "#ffffff" },
     { tag: t.emphasis, fontStyle: "italic" },
-    { tag: t.link, color: "#a78bfa", textDecoration: "underline" },
-    { tag: t.heading, fontWeight: "bold", color: "#f4f4f5" },
-    { tag: [t.atom, t.bool, t.special(t.variableName)], color: "#f43f5e" }, // rose
-    { tag: [t.processingInstruction, t.string, t.inserted], color: "#4ade80" }, // emerald-400
+    { tag: t.link, color: "#e5e5e5", textDecoration: "underline" },
+    { tag: t.heading, fontWeight: "bold", color: "#f5f5f5" },
+    { tag: [t.atom, t.bool, t.special(t.variableName)], color: "#fda4af" },
+    { tag: [t.processingInstruction, t.string, t.inserted], color: "#86efac" },
     { tag: t.invalid, color: "#ef4444" },
   ])
 );

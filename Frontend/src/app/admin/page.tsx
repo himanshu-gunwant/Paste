@@ -9,7 +9,7 @@ export default function AdminPage() {
 
       {/* Immediate Attention: Open Abuse Reports Queue */}
       <div className="space-y-3">
-        <h2 className="text-base font-semibold text-zinc-100">Abuse Reports Queue</h2>
+        <h2 className="text-sm font-medium uppercase tracking-wider text-muted">Abuse Reports Queue</h2>
         <ReportsQueue />
       </div>
     </div>

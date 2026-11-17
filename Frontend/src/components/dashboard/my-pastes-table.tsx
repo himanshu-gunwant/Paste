@@ -21,7 +21,7 @@ import {
   Calendar,
   Eye,
   KeyRound,
-  FilePlus,
+  Plus,
 } from "lucide-react";
 
 export function MyPastesTable() {
@@ -67,24 +67,24 @@ export function MyPastesTable() {
 
   return (
     <div className="space-y-6">
-      {/* Tab Switcher */}
+      {/* Tab Switcher & CTA */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <Tabs value={tab} onValueChange={(val) => setTab(val as typeof tab)}>
-          <TabsList className="bg-zinc-900 border border-zinc-800">
+          <TabsList>
             <TabsTrigger value="account" className="gap-2 text-xs">
               <FileText className="h-3.5 w-3.5" />
               Account Pastes ({accountPastes.length})
             </TabsTrigger>
             <TabsTrigger value="vault" className="gap-2 text-xs">
-              <KeyRound className="h-3.5 w-3.5 text-amber-400" />
+              <KeyRound className="h-3.5 w-3.5" />
               Local Vault / Anonymous ({vault.length})
             </TabsTrigger>
           </TabsList>
         </Tabs>
 
-        <Button asChild size="sm" className="bg-violet-600 hover:bg-violet-700 text-white gap-1.5">
+        <Button asChild size="sm" className="gap-1.5">
           <Link href="/new">
-            <FilePlus className="h-4 w-4" />
+            <Plus className="h-4 w-4" />
             Create Paste
           </Link>
         </Button>
@@ -95,37 +95,37 @@ export function MyPastesTable() {
         <div>
           {isLoading ? (
             <div className="flex flex-col items-center justify-center py-20 gap-3">
-              <Loader2 className="h-8 w-8 animate-spin text-violet-500" />
-              <p className="text-sm text-zinc-400">Loading your pastes...</p>
+              <Loader2 className="h-6 w-6 animate-spin text-muted" />
+              <p className="text-sm text-muted">Loading your pastes...</p>
             </div>
           ) : accountPastes.length === 0 ? (
-            <div className="text-center py-16 border border-zinc-800/80 rounded-xl bg-zinc-950/40 p-8 space-y-3">
-              <FileText className="h-8 w-8 text-zinc-600 mx-auto" />
-              <h3 className="text-base font-medium text-zinc-200">No public pastes created yet</h3>
-              <p className="text-xs text-zinc-500 max-w-sm mx-auto">
+            <div className="text-center py-16 border border-white/10 rounded-lg bg-white/[0.02] p-8 space-y-3">
+              <FileText className="h-8 w-8 text-muted/60 mx-auto" />
+              <h3 className="text-base font-medium text-foreground">No public pastes created yet</h3>
+              <p className="text-xs text-muted max-w-sm mx-auto">
                 Any public pastes you create while signed in will appear here.
               </p>
-              <Button asChild size="sm" className="mt-2 bg-violet-600 hover:bg-violet-700 text-white">
+              <Button asChild size="sm" className="mt-2">
                 <Link href="/new">Create a Paste</Link>
               </Button>
             </div>
           ) : (
-            <div className="divide-y divide-zinc-800/80 rounded-lg border border-zinc-800 bg-zinc-950/80 overflow-hidden">
+            <div className="divide-y divide-white/5 rounded-lg border border-white/10 bg-white/[0.02] overflow-hidden">
               {accountPastes.map((p: PasteSummary) => (
                 <div
                   key={p.id}
-                  className="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-zinc-900/40 transition-colors gap-3"
+                  className="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-white/5 transition-colors gap-3"
                 >
                   <div className="space-y-1">
                     <Link
                       href={`/p/${p.id}`}
-                      className="text-sm font-medium text-zinc-200 hover:text-violet-400 transition-colors flex items-center gap-1.5"
+                      className="text-sm font-medium text-foreground hover:underline transition-colors flex items-center gap-1.5"
                     >
                       {p.title || "Untitled Paste"}
-                      <ExternalLink className="h-3 w-3 text-zinc-500" />
+                      <ExternalLink className="h-3 w-3 text-muted" />
                     </Link>
-                    <div className="flex flex-wrap items-center gap-3 text-xs text-zinc-500">
-                      <Badge variant="outline" className="text-[10px] font-mono border-zinc-800">
+                    <div className="flex flex-wrap items-center gap-3 text-xs text-muted">
+                      <Badge variant="outline" className="text-[10px] font-mono border-white/10 bg-white/5">
                         {p.language || "text"}
                       </Badge>
                       <span className="flex items-center gap-1">
@@ -140,7 +140,7 @@ export function MyPastesTable() {
                   </div>
 
                   <div className="flex items-center gap-2 self-end sm:self-center">
-                    <Button asChild variant="outline" size="sm" className="h-8 text-xs border-zinc-800 text-zinc-300">
+                    <Button asChild variant="outline" size="sm" className="h-8 text-xs">
                       <Link href={`/p/${p.id}/edit`}>
                         <Edit className="h-3.5 w-3.5 mr-1" /> Edit
                       </Link>
@@ -149,7 +149,7 @@ export function MyPastesTable() {
                       variant="ghost"
                       size="sm"
                       onClick={() => handleDeleteAccountPaste(p.id)}
-                      className="h-8 text-xs text-zinc-500 hover:text-rose-400 hover:bg-rose-950/20"
+                      className="h-8 text-xs text-muted hover:text-red-400 hover:bg-red-500/10"
                     >
                       <Trash2 className="h-3.5 w-3.5" />
                     </Button>
@@ -164,35 +164,35 @@ export function MyPastesTable() {
       {/* Local Vault Tab */}
       {tab === "vault" && (
         <div className="space-y-3">
-          <p className="text-xs text-zinc-400">
+          <p className="text-xs text-muted">
             These pastes were created anonymously on this browser. Their management tokens are saved locally in your browser storage so you can still edit or delete them.
           </p>
 
           {vault.length === 0 ? (
-            <div className="text-center py-16 border border-zinc-800/80 rounded-xl bg-zinc-950/40 p-8 space-y-3">
-              <KeyRound className="h-8 w-8 text-zinc-600 mx-auto" />
-              <h3 className="text-base font-medium text-zinc-200">Local vault is empty</h3>
-              <p className="text-xs text-zinc-500 max-w-sm mx-auto">
+            <div className="text-center py-16 border border-white/10 rounded-lg bg-white/[0.02] p-8 space-y-3">
+              <KeyRound className="h-8 w-8 text-muted/60 mx-auto" />
+              <h3 className="text-base font-medium text-foreground">Local vault is empty</h3>
+              <p className="text-xs text-muted max-w-sm mx-auto">
                 When you create a paste without signing in, it is preserved here automatically.
               </p>
             </div>
           ) : (
-            <div className="divide-y divide-zinc-800/80 rounded-lg border border-zinc-800 bg-zinc-950/80 overflow-hidden">
+            <div className="divide-y divide-white/5 rounded-lg border border-white/10 bg-white/[0.02] overflow-hidden">
               {vault.map((item: VaultPaste) => (
                 <div
                   key={item.id}
-                  className="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-zinc-900/40 transition-colors gap-3"
+                  className="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-white/5 transition-colors gap-3"
                 >
                   <div className="space-y-1">
                     <Link
                       href={`/p/${item.id}`}
-                      className="text-sm font-medium text-zinc-200 hover:text-violet-400 transition-colors flex items-center gap-1.5"
+                      className="text-sm font-medium text-foreground hover:underline transition-colors flex items-center gap-1.5"
                     >
                       {item.title || `Paste ${item.id}`}
-                      <ExternalLink className="h-3 w-3 text-zinc-500" />
+                      <ExternalLink className="h-3 w-3 text-muted" />
                     </Link>
-                    <div className="flex items-center gap-2 text-xs text-zinc-500">
-                      <Badge variant="outline" className="text-[10px] text-amber-400 border-amber-900/60 font-mono">
+                    <div className="flex items-center gap-2 text-xs text-muted">
+                      <Badge variant="outline" className="text-[10px] border-white/10 bg-white/5 font-mono text-muted">
                         Token Saved
                       </Badge>
                       <span>Created {new Date(item.createdAt).toLocaleDateString()}</span>
@@ -200,7 +200,7 @@ export function MyPastesTable() {
                   </div>
 
                   <div className="flex items-center gap-2 self-end sm:self-center">
-                    <Button asChild variant="outline" size="sm" className="h-8 text-xs border-zinc-800 text-zinc-300">
+                    <Button asChild variant="outline" size="sm" className="h-8 text-xs">
                       <Link href={`/p/${item.id}/edit?token=${encodeURIComponent(item.managementToken)}`}>
                         <Edit className="h-3.5 w-3.5 mr-1" /> Edit
                       </Link>
@@ -209,7 +209,7 @@ export function MyPastesTable() {
                       variant="ghost"
                       size="sm"
                       onClick={() => handleDeleteVaultPaste(item)}
-                      className="h-8 text-xs text-zinc-500 hover:text-rose-400 hover:bg-rose-950/20"
+                      className="h-8 text-xs text-muted hover:text-red-400 hover:bg-red-500/10"
                     >
                       <Trash2 className="h-3.5 w-3.5" />
                     </Button>

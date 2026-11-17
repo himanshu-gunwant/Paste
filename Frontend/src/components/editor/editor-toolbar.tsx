@@ -53,7 +53,7 @@ export function EditorToolbar({
   hasCustomSlug,
 }: EditorToolbarProps) {
   return (
-    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border bg-card px-3 py-2">
+    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 bg-[#0f0f0f] px-3.5 py-2">
       {/* Left controls: Language, Visibility, Expiration */}
       <div className="flex flex-wrap items-center gap-2">
         <LanguageSelect
@@ -64,7 +64,7 @@ export function EditorToolbar({
 
         {/* Visibility */}
         <Select value={visibility} onValueChange={(val) => onVisibilityChange(val as "public" | "unlisted" | "private")}>
-          <SelectTrigger className="h-8 w-[110px] text-xs gap-1.5 border-border bg-subtle">
+          <SelectTrigger className="h-8 w-[115px] text-xs gap-1.5 border-white/10 bg-white/[0.03] hover:bg-white/5 transition-colors">
             {visibility === "public" && <Globe className="h-3.5 w-3.5 text-emerald-400" />}
             {visibility === "unlisted" && <LinkIcon className="h-3.5 w-3.5 text-zinc-400" />}
             {visibility === "private" && <Lock className="h-3.5 w-3.5 text-amber-400" />}
@@ -94,7 +94,7 @@ export function EditorToolbar({
 
         {/* Expiration */}
         <Select value={expiresIn} onValueChange={onExpiresInChange}>
-          <SelectTrigger className="h-8 w-[110px] text-xs gap-1.5 border-border bg-subtle">
+          <SelectTrigger className="h-8 w-[115px] text-xs gap-1.5 border-white/10 bg-white/[0.03] hover:bg-white/5 transition-colors">
             <Clock className="h-3.5 w-3.5 text-zinc-400" />
             <SelectValue />
           </SelectTrigger>
@@ -113,9 +113,9 @@ export function EditorToolbar({
           variant="outline"
           size="sm"
           onClick={onOpenSettings}
-          className="h-8 text-xs gap-1.5 border-border bg-subtle hover:bg-muted text-muted-foreground hover:text-foreground"
+          className="h-8 text-xs gap-1.5 border-white/10 bg-white/[0.03] hover:bg-white/5 text-foreground hover:text-white transition-colors"
         >
-          <SlidersHorizontal className="h-3.5 w-3.5" />
+          <SlidersHorizontal className="h-3.5 w-3.5 text-zinc-400" />
           <span>Options</span>
           {hasPassword && (
             <Badge variant="amber" className="h-4 px-1 text-[9px]">
@@ -142,7 +142,7 @@ export function EditorToolbar({
           size="sm"
           onClick={onSubmit}
           disabled={isSubmitting}
-          className="h-8 gap-1.5 text-xs bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
+          className="h-8 gap-1.5 text-xs bg-foreground text-background hover:bg-white font-medium"
         >
           {isSubmitting ? (
             <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -150,7 +150,7 @@ export function EditorToolbar({
             <Check className="h-3.5 w-3.5" />
           )}
           <span>Create Paste</span>
-          <kbd className="hidden sm:inline-block rounded bg-primary-foreground/20 px-1 py-0.2 text-[10px]">
+          <kbd className="hidden sm:inline-block rounded bg-background/20 px-1 py-0.2 text-[10px] font-mono">
             ⌘↵
           </kbd>
         </Button>
