@@ -115,19 +115,19 @@ flowchart TD
     Redis[("Redis 7\n(Queues, Rate Limits, Buffers)")]
     SMTP["SMTP / MailHog Server"]
 
-    Client -->|Web Traffic| Nginx
-    Nginx -->|SSR & Static Assets| NextJS
-    NextJS -->|API Proxy (/api/v1/*)| API
-    Client -->|Direct REST API / Embeds| Nginx
-    Nginx -->|/api/*, /embed/*| API
+    Client -->|"Web Traffic"| Nginx
+    Nginx -->|"SSR & Static Assets"| NextJS
+    NextJS -->|"API Proxy (/api/v1/*)"| API
+    Client -->|"Direct REST API & Embeds"| Nginx
+    Nginx -->|"REST & Embed Endpoints"| API
 
-    API -->|Prisma 7 Queries| Postgres
-    API -->|Rate Limits, Sessions, Queues| Redis
-    API -->|Enqueue Jobs| Redis
+    API -->|"Prisma 7 Queries"| Postgres
+    API -->|"Rate Limits & Queues"| Redis
+    API -->|"Enqueue Jobs"| Redis
 
-    Worker -->|Consume Email & Cleanup Jobs| Redis
-    Worker -->|View Buffer Flush & Expiry Sweeper| Postgres
-    Worker -->|Send Emails| SMTP
+    Worker -->|"Consume Email & Cleanup Jobs"| Redis
+    Worker -->|"View Buffer Flush & Expiry Sweeper"| Postgres
+    Worker -->|"Send Emails"| SMTP
 ```
 
 ### Architectural Decisions
