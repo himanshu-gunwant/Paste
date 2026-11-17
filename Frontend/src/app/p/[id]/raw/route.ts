@@ -9,8 +9,8 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
   const url = new URL(request.url);
   const search = url.search;
 
-  // Backend target URL (using internal or standard localhost backend port 3000)
-  const backendBaseUrl = process.env.INTERNAL_BACKEND_URL || "http://localhost:3000";
+  // Backend target URL (using internal, public backend URL, or localhost:3000)
+  const backendBaseUrl = process.env.INTERNAL_BACKEND_URL || process.env.BACKEND_URL || "http://localhost:3000";
   const backendRawUrl = `${backendBaseUrl}/api/v1/pastes/${id}/raw${search}`;
 
   try {
