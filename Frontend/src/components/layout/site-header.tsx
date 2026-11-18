@@ -29,7 +29,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-[#0f0f0f]/80 backdrop-blur-md">
-      <div className="container mx-auto flex h-14 max-w-7xl items-center justify-between px-2.5 sm:px-6">
+      <div className="flex h-14 w-full items-center justify-between px-3 sm:px-4">
         <div className="flex items-center gap-1.5 sm:gap-6">
           {/* Mobile Menu Sheet */}
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>

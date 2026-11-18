@@ -26,7 +26,7 @@ export function EditorStatusbar({
   const isExceeded = byteSize > 1_000_000;
 
   return (
-    <div className="flex items-center justify-between border-t border-white/10 bg-[#0f0f0f] px-2.5 sm:px-4 py-1.5 text-[11px] text-zinc-400 font-mono select-none overflow-x-auto scrollbar-none">
+    <div className="flex items-center justify-between border-t border-white/10 bg-[#0f0f0f] px-3 sm:px-4 py-1.5 text-[11px] text-zinc-400 font-mono select-none overflow-x-auto scrollbar-none">
       <div className="flex items-center gap-2.5 sm:gap-4 shrink-0">
         <span>{lineCount} {lineCount === 1 ? "line" : "lines"}</span>
         <span className="hidden sm:inline">{charCount} {charCount === 1 ? "char" : "chars"}</span>
