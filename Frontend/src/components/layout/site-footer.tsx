@@ -4,8 +4,8 @@ import Link from "next/link";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-white/10 bg-[#0f0f0f] py-6 text-xs text-zinc-400">
-      <div className="container max-w-7xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-4 sm:px-6">
+    <footer className="border-t border-white/10 bg-[#0f0f0f] py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] text-xs text-zinc-400">
+      <div className="container mx-auto max-w-7xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-4 sm:px-6">
         <div className="flex items-center gap-2">
           <span className="text-zinc-400 font-mono">paste.himanshugunwant.com</span>
         </div>

@@ -39,15 +39,16 @@ export function UserNav() {
 
   if (!isAuthenticated || !user) {
     return (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1 sm:gap-2">
         <LinkNext href="/login">
-          <Button variant="ghost" size="sm" className="text-xs text-zinc-300 hover:text-white hover:bg-white/5">
+          <Button variant="ghost" size="sm" className="h-8 px-1.5 xs:px-2.5 sm:px-3 text-xs text-zinc-300 hover:text-white hover:bg-white/5">
             Sign In
           </Button>
         </LinkNext>
         <LinkNext href="/register">
-          <Button size="sm" className="text-xs bg-foreground text-background font-medium hover:bg-white">
-            Sign Up
+          <Button size="sm" className="h-8 px-1.5 xs:px-2.5 sm:px-3 text-xs bg-foreground text-background font-medium hover:bg-white">
+            <span className="hidden xs:inline">Sign Up</span>
+            <span className="xs:hidden">Join</span>
           </Button>
         </LinkNext>
       </div>

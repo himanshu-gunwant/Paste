@@ -69,15 +69,19 @@ export function MyPastesTable() {
     <div className="space-y-6">
       {/* Tab Switcher & CTA */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <Tabs value={tab} onValueChange={(val) => setTab(val as typeof tab)}>
-          <TabsList>
-            <TabsTrigger value="account" className="gap-2 text-xs">
-              <FileText className="h-3.5 w-3.5" />
-              Account Pastes ({accountPastes.length})
+        <Tabs value={tab} onValueChange={(val) => setTab(val as typeof tab)} className="w-full sm:w-auto">
+          <TabsList className="w-full sm:w-auto">
+            <TabsTrigger value="account" className="gap-1.5 sm:gap-2 text-xs flex-1 sm:flex-initial">
+              <FileText className="h-3.5 w-3.5 shrink-0" />
+              <span>
+                Account <span className="hidden xs:inline">Pastes</span> ({accountPastes.length})
+              </span>
             </TabsTrigger>
-            <TabsTrigger value="vault" className="gap-2 text-xs">
-              <KeyRound className="h-3.5 w-3.5" />
-              Local Vault / Anonymous ({vault.length})
+            <TabsTrigger value="vault" className="gap-1.5 sm:gap-2 text-xs flex-1 sm:flex-initial">
+              <KeyRound className="h-3.5 w-3.5 shrink-0" />
+              <span>
+                <span className="hidden sm:inline">Local </span>Vault ({vault.length})
+              </span>
             </TabsTrigger>
           </TabsList>
         </Tabs>
@@ -116,13 +120,13 @@ export function MyPastesTable() {
                   key={p.id}
                   className="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-white/5 transition-colors gap-3"
                 >
-                  <div className="space-y-1">
+                  <div className="space-y-1 min-w-0 flex-1">
                     <Link
                       href={`/p/${p.id}`}
-                      className="text-sm font-medium text-foreground hover:underline transition-colors flex items-center gap-1.5"
+                      className="text-sm font-medium text-foreground hover:underline transition-colors flex items-center gap-1.5 truncate"
                     >
-                      {p.title || "Untitled Paste"}
-                      <ExternalLink className="h-3 w-3 text-muted" />
+                      <span className="truncate">{p.title || "Untitled Paste"}</span>
+                      <ExternalLink className="h-3 w-3 text-muted shrink-0" />
                     </Link>
                     <div className="flex flex-wrap items-center gap-3 text-xs text-muted">
                       <Badge variant="outline" className="text-[10px] font-mono border-white/10 bg-white/5">
@@ -183,13 +187,13 @@ export function MyPastesTable() {
                   key={item.id}
                   className="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-white/5 transition-colors gap-3"
                 >
-                  <div className="space-y-1">
+                  <div className="space-y-1 min-w-0 flex-1">
                     <Link
                       href={`/p/${item.id}`}
-                      className="text-sm font-medium text-foreground hover:underline transition-colors flex items-center gap-1.5"
+                      className="text-sm font-medium text-foreground hover:underline transition-colors flex items-center gap-1.5 truncate"
                     >
-                      {item.title || `Paste ${item.id}`}
-                      <ExternalLink className="h-3 w-3 text-muted" />
+                      <span className="truncate">{item.title || `Paste ${item.id}`}</span>
+                      <ExternalLink className="h-3 w-3 text-muted shrink-0" />
                     </Link>
                     <div className="flex items-center gap-2 text-xs text-muted">
                       <Badge variant="outline" className="text-[10px] border-white/10 bg-white/5 font-mono text-muted">

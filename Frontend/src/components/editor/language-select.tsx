@@ -18,11 +18,11 @@ interface LanguageSelectProps {
 
 export function LanguageSelect({ value, onChange, detectedLanguage }: LanguageSelectProps) {
   return (
-    <div className="flex items-center gap-1.5">
+    <div className="flex items-center gap-1.5 min-w-0 w-full sm:w-auto">
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="h-8 w-[140px] text-xs gap-1.5 border-white/10 bg-white/[0.03] hover:bg-white/5 transition-colors">
+        <SelectTrigger className="h-8 w-full sm:w-[135px] min-w-[105px] text-xs gap-1.5 border-white/10 bg-white/[0.03] hover:bg-white/5 transition-colors px-2 sm:px-3">
           <Code2 className="h-3.5 w-3.5 text-zinc-400 shrink-0" />
-          <SelectValue placeholder="Select Language" />
+          <SelectValue placeholder="Language" />
         </SelectTrigger>
         <SelectContent align="start" className="max-h-[300px]">
           {SUPPORTED_LANGUAGES.map((lang) => (

@@ -104,7 +104,7 @@ export default function PastePage({ params }: PastePageProps) {
   // Password required gate
   if (isPasswordRequired) {
     return (
-      <div className="max-w-md mx-auto px-4 py-16">
+      <div className="max-w-md mx-auto px-4 py-8 sm:py-16">
         <PasswordGate pasteId={id} shareToken={shareToken} onUnlocked={handleUnlocked} />
       </div>
     );
@@ -113,8 +113,8 @@ export default function PastePage({ params }: PastePageProps) {
   // Error view (404, 410, 403, etc.)
   if (errorStatus && !paste) {
     return (
-      <div className="max-w-lg mx-auto px-4 py-20">
-        <Card className="bg-white/[0.02] border-white/10 p-6 text-center rounded-xl">
+      <div className="max-w-lg mx-auto px-4 py-12 sm:py-20">
+        <Card className="bg-white/[0.02] border-white/10 p-4 sm:p-6 text-center rounded-xl">
           <CardContent className="pt-6 space-y-4">
             <div className="inline-flex p-3 rounded-full bg-red-500/10 text-red-400">
               <AlertCircle className="h-7 w-7" />

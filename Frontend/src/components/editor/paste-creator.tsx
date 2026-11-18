@@ -142,7 +142,7 @@ export function PasteCreator() {
   };
 
   return (
-    <div className="flex-1 flex flex-col h-[calc(100vh-3.5rem-4.5rem)] min-h-[520px]">
+    <div className="flex-1 flex flex-col h-[calc(100dvh-3.5rem-4rem)] min-h-[380px] sm:min-h-[480px]">
       {/* Top action toolbar */}
       <EditorToolbar
         language={language}

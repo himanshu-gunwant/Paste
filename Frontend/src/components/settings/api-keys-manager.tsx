@@ -193,16 +193,16 @@ export function ApiKeysManager() {
           {apiKeys.map((k: ApiKeyView) => (
             <div
               key={k.id}
-              className="flex items-center justify-between p-4 hover:bg-white/5 transition-colors gap-3"
+              className="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-white/5 transition-colors gap-3"
             >
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-semibold text-foreground">{k.name}</span>
-                  <Badge variant="outline" className="font-mono text-[10px] border-white/10 bg-white/5 text-muted">
+              <div className="space-y-1 min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-sm font-semibold text-foreground truncate">{k.name}</span>
+                  <Badge variant="outline" className="font-mono text-[10px] border-white/10 bg-white/5 text-muted shrink-0">
                     {k.prefix}...
                   </Badge>
                   {k.revokedAt && (
-                    <Badge variant="destructive" className="text-[10px]">
+                    <Badge variant="destructive" className="text-[10px] shrink-0">
                       Revoked
                     </Badge>
                   )}
@@ -227,7 +227,7 @@ export function ApiKeysManager() {
                   variant="ghost"
                   size="sm"
                   onClick={() => handleRevoke(k.id)}
-                  className="text-muted hover:text-red-400 hover:bg-red-500/10 h-8"
+                  className="text-muted hover:text-red-400 hover:bg-red-500/10 h-8 self-end sm:self-center shrink-0"
                 >
                   <Trash2 className="h-3.5 w-3.5" />
                 </Button>

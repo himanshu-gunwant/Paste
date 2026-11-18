@@ -95,7 +95,7 @@ export function PasteViewer({
       {/* Code or Markdown Display */}
       <div className="rounded-lg border border-white/10 bg-[#0f0f0f] overflow-hidden">
         {isMarkdown && tab === "preview" ? (
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             <MarkdownView content={content} />
           </div>
         ) : (

@@ -22,14 +22,14 @@ export function DiffViewer({
   }, [diffText]);
 
   return (
-    <div className={`rounded-lg border border-white/10 bg-[#0f0f0f] overflow-hidden font-mono text-xs ${className}`}>
+    <div className={`rounded-lg border border-white/10 bg-[#0f0f0f] overflow-hidden font-mono text-xs min-w-0 ${className}`}>
       {/* Diff Header */}
-      <div className="flex items-center justify-between px-4 py-2.5 bg-white/[0.02] border-b border-white/10">
-        <div className="flex items-center gap-2 text-foreground font-sans font-medium">
-          <GitCompare className="h-4 w-4 text-muted" />
-          <span>Comparing Revision #{fromRevision} → Revision #{toRevision}</span>
+      <div className="flex flex-wrap items-center justify-between gap-2 px-3 sm:px-4 py-2.5 bg-white/[0.02] border-b border-white/10">
+        <div className="flex items-center gap-2 text-foreground font-sans font-medium text-xs sm:text-sm">
+          <GitCompare className="h-4 w-4 text-muted shrink-0" />
+          <span className="truncate">Comparing #{fromRevision} → #{toRevision}</span>
         </div>
-        <span className="text-muted text-xs font-mono">Unified Diff</span>
+        <span className="text-muted text-[11px] sm:text-xs font-mono shrink-0">Unified Diff</span>
       </div>
 
       {/* Diff Content */}

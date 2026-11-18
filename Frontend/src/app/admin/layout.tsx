@@ -61,11 +61,11 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   ];
 
   return (
-    <div className="w-full max-w-5xl mx-auto py-4 space-y-6 animate-enter">
+    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 animate-enter">
       {/* Admin Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
         <div className="flex items-center gap-2.5">
-          <div className="p-2 rounded-md bg-white/5 border border-white/10 text-muted">
+          <div className="p-2 rounded-md bg-white/5 border border-white/10 text-muted shrink-0">
             <Shield className="h-5 w-5" />
           </div>
           <div>
@@ -78,7 +78,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       </div>
 
       {/* Admin Nav Tabs */}
-      <div className="flex flex-wrap items-center gap-1.5 pb-2 border-b border-white/10">
+      <div className="flex items-center gap-1.5 pb-2 border-b border-white/10 overflow-x-auto max-w-full scrollbar-none">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;

@@ -169,12 +169,12 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
     <div className="space-y-6">
       {/* Collection Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
-        <div className="space-y-1.5">
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="p-2.5 rounded-md bg-white/5 border border-white/10 text-muted">
+        <div className="space-y-1.5 min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+            <div className="p-2 sm:p-2.5 rounded-md bg-white/5 border border-white/10 text-muted shrink-0">
               <Folder className="h-5 w-5" />
             </div>
-            <h1 className="text-2xl font-bold tracking-tight text-foreground">
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground break-words min-w-0">
               {collection.title}
             </h1>
             <div>
@@ -197,12 +197,12 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
           </div>
 
           {collection.description && (
-            <p className="text-sm text-muted max-w-2xl pt-1 leading-relaxed">
+            <p className="text-sm text-muted max-w-2xl pt-1 leading-relaxed break-words">
               {collection.description}
             </p>
           )}
 
-          <div className="flex items-center gap-3 text-xs text-muted pt-1">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs text-muted pt-1">
             <span>Curated by @{collection.ownerUsername}</span>
             <span>·</span>
             <span>{items.length} {items.length === 1 ? "paste" : "pastes"}</span>
@@ -211,11 +211,11 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
 
         {/* Owner Controls */}
         {isOwner && (
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
             <Button
               size="sm"
               onClick={() => setAddPasteOpen(true)}
-              className="gap-1.5"
+              className="gap-1.5 flex-1 sm:flex-initial"
             >
               <Plus className="h-4 w-4" />
               Add Paste
@@ -286,12 +286,12 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
               return (
                 <div
                   key={paste.id}
-                  className="flex items-center justify-between p-4 hover:bg-white/5 transition-colors gap-3"
+                  className="flex items-center justify-between p-3.5 sm:p-4 hover:bg-white/5 transition-colors gap-3"
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 min-w-0 flex-1">
                     {/* Reorder Buttons (owner only) */}
                     {isOwner && (
-                      <div className="flex flex-col gap-0.5">
+                      <div className="flex flex-col gap-0.5 shrink-0">
                         <button
                           type="button"
                           onClick={() => handleMove(idx, "up")}
@@ -311,23 +311,24 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
                       </div>
                     )}
 
-                    <div className="space-y-1">
+                    <div className="space-y-1 min-w-0 flex-1">
                       <Link
                         href={`/p/${paste.id}`}
                         className="text-sm font-medium text-foreground hover:underline transition-colors flex items-center gap-1.5"
                       >
-                        {paste.title || "Untitled Paste"}
-                        <ExternalLink className="h-3 w-3 text-muted" />
+                        <span className="truncate">{paste.title || "Untitled Paste"}</span>
+                        <ExternalLink className="h-3 w-3 text-muted shrink-0" />
                       </Link>
-                      <div className="flex items-center gap-2 text-xs text-muted">
-                        <Badge variant="outline" className="text-[10px] font-mono border-white/10 bg-white/5">
+                      <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
+                        <Badge variant="outline" className="text-[10px] font-mono border-white/10 bg-white/5 shrink-0">
                           <FileCode className="h-2.5 w-2.5 mr-1" />
                           {paste.language || "text"}
                         </Badge>
                         {paste.author?.username && (
-                          <span>by @{paste.author.username}</span>
+                          <span className="truncate max-w-[120px] sm:max-w-none">by @{paste.author.username}</span>
                         )}
-                        <span>· added {new Date(item.addedAt).toLocaleDateString()}</span>
+                        <span className="hidden xs:inline">·</span>
+                        <span className="hidden xs:inline">added {new Date(item.addedAt).toLocaleDateString()}</span>
                       </div>
                     </div>
                   </div>
@@ -337,7 +338,7 @@ export function CollectionDetailView({ initialData, onRefresh }: CollectionDetai
                       variant="ghost"
                       size="sm"
                       onClick={() => handleRemovePaste(paste.id)}
-                      className="text-muted hover:text-red-400 hover:bg-red-500/10 h-8"
+                      className="text-muted hover:text-red-400 hover:bg-red-500/10 h-8 shrink-0"
                     >
                       <Trash2 className="h-3.5 w-3.5" />
                     </Button>

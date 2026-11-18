@@ -47,15 +47,15 @@ export function ReportsQueue() {
 
   return (
     <div className="space-y-4">
-      <Tabs value={statusFilter} onValueChange={(val) => setStatusFilter(val as typeof statusFilter)}>
-        <TabsList>
-          <TabsTrigger value="OPEN" className="gap-1.5 text-xs">
+      <Tabs value={statusFilter} onValueChange={(val) => setStatusFilter(val as typeof statusFilter)} className="w-full sm:w-auto">
+        <TabsList className="w-full sm:w-auto">
+          <TabsTrigger value="OPEN" className="gap-1.5 text-xs flex-1 sm:flex-initial">
             <AlertTriangle className="h-3.5 w-3.5 text-red-400" />
             Open
           </TabsTrigger>
-          <TabsTrigger value="REVIEWED" className="text-xs">Reviewed</TabsTrigger>
-          <TabsTrigger value="RESOLVED" className="text-xs">Resolved</TabsTrigger>
-          <TabsTrigger value="DISMISSED" className="text-xs">Dismissed</TabsTrigger>
+          <TabsTrigger value="REVIEWED" className="text-xs flex-1 sm:flex-initial">Reviewed</TabsTrigger>
+          <TabsTrigger value="RESOLVED" className="text-xs flex-1 sm:flex-initial">Resolved</TabsTrigger>
+          <TabsTrigger value="DISMISSED" className="text-xs flex-1 sm:flex-initial">Dismissed</TabsTrigger>
         </TabsList>
       </Tabs>
 
@@ -75,8 +75,8 @@ export function ReportsQueue() {
               key={r.id}
               className="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-white/5 transition-colors gap-3"
             >
-              <div className="space-y-1.5 max-w-2xl">
-                <div className="flex items-center gap-2">
+              <div className="space-y-1.5 max-w-2xl min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
                   <Badge variant="destructive" className="text-[10px]">
                     {r.reason}
                   </Badge>

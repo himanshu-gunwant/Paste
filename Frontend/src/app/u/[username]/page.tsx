@@ -76,9 +76,9 @@ export default function UserProfilePage({ params }: UserProfilePageProps) {
   }
 
   return (
-    <div className="w-full max-w-5xl mx-auto py-4 space-y-8 animate-enter">
+    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-8 animate-enter">
       {/* Profile Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 p-6 rounded-lg border border-white/10 bg-white/[0.02]">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 p-4 sm:p-6 rounded-lg border border-white/10 bg-white/[0.02]">
         <Avatar className="h-20 w-20 border border-white/20">
           <AvatarImage src={profile.avatarUrl || undefined} alt={profile.username} />
           <AvatarFallback className="bg-white/10 text-foreground text-xl font-bold">

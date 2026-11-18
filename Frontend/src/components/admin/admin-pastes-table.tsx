@@ -95,14 +95,14 @@ export function AdminPastesTable() {
               key={p.id}
               className="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-white/5 transition-colors gap-3"
             >
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
+              <div className="space-y-1 min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
                   <Link
                     href={`/p/${p.id}`}
-                    className="text-sm font-semibold text-foreground hover:underline transition-colors flex items-center gap-1.5"
+                    className="text-sm font-semibold text-foreground hover:underline transition-colors flex items-center gap-1.5 truncate"
                   >
-                    {p.title || `Paste ${p.id}`}
-                    <ExternalLink className="h-3 w-3 text-muted" />
+                    <span className="truncate">{p.title || `Paste ${p.id}`}</span>
+                    <ExternalLink className="h-3 w-3 text-muted shrink-0" />
                   </Link>
 
                   <Badge variant="outline" className="font-mono text-[10px] border-white/10 bg-white/5">

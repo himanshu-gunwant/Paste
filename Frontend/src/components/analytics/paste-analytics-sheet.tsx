@@ -38,7 +38,7 @@ export function PasteAnalyticsSheet({
             <BarChart2 className="h-4 w-4 text-muted" />
             <SheetTitle>Paste Metrics</SheetTitle>
           </div>
-          <SheetDescription className="text-xs">
+          <SheetDescription className="text-xs break-all">
             30-day traffic breakdown and unique visitor analytics for p/{pasteId}.
           </SheetDescription>
         </SheetHeader>
@@ -56,7 +56,7 @@ export function PasteAnalyticsSheet({
           ) : (
             <div className="space-y-6">
               {/* Stat Cards */}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 xs:grid-cols-2 gap-2.5 sm:gap-3">
                 <Card>
                   <CardContent className="p-4 space-y-1">
                     <div className="flex items-center gap-1.5 text-xs text-muted">

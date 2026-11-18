@@ -37,10 +37,10 @@ export function PasteCard({ paste }: PasteCardProps) {
     <div className="group relative flex flex-col justify-between p-4 rounded-lg border border-white/10 bg-white/[0.02] hover:bg-white/5 transition-colors focus-within:ring-1 focus-within:ring-white/30">
       <div className="space-y-2">
         {/* Header: Title and Language */}
-        <div className="flex items-baseline justify-between gap-2">
+        <div className="flex items-baseline justify-between gap-2 min-w-0">
           <Link
             href={`/p/${paste.id}`}
-            className="font-medium text-foreground group-hover:text-white transition-colors line-clamp-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded"
+            className="font-medium text-foreground group-hover:text-white transition-colors truncate min-w-0 flex-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded"
           >
             <span>{paste.title || "Untitled Paste"}</span>
             <span className="inline-block ml-1 text-xs text-muted transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">

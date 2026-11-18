@@ -102,23 +102,23 @@ export function PasteEditView({ paste, managementToken }: PasteEditViewProps) {
   return (
     <div className="flex flex-col gap-5 animate-enter delay-1">
       {/* Top action bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-white/10">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/10">
+        <div className="flex items-center gap-3 min-w-0">
           <Button
             variant="ghost"
             size="sm"
             onClick={() => router.push(`/p/${paste.id}`)}
-            className="text-muted hover:text-foreground gap-1.5"
+            className="text-muted hover:text-foreground gap-1.5 shrink-0"
           >
             <ArrowLeft className="h-4 w-4" />
             Back
           </Button>
-          <span className="text-sm font-semibold text-foreground">
+          <span className="text-sm font-semibold text-foreground truncate">
             Editing {paste.title ? `"${paste.title}"` : `p/${paste.id}`}
           </span>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0 self-end sm:self-center">
           {/* Settings sheet trigger */}
           <Sheet open={settingsOpen} onOpenChange={setSettingsOpen}>
             <SheetTrigger asChild>
@@ -234,12 +234,12 @@ export function PasteEditView({ paste, managementToken }: PasteEditViewProps) {
       </div>
 
       {/* Language, Visibility, Preview Toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 bg-white/[0.02] p-2.5 rounded-lg border border-white/10">
-        <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3 bg-white/[0.02] p-2.5 rounded-lg border border-white/10">
+        <div className="flex flex-wrap items-center gap-2">
           <LanguageSelect value={language} onChange={setLanguage} />
 
           <Select value={visibility} onValueChange={(val) => setVisibility(val as Visibility)}>
-            <SelectTrigger className="w-[125px] h-9 bg-white/[0.03] border-white/10 text-xs">
+            <SelectTrigger className="w-[115px] h-9 bg-white/[0.03] border-white/10 text-xs">
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="bg-[#141414] border-white/10 text-foreground">

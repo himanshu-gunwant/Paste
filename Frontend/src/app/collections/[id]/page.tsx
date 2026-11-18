@@ -63,7 +63,7 @@ export default function CollectionDetailPage({ params }: CollectionDetailPagePro
   }
 
   return (
-    <div className="w-full max-w-5xl mx-auto py-4 space-y-6 animate-enter">
+    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 animate-enter">
       <div className="pb-2">
         <Button asChild variant="ghost" size="sm" className="text-muted hover:text-foreground -ml-2 gap-1.5">
           <Link href="/collections">

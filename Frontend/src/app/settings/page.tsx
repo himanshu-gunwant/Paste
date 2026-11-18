@@ -35,7 +35,7 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="w-full max-w-5xl mx-auto py-4 space-y-8 animate-enter">
+    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-8 animate-enter">
       {/* Settings Navigation */}
       <div className="flex flex-col gap-4 pb-4 border-b border-white/10">
         <div>
@@ -45,7 +45,7 @@ export default function SettingsPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2 pt-2">
+        <div className="flex flex-wrap items-center gap-2 pt-2">
           <Button asChild variant="secondary" size="sm" className="gap-1.5 text-xs">
             <Link href="/settings">
               <User className="h-3.5 w-3.5" /> Profile

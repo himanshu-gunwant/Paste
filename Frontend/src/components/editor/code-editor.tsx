@@ -94,7 +94,13 @@ export function CodeEditor({
     viewRef.current = view;
 
     if (autoFocus && !readOnly) {
-      view.focus();
+      const isTouchDevice =
+        typeof window !== "undefined" &&
+        (window.matchMedia("(pointer: coarse)").matches ||
+          /mobile|iphone|ipad|android/i.test(navigator.userAgent));
+      if (!isTouchDevice) {
+        view.focus();
+      }
     }
 
     return () => {
@@ -134,7 +140,7 @@ export function CodeEditor({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full h-full min-h-[350px] overflow-hidden bg-background ${className}`}
+      className={`relative w-full h-full min-h-[250px] sm:min-h-[350px] overflow-hidden bg-background ${className}`}
     />
   );
 }

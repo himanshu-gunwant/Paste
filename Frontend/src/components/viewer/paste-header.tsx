@@ -75,7 +75,7 @@ export function PasteHeader({ paste, lineCount }: PasteHeaderProps) {
       {/* Title & Visibility */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-2.5">
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-foreground break-words [overflow-wrap:anywhere] min-w-0">
             {paste.title || "Untitled Paste"}
           </h1>
           <div className="flex items-center gap-1.5">
@@ -177,7 +177,7 @@ export function PasteHeader({ paste, lineCount }: PasteHeaderProps) {
 
         {/* View count if available */}
         {typeof paste.viewCount === "number" && (
-          <div className="flex items-center gap-1.5 text-muted font-mono ml-auto">
+          <div className="flex items-center gap-1.5 text-muted font-mono sm:ml-auto">
             <Eye className="h-3.5 w-3.5 text-muted" />
             <span>
               {paste.viewCount.toLocaleString()} {paste.viewCount === 1 ? "view" : "views"}

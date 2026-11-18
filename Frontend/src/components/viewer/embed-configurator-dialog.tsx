@@ -70,7 +70,7 @@ export function EmbedConfiguratorDialog({
 
         <div className="space-y-4 py-3">
           {/* Options */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="space-y-1.5">
               <Label className="text-xs text-foreground/90">Theme</Label>
               <Select value={theme} onValueChange={(val) => setTheme(val as "dark" | "light")}>
@@ -111,23 +111,24 @@ export function EmbedConfiguratorDialog({
 
           {/* Snippet box */}
           <div className="space-y-1.5 pt-2">
-            <Label className="text-xs text-muted">HTML Embed Code</Label>
-            <div className="relative">
-              <textarea
-                readOnly
-                value={embedSnippet}
-                rows={3}
-                className="w-full p-2.5 font-mono text-xs rounded-md bg-white/[0.03] border border-white/10 text-foreground resize-none select-all focus:outline-none"
-              />
+            <div className="flex items-center justify-between">
+              <Label className="text-xs text-muted">HTML Embed Code</Label>
               <Button
                 size="sm"
+                variant="outline"
                 onClick={handleCopy}
-                className="absolute right-2 bottom-3 h-7 text-xs gap-1.5 bg-foreground text-background hover:bg-white font-medium"
+                className="h-7 text-xs gap-1.5 border-white/10 bg-white/5 hover:bg-white/10 text-foreground px-2.5"
               >
                 {copied ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
-                Copy Code
+                {copied ? "Copied" : "Copy Code"}
               </Button>
             </div>
+            <textarea
+              readOnly
+              value={embedSnippet}
+              rows={3}
+              className="w-full p-2.5 font-mono text-xs rounded-md bg-white/[0.03] border border-white/10 text-foreground resize-none select-all focus:outline-none"
+            />
           </div>
         </div>
       </DialogContent>

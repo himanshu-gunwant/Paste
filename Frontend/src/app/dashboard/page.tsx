@@ -37,7 +37,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="w-full max-w-5xl mx-auto py-4">
+    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
       <DashboardOverview />
     </div>
   );

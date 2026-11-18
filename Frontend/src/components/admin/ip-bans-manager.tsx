@@ -83,14 +83,14 @@ export function IpBansManager() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between pb-2">
-        <p className="text-xs text-muted">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-2">
+        <p className="text-xs text-muted max-w-xl">
           Blacklist abusive IP addresses from anonymous paste creation and account registration.
         </p>
         <Button
           size="sm"
           onClick={() => setCreateOpen(true)}
-          className="gap-1.5"
+          className="gap-1.5 shrink-0 self-end sm:self-auto"
         >
           <Plus className="h-4 w-4" />
           Ban IP
@@ -111,14 +111,14 @@ export function IpBansManager() {
           {bans.map((b: IpBanView) => (
             <div
               key={b.id}
-              className="flex items-center justify-between p-4 hover:bg-white/5 transition-colors gap-3"
+              className="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-white/5 transition-colors gap-3"
             >
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <span className="font-mono font-semibold text-foreground">
+              <div className="space-y-1 min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-mono font-semibold text-foreground break-all">
                     Hash: {b.ipHash.slice(0, 16)}...
                   </span>
-                  <span className="text-muted">({b.reason})</span>
+                  <span className="text-muted break-words">({b.reason})</span>
                 </div>
                 <div className="flex items-center gap-3 text-muted">
                   <span className="flex items-center gap-1">

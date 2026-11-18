@@ -101,7 +101,7 @@ export function ShareDialog({ pasteId, open, onOpenChange, isPrivate }: ShareDia
               </span>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
               <div className="space-y-1">
                 <Label htmlFor="share-max-uses" className="text-[11px] text-muted">Max Uses (optional)</Label>
                 <Input

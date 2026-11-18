@@ -100,20 +100,20 @@ export function SessionsTable() {
             return (
               <div
                 key={s.id}
-                className="flex items-center justify-between p-4 hover:bg-white/5 transition-colors gap-3"
+                className="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-white/5 transition-colors gap-3"
               >
-                <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-md bg-white/5 border border-white/10 text-muted mt-0.5">
+                <div className="flex items-start gap-3 min-w-0 flex-1">
+                  <div className="p-2 rounded-md bg-white/5 border border-white/10 text-muted mt-0.5 shrink-0">
                     {isMobile ? <Smartphone className="h-4 w-4" /> : <Laptop className="h-4 w-4" />}
                   </div>
 
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-medium text-foreground">
+                  <div className="space-y-1 min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="text-sm font-medium text-foreground truncate max-w-md">
                         {s.userAgent ? s.userAgent.slice(0, 60) : "Unknown Client"}
                       </span>
                       {s.isCurrent && (
-                        <Badge variant="outline" className="text-[10px] border-white/10 bg-white/5 text-muted">
+                        <Badge variant="outline" className="text-[10px] border-white/10 bg-white/5 text-muted shrink-0">
                           Current Session
                         </Badge>
                       )}
@@ -139,7 +139,7 @@ export function SessionsTable() {
                     variant="ghost"
                     size="sm"
                     onClick={() => handleRevokeSingle(s.id)}
-                    className="text-muted hover:text-red-400 hover:bg-red-500/10 h-8"
+                    className="text-muted hover:text-red-400 hover:bg-red-500/10 h-8 self-end sm:self-center shrink-0"
                   >
                     <Trash2 className="h-3.5 w-3.5" />
                   </Button>

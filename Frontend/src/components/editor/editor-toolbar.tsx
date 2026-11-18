@@ -53,9 +53,9 @@ export function EditorToolbar({
   hasCustomSlug,
 }: EditorToolbarProps) {
   return (
-    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 bg-[#0f0f0f] px-3.5 py-2">
-      {/* Left controls: Language, Visibility, Expiration */}
-      <div className="flex flex-wrap items-center gap-2">
+    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 bg-[#0f0f0f] px-3 sm:px-4 py-2">
+      {/* Primary configuration controls */}
+      <div className="grid grid-cols-3 sm:flex sm:flex-wrap items-center gap-1.5 sm:gap-2">
         <LanguageSelect
           value={language}
           onChange={onLanguageChange}
@@ -64,10 +64,10 @@ export function EditorToolbar({
 
         {/* Visibility */}
         <Select value={visibility} onValueChange={(val) => onVisibilityChange(val as "public" | "unlisted" | "private")}>
-          <SelectTrigger className="h-8 w-[115px] text-xs gap-1.5 border-white/10 bg-white/[0.03] hover:bg-white/5 transition-colors">
-            {visibility === "public" && <Globe className="h-3.5 w-3.5 text-emerald-400" />}
-            {visibility === "unlisted" && <LinkIcon className="h-3.5 w-3.5 text-zinc-400" />}
-            {visibility === "private" && <Lock className="h-3.5 w-3.5 text-amber-400" />}
+          <SelectTrigger className="h-8 w-full sm:w-[110px] text-xs gap-1.5 border-white/10 bg-white/[0.03] hover:bg-white/5 transition-colors px-2 sm:px-3">
+            {visibility === "public" && <Globe className="h-3.5 w-3.5 text-emerald-400 shrink-0" />}
+            {visibility === "unlisted" && <LinkIcon className="h-3.5 w-3.5 text-zinc-400 shrink-0" />}
+            {visibility === "private" && <Lock className="h-3.5 w-3.5 text-amber-400 shrink-0" />}
             <SelectValue />
           </SelectTrigger>
           <SelectContent align="start">
@@ -94,8 +94,8 @@ export function EditorToolbar({
 
         {/* Expiration */}
         <Select value={expiresIn} onValueChange={onExpiresInChange}>
-          <SelectTrigger className="h-8 w-[115px] text-xs gap-1.5 border-white/10 bg-white/[0.03] hover:bg-white/5 transition-colors">
-            <Clock className="h-3.5 w-3.5 text-zinc-400" />
+          <SelectTrigger className="h-8 w-full sm:w-[110px] text-xs gap-1.5 border-white/10 bg-white/[0.03] hover:bg-white/5 transition-colors px-2 sm:px-3">
+            <Clock className="h-3.5 w-3.5 text-zinc-400 shrink-0" />
             <SelectValue />
           </SelectTrigger>
           <SelectContent align="start">
@@ -107,13 +107,16 @@ export function EditorToolbar({
             <SelectItem value="1m" className="text-xs">1 Month</SelectItem>
           </SelectContent>
         </Select>
+      </div>
 
+      {/* Secondary controls: Options & Create button */}
+      <div className="flex items-center justify-between sm:justify-end gap-2">
         {/* Active features badges / Settings trigger */}
         <Button
           variant="outline"
           size="sm"
           onClick={onOpenSettings}
-          className="h-8 text-xs gap-1.5 border-white/10 bg-white/[0.03] hover:bg-white/5 text-foreground hover:text-white transition-colors"
+          className="h-8 text-xs gap-1.5 border-white/10 bg-white/[0.03] hover:bg-white/5 text-foreground hover:text-white transition-colors px-2.5"
         >
           <SlidersHorizontal className="h-3.5 w-3.5 text-zinc-400" />
           <span>Options</span>
@@ -134,15 +137,13 @@ export function EditorToolbar({
             </Badge>
           )}
         </Button>
-      </div>
 
-      {/* Right controls: Submit */}
-      <div className="flex items-center gap-2">
+        {/* Submit */}
         <Button
           size="sm"
           onClick={onSubmit}
           disabled={isSubmitting}
-          className="h-8 gap-1.5 text-xs bg-foreground text-background hover:bg-white font-medium"
+          className="h-8 gap-1.5 text-xs bg-foreground text-background hover:bg-white font-medium px-3"
         >
           {isSubmitting ? (
             <Loader2 className="h-3.5 w-3.5 animate-spin" />

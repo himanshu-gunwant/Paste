@@ -70,7 +70,7 @@ export default function BookmarksPage() {
   }
 
   return (
-    <div className="w-full max-w-5xl mx-auto py-4 space-y-6 animate-enter">
+    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 animate-enter">
       {/* Header */}
       <div className="flex flex-col gap-1 pb-4 border-b border-white/10">
         <div className="flex items-center gap-2.5 text-foreground">
